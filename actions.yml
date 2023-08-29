@@ -1,0 +1,63 @@
+ 
+      - name: Trigger workflow in another repo
+        run: |
+          curl -X POST \
+           -H "Authorization: token YOUR_PERSONAL_ACCESS_TOKEN" \
+           -H "Accept: application/vnd.github.everest-preview+json" \
+           "https://api.github.com/repos/USERNAME/REPO_NAME/dispatches" \
+           -d '{"event_type": "run-workflow", "client_payload": { "workflow_name": "TARGET_WORKFLOW_NAME"}}'
+
+
+           name: Process Issue Submission
+
+           on:
+             push:
+               paths:
+                 - 'issue_submission/issue_submission.json'
+           
+           jobs:
+             update_config:
+               runs-on: ubuntu-latest
+           
+               steps:
+                 - name: Checkout Repository
+                   uses: actions/checkout@v2
+           
+                 - name: Append / Remove issue submission to / from master config JSON file
+                   env:
+                     DB_REGION: ${{ secrets.DB_REGION }}
+                     BSA_SHORTNAME: ${{ secrets.BSA_SHORTNAME }}
+                     ISSUE_ENVIRONMENT: ${{ secrets.ISSUE_ENVIRONMENT }}
+                   run: |
+                     ISSUE_JSON=$(cat issue_submission/issue_submission.json)
+                     echo "$ISSUE_JSON"
+                     
+                     MASTER_CONFIG_JSON=$(cat $DB_REGION/$BSA_SHORTNAME/$ISSUE_ENVIRONMENT/storagecreds.json)
+                     echo "$MASTER_CONFIG_JSON"
+                     
+                     ISSUE_RESOURCE_NAME=$(echo "$ISSUE_JSON" | jq -r .resource_name)
+                     ISSUE_ACTION=$(echo "$ISSUE_JSON" | jq -r .create_or_delete)
+                     
+                     echo "ISSUE ACTION |$ISSUE_ACTION|"
+                     echo "ISSUE_JSON $ISSUE_JSON"
+                     
+                     if [[ "$ISSUE_ACTION" == "Create" ]]; then
+                       UPDATED_MASTER_CONFIG=$(jq --argjson issue "$ISSUE_JSON" ".storage_credentials.\"$ISSUE_RESOURCE_NAME\" = $issue" <<< "$MASTER_CONFIG_JSON")
+                     elif [[ "$ISSUE_ACTION" == "Destroy" ]]; then
+                       UPDATED_MASTER_CONFIG=$(jq "del(.storage_credentials.\"$ISSUE_RESOURCE_NAME\")" <<< "$MASTER_CONFIG_JSON")
+                     else
+                       echo "Unknown ISSUE_ACTION: $ISSUE_ACTION"
+                       exit 1
+                     fi
+                     
+                     echo "$UPDATED_MASTER_CONFIG" > issue_submission/issue_submission.json
+           
+                 - name: Commit changes
+                   run: |
+                     git config --local user.email "action@github.com"
+                     git config --local user.name "GitHub Action"
+                     git add issue_submission/issue_submission.json
+                     git commit -m "Update master config with issue submission" || echo "No changes to commit"
+                     git push
+           
+           
