@@ -1,8 +1,8 @@
-name: Unity Catalog Storage Credential Request
-description: Create UC Storage Credential Create Request Form
-labels: [storage_credential]
+name: Workspace Cluster Policy Request
+description: Create Workspace Cluster Policy Request Form
+labels: [cluster_policy]
 
-title: "Unity Catalog Storage Credential Request"
+title: "Workspace Cluster Policy Request"
 
 body:
 
