@@ -122,7 +122,7 @@ body:
   validations:
     required: True
 
-- type: checkboxes
+- type: dropdown
   id: cluster_policy_principal_privileges
   attributes:
     label: Please Select the Grants for the Principal or Group Name
