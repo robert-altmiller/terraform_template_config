@@ -48,6 +48,8 @@ body:
   id: sc_principal_name
   attributes:
     label: Please Enter the Principal or Group Name for Storage Credential Access
+    options: 
+      - contributors
   validations:
     required: True
 

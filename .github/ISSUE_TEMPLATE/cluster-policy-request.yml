@@ -1,0 +1,133 @@
+name: Unity Catalog Storage Credential Request
+description: Create UC Storage Credential Create Request Form
+labels: [storage_credential]
+
+title: "Unity Catalog Storage Credential Request"
+
+body:
+
+- type: dropdown
+  id: environment
+  attributes:
+    label: Select Environment
+    options:
+      - dev
+      - prod
+  validations:
+    required: True
+
+- type: dropdown
+  id: create_or_delete
+  attributes:
+    label: Select to 'Create' or 'Destroy' Resource
+    options:
+      - Create
+      - Destroy
+  validations:
+    required: True
+
+- type: input
+  id: resource_name
+  attributes:
+    description: "Please note: 'underscores' or 'dashes' can be used in the name."
+    label: Please Enter the Cluster Policy Name
+  validations:
+    required: True
+
+- type: dropdown
+  id: cluster_profile
+  attributes:
+    label: Please Select the Cluster Profile
+    description: 
+    options: 
+      - singleNode
+  validations:
+    required: True
+
+- type: dropdown
+  id: cluster_type
+  attributes:
+    label: Please Select the Cluster Type
+    description: 
+    options: 
+      - all-purpose
+  validations:
+    required: True
+
+- type: dropdown
+  id: runtime_engine
+  attributes:
+    label: 
+    options: 
+      - STANDARD
+  validations:
+    required: True
+
+- type: dropdown
+  id: nodetype_id
+  attributes:
+    label: 
+    options: 
+      - i3.xlarge
+      - i3.2xlarge
+  validations:
+    required: True
+
+- type: dropdown
+  id: spark_version
+  attributes:
+    label: 
+    options: 
+      - auto:latest-ml
+  validations:
+    required: True
+
+- type: input
+  id: num_workers
+  attributes:
+    label: Please Enter the Number of Workers
+  validations:
+    required: True
+
+- type: input
+  id: min_workers
+  attributes:
+    label: Please Enter Min Workers
+  validations:
+    required: True
+
+- type: input
+  id: max_workers
+  attributes:
+    label: Please Enter Max Workers
+  validations:
+    required: True
+
+- type: checkbox
+  id: auto_termination_mins
+  attributes:
+    label: 
+    options: 
+      - 30
+      - 60
+      - 90
+      - 120
+  validations:
+    required: True
+
+- type: input
+  id: cluster_policy_principal_name
+  attributes:
+    label: Please Enter the Principal or Group Name for Cluster Policy Use Permissions
+  validations:
+    required: True
+
+- type: checkboxes
+  id: cluster_policy_principal_privileges
+  attributes:
+    label: Please Select the Grants for the Principal or Group Name
+    options:
+      - label: CAN_USE
+        required: False
+  validations:
+    required: True
