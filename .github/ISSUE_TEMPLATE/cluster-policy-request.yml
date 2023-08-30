@@ -38,7 +38,6 @@ body:
   id: cluster_profile
   attributes:
     label: Please Select the Cluster Profile
-    description: 
     options: 
       - singleNode
   validations:
@@ -48,7 +47,6 @@ body:
   id: cluster_type
   attributes:
     label: Please Select the Cluster Type
-    description: 
     options: 
       - all-purpose
   validations:
@@ -66,7 +64,7 @@ body:
 - type: dropdown
   id: nodetype_id
   attributes:
-    label: 
+    label: Please Select the Node Type ID
     options: 
       - i3.xlarge
       - i3.2xlarge
@@ -76,7 +74,7 @@ body:
 - type: dropdown
   id: spark_version
   attributes:
-    label: 
+    label: Please Select the Spark Version
     options: 
       - auto:latest-ml
   validations:
@@ -103,10 +101,10 @@ body:
   validations:
     required: True
 
-- type: checkbox
+- type: dropdown
   id: auto_termination_mins
   attributes:
-    label: 
+    label: Please Select Auto Termination Minutes
     options: 
       - 30
       - 60
