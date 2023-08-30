@@ -127,7 +127,6 @@ body:
   attributes:
     label: Please Select the Grants for the Principal or Group Name
     options:
-      - label: CAN_USE
-        required: False
+      - CAN_USE
   validations:
     required: True
