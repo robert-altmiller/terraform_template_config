@@ -11,7 +11,7 @@ jobs:
       
       - name: Check for Github workflow label
         run: |
-          ISSUE_LABEL = ${{ github.event.label.name }}
+          ISSUE_LABEL="${{ github.event.label.name }}"
           echo ISSUE_LABEL: $ISSUE_LABEL
 
       - uses: actions/checkout@v3
