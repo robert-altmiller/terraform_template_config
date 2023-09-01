@@ -13,10 +13,11 @@ jobs:
 
     steps:
 
-      - name: Convert Github issues title to lowercase and put in env vars
+      - name: Convert Github issues title to lowercase with underscore and put in env vars
         run: |    
-          ISSUES_TITLE=$(echo "${{ github.event.issue.title }}" | tr '[:upper:]' '[:lower:]')
-          echo "ISSUE_TITLE=$ISSUE_TITLE" >> $GITHUB_ENV
+          FORMATTED_TITLE=$(echo "$ISSUE_TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/ /_/g')
+          echo "ISSUE_TITLE=$FORMATTED_TITLE" >> $GITHUB_ENV
+          echo ISSUE_TITLE: $FORMATTED_TITLE
 
       - uses: actions/checkout@v3
         with:
@@ -32,7 +33,7 @@ jobs:
       - uses: stefanbuck/github-issue-parser@v3
         id: issue-parser
         with:
-          template-path: .github/ISSUE_TEMPLATE/create_terraform_json_payload.yml
+          template-path: .github/ISSUE_TEMPLATE/${{ env.ISSUE_TITLE }}-request.yml
 
       - name: Output issue parser JSON results 
         run: cat ${HOME}/issue-parser-result.json
