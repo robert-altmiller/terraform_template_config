@@ -8,6 +8,9 @@ jobs:
   get_issue_in_json:
     runs-on: ubuntu-latest
     
+    env:
+      ISSUE_TITLE: ${{ github.event.issue.title }}
+
     steps:
 
       - name: Convert Github issues title to lowercase with underscore and put in env vars
@@ -51,7 +54,7 @@ jobs:
         run: |
           ISSUE_JSON=$(cat issue_submission/issue_submission.json)
           echo ISSUE_JSON: $ISSUE_JSON
-          MASTER_CONFIG_JSON=$(cat ./master_tfstate/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json)
+          MASTER_CONFIG_JSON=$(cat ../../master_tfstate/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json)
           echo MASTER_CONFIG_JSON: $MASTER_CONFIG_JSON
           # ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
           # ISSUE_ACTION=$(echo $ISSUE_JSON | jq -r .create_or_delete)
