@@ -9,13 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Get Github Issue Label
-        id: get-labels
+      - name: Display Github issue labels
         run: |
-          LABELS_JSON="${{ toJSON(github.event.issue.labels) }}"
-          LABEL_NAMES=$(echo "$LABELS_JSON" | jq -r '.[] | .name')
-          echo "LABEL_NAMES=$LABEL_NAMES" >> $GITHUB_ENV
-          echo LABEL_NAMES $LABEL_NAMES
+          LABELS="${{ join(github.event.issue.labels.*.name, ', ') }}"
+          echo "Labels on the issue: $LABELS"
 
       - uses: actions/checkout@v3
         with:
