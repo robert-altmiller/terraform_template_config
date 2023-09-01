@@ -1,13 +1,22 @@
-name: Process Storage Credential Request
+name: Create Terraform Json Payload
 
 on:
   issues:
-    types: [opened]
+    types: [opened, edited]
   
 jobs:
   get_issue_in_json:
     runs-on: ubuntu-latest
     steps:
+
+      - name: Get labels
+        id: get-labels
+        run: |
+          LABELS_JSON="${{ toJSON(github.event.issue.labels) }}"
+          LABEL_NAMES=$(echo "$LABELS_JSON" | jq -r '.[] | .name')
+          echo "LABEL_NAMES=$LABEL_NAMES" >> $GITHUB_ENV
+          echo LABEL_NAMES $LABEL_NAMES
+
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.GH_TOKEN }}
@@ -27,13 +36,13 @@ jobs:
       - name: Output issue parser JSON results 
         run: cat ${HOME}/issue-parser-result.json
 
-      - name: Checkout Target Terraform Repo
-        uses: actions/checkout@v2
-        with:
-          repository: 'robert-altmiller/terraform_template'
-          token: ${{ secrets.GH_TOKEN }}
+      # - name: Checkout Target Terraform Repo
+      #   uses: actions/checkout@v2
+      #   with:
+      #     repository: 'robert-altmiller/terraform_template'
+      #     token: ${{ secrets.GH_TOKEN }}
 
-      - name: Write issue submission JSON file to local config repo and environment to environment vars
+      - name: Write issue submission JSON file to local Terraform Template Config repo and environment to environment vars
         run: |
           echo '${{ steps.issue-parser.outputs.jsonString }}' > issue_submission/issue_submission.json
           ISSUE_JSON=$(cat issue_submission/issue_submission.json)
@@ -49,7 +58,7 @@ jobs:
         run: |
           ISSUE_JSON=$(cat issue_submission/issue_submission.json)
           echo ISSUE_JSON: $ISSUE_JSON
-          MASTER_CONFIG_JSON=$(cat master_config.json)
+          MASTER_CONFIG_JSON=$(cat master_tfstate/${{ env.ISSUE_ENVIRONMENT }}/master_config.json)
           echo MASTER_CONFIG_JSON: $MASTER_CONFIG_JSON
           ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
           ISSUE_ACTION=$(echo $ISSUE_JSON | jq -r .create_or_delete)
