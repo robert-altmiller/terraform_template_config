@@ -7,11 +7,16 @@ on:
 jobs:
   get_issue_in_json:
     runs-on: ubuntu-latest
+    
+    env:
+      ISSUE_TITLE: ${{ github.event.issue.title }}
+
     steps:
-      
-      - name: Get Issue Title
-        run: |
-          echo Issue Title: ${{ github.event.issue.title }}
+
+      - name: Convert Github issues title to lowercase and put in env vars
+        run: |    
+          ISSUES_TITLE=$(echo "${{ github.event.issue.title }}" | tr '[:upper:]' '[:lower:]')
+          echo "ISSUE_TITLE=$ISSUE_TITLE" >> $GITHUB_ENV
 
       - uses: actions/checkout@v3
         with:
@@ -24,24 +29,13 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Check for Github workflow label
-        run: |
-          ISSUE_LABEL="${{ github.event.label }}"
-          echo ISSUE_LABEL: $ISSUE_LABEL
-
       - uses: stefanbuck/github-issue-parser@v3
         id: issue-parser
         with:
-          template-path: .github/ISSUE_TEMPLATE/storage-credential-request.yml
+          template-path: .github/ISSUE_TEMPLATE/create_terraform_json_payload.yml
 
       - name: Output issue parser JSON results 
         run: cat ${HOME}/issue-parser-result.json
-
-      # - name: Checkout Target Terraform Repo
-      #   uses: actions/checkout@v2
-      #   with:
-      #     repository: 'robert-altmiller/terraform_template'
-      #     token: ${{ secrets.GH_TOKEN }}
 
       - name: Write issue submission JSON file to local Terraform Template Config repo and environment to environment vars
         run: |
@@ -59,7 +53,7 @@ jobs:
         run: |
           ISSUE_JSON=$(cat issue_submission/issue_submission.json)
           echo ISSUE_JSON: $ISSUE_JSON
-          MASTER_CONFIG_JSON=$(cat master_tfstate/${{ env.ISSUE_ENVIRONMENT }}/master_config.json)
+          MASTER_CONFIG_JSON=$(cat /master_tfstate/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json)
           echo MASTER_CONFIG_JSON: $MASTER_CONFIG_JSON
           ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
           ISSUE_ACTION=$(echo $ISSUE_JSON | jq -r .create_or_delete)
@@ -72,7 +66,7 @@ jobs:
             exit 1
           fi
           echo UPDATED_MASTER_CONFIG: $UPDATED_MASTER_CONFIG
-          echo "$UPDATED_MASTER_CONFIG" > issue_submission/issue_submission.json
+          echo "$UPDATED_MASTER_CONFIG" > ../issue_submission/issue_submission.json
 
       - name: Commit updated issue submission JSON file to Terraform Config repo
         shell: bash
