@@ -33,7 +33,7 @@ jobs:
       - uses: stefanbuck/github-issue-parser@v3
         id: issue-parser
         with:
-          template-path: .github/ISSUE_TEMPLATE/${{ env.ISSUE_TITLE }}-request.yml
+          template-path: .github/ISSUE_TEMPLATE/${{ env.ISSUE_TITLE }}_request.yml
 
       - name: Output issue parser JSON results 
         run: cat ${HOME}/issue-parser-result.json
