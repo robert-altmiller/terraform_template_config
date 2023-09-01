@@ -8,11 +8,16 @@ jobs:
   get_issue_in_json:
     runs-on: ubuntu-latest
     steps:
-
-      - name: Display Github issue first label
+      
+      - name: Check for storage_credential label
         run: |
-          FIRST_LABEL=${{ github.event.issue.labels[0].name }}
-          echo First label on the issue: $FIRST_LABEL
+          ISSUE_LABELS="${{ toJSON(github.event.issue.labels.*.name) }}"
+          if echo "$ISSUE_LABELS" | grep -q "storage_credential"; then
+            echo "Issue has storage_credential label!"
+            # You can proceed with further steps here if needed.
+          else
+            echo "Issue does not have storage_credential label."
+          fi
 
       - uses: actions/checkout@v3
         with:
