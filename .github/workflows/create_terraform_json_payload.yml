@@ -67,7 +67,7 @@ jobs:
             exit 1
           fi
           echo UPDATED_MASTER_CONFIG: $UPDATED_MASTER_CONFIG
-          echo "$UPDATED_MASTER_CONFIG" > ../../issue_submission/issue_submission.json
+          echo "$UPDATED_MASTER_CONFIG" > issue_submission/issue_submission.json
 
       - name: Commit updated issue submission JSON file to Terraform Config repo
         shell: bash
