@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Get labels
+      - name: Get Github Issue Label
         id: get-labels
         run: |
           LABELS_JSON="${{ toJSON(github.event.issue.labels) }}"
