@@ -1,8 +1,8 @@
 name: Workspace Cluster Policy Request
 description: Create Workspace Cluster Policy Request Form
-labels: [cluster_policy]
+labels: [cluster policy]
 
-title: "Workspace Cluster Policy Request"
+title: "Cluster Policy"
 
 body:
 
@@ -61,13 +61,15 @@ body:
   validations:
     required: True
 
-- type: dropdown
+- type: checkboxes
   id: nodetype_id
   attributes:
-    label: Please Select the Node Type ID
-    options: 
-      - i3.xlarge
-      - i3.2xlarge
+    label: Please Select the Node Type IDs
+    options:
+      - label: i3.xlarge
+        required: False
+      - label: i3.2xlarge
+        required: False
   validations:
     required: True
 
