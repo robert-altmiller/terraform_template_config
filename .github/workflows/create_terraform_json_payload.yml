@@ -13,15 +13,15 @@ jobs:
 
     steps:
 
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+
       - name: Convert Github issues title to lowercase with underscore and put in env vars
         run: |    
           FORMATTED_TITLE=$(echo "$ISSUE_TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/ /_/g')
           echo "ISSUE_TITLE=$FORMATTED_TITLE" >> $GITHUB_ENV
           echo ISSUE_TITLE: $FORMATTED_TITLE
-
-      - uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.GH_TOKEN }}
 
       - name: Install jq
         run: sudo apt-get install jq
@@ -54,8 +54,10 @@ jobs:
         run: |
           ISSUE_JSON=$(cat issue_submission/issue_submission.json)
           echo ISSUE_JSON: $ISSUE_JSON
-          MASTER_CONFIG_JSON=$(cat ../../master_tfstate/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json)
-          echo MASTER_CONFIG_JSON: $MASTER_CONFIG_JSON
+          echo master_tfstate/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json
+          ls -al master_tfstate/dev/
+          MASTER_CONFIG_JSON=$(cat master_tfstate/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json)
+          #echo MASTER_CONFIG_JSON: $MASTER_CONFIG_JSON
           # ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
           # ISSUE_ACTION=$(echo $ISSUE_JSON | jq -r .create_or_delete)
           # if [[ "$ISSUE_ACTION" == "Create" ]]; then
