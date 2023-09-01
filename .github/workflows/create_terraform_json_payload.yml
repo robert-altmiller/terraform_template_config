@@ -9,10 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       
-      - name: Check for Github workflow label
+      - name: Get Issue Title
         run: |
-          ISSUE_LABEL="${{ github.event.label.name }}"
-          echo ISSUE_LABEL: $ISSUE_LABEL
+          echo Issue Title: ${{ github.event.issue.title }}
 
       - uses: actions/checkout@v3
         with:
@@ -27,7 +26,7 @@ jobs:
 
       - name: Check for Github workflow label
         run: |
-          ISSUE_LABEL="${{ github.event.label.name }}"
+          ISSUE_LABEL="${{ github.event.label }}"
           echo ISSUE_LABEL: $ISSUE_LABEL
 
       - uses: stefanbuck/github-issue-parser@v3
