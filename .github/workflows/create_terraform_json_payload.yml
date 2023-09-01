@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Display Github issue labels
+      - name: Display Github issue first label
         run: |
-          LABELS="${{ join(github.event.issue.labels.*.name, ', ') }}"
-          echo "Labels on the issue: $LABELS"
+          FIRST_LABEL=${{ github.event.issue.labels[0].name }}
+          echo "First label on the issue: $FIRST_LABEL"
 
       - uses: actions/checkout@v3
         with:
