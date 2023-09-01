@@ -12,7 +12,7 @@ jobs:
       - name: Display Github issue first label
         run: |
           FIRST_LABEL=${{ github.event.issue.labels[0].name }}
-          echo "First label on the issue: $FIRST_LABEL"
+          echo First label on the issue: $FIRST_LABEL
 
       - uses: actions/checkout@v3
         with:
