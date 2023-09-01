@@ -25,6 +25,11 @@ jobs:
         with:
           node-version: '16'
 
+      - name: Check for Github workflow label
+        run: |
+          ISSUE_LABEL="${{ github.event.label.name }}"
+          echo ISSUE_LABEL: $ISSUE_LABEL
+
       - uses: stefanbuck/github-issue-parser@v3
         id: issue-parser
         with:
