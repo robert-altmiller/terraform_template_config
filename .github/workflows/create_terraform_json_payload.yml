@@ -99,13 +99,18 @@ jobs:
 
       - name: Get Github repo url and write to issue_submission --> env.sh
         run: |
-          echo export REF_GITHUB_URL=${{ github.server_url }}/${{ github.repository_owner }}/${{ github.event.repository.name }} > issue_submission/env.sh  
+          echo export REF_GITHUB_URL=${{ github.server_url }}/${{ github.repository_owner }}/${{ github.event.repository.name }}.git > issue_submission/env.sh  
+
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          ref: ${{ github.ref }}
 
       - name: Commit updated issue submission JSON file to Terraform Config repo
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
-          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/robert-altmiller/terraform_template_config.git
+          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}.git
           git fetch
           git checkout ${{ env.gh_branch_name }} || git checkout -b ${{ env.gh_branch_name }} # Check out the branch if it exists, otherwise create it
           git pull origin ${{ env.gh_branch_name }} || true # If the branch is new, this pull will fail, hence we use `|| true` to prevent the workflow from stopping
