@@ -1,8 +1,8 @@
 name: Create Terraform Json Payload
 
 on:
-  issues:
-    types: [opened, edited]
+  # issues:
+  #   types: [opened, edited]
   pull_request:
     branches:
       - main
@@ -37,6 +37,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.GH_TOKEN }}
+          ref: ${{ github.ref }}
 
       - name: Convert Github issues title to lowercase with underscore and put in env vars
         run: |    
