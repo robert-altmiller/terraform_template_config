@@ -1,0 +1,107 @@
+name: Unity Catalog Schema Request
+description: Create UC Schema Request Form
+labels: [schema]
+
+title: "Schema"
+
+body:
+
+- type: dropdown
+  id: environment
+  attributes:
+    label: Select Environment
+    options:
+      - dev
+      - prod
+  validations:
+    required: True
+
+- type: dropdown
+  id: create_or_delete
+  attributes:
+    label: Select to 'Create' or 'Destroy' Resource
+    options:
+      - Create
+      - Destroy
+  validations:
+    required: True
+
+- type: input
+  id: resource_name
+  attributes:
+    description: "Please note: 'underscores' or 'dashes' can be used in the name."
+    label: Please Enter the Schema Name
+  validations:
+    required: True
+
+- type: input
+  id: catalog_name
+  attributes:
+    description: "Please note: 'underscores' or 'dashes' can be used in the name."
+    label: Please Enter the Catalog Name
+  validations:
+    required: True
+
+- type: input
+  id: catalog_principal_name
+  attributes:
+    label: Please Enter the 'Catalog' Principal Name for Catalog Access
+  validations:
+    required: True
+
+- type: checkboxes
+  id: catalog_principal_privileges
+  attributes:
+    label: Please Select the Grants for the 'Catalog' Principal or Group Name
+    description: "Please note: If selecting 'ALL_PRIVILEGES', ensure no other boxes are checked."
+    options:
+      - label: USE_CATALOG
+        required: True
+      - label: USE_SCHEMA
+        required: True
+
+catalog_principal_privileges
+
+- type: input
+  id: schema_principal_name
+  attributes:
+    label: Please Enter the 'Schema' Principal or Group Name for Schema Access
+  validations:
+    required: True
+
+- type: checkboxes
+  id: schema_principal_privileges
+  attributes:
+    label: Please Select the Grants for the 'Schema' Principal or Group Name
+    description: "Please note: If selecting 'ALL_PRIVILEGES', ensure no other boxes are checked."
+    options:
+      - label: USE_CATALOG
+        required: False
+      - label: USE_SCHEMA
+        required: False
+      - label: APPLY_TAG
+        required: False
+      - label: EXECUTE
+        required: False
+      - label: READ_VOLUME
+        required: False
+      - label: REFRESH
+        required: False
+      - label: SELECT
+        required: False
+      - label: WRITE_VOLUME
+        required: False
+      - label: CREATE_FUNCTION
+        required: False
+      - label: CREATE_MATERIALIZED_VIEW
+        required: False
+      - label: CREATE_MODEL
+        required: False
+      - label: CREATE_SCHEMA
+        required: False
+      - label: CREATE_TABLE
+        required: False
+      - label: CREATE_VOLUME
+        required: False
+  validations:
+    required: True

@@ -80,3 +80,8 @@ jobs:
           git commit -m 'new infrastructure submission' && \
           git push
 
+
+          # github refname is the branch, and the github event repository name is the name of the repository and server_url is the base url
+          echo export REF_GITHUB_URL=${{ github.server_url }}/${{ github.event.repository.name }} > issue_submission/env.sh
+
+          echo server url ${{ github.server_url }} github refname  ${{ github.ref_name }} ${{ github.event.repository.name }}

@@ -1,0 +1,11 @@
+{
+  "schemas": {
+    "schema1": {
+      "catalog_name": "main",
+      "catalog_principal_privileges": ["ALL_PRIVILEGES"],
+      "schema_name": "dbo",
+      "schema_principal_name": "contributors",
+      "schema_principal_privileges": ["ALL_PRIVILEGES"]
+    }
+  }
+}
