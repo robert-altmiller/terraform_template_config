@@ -19,6 +19,23 @@
         "SELECT",
         "CREATE_TABLE"
       ]
+    },
+    "dbo22": {
+      "gh_branch_name": "bsa-feature-branch",
+      "environment": "dev",
+      "create_or_delete": "Create",
+      "resource_name": "dbo22",
+      "catalog_name": "main",
+      "catalog_principal_name": "my-sp-dev",
+      "catalog_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA"
+      ],
+      "schema_principal_name": "contributors",
+      "schema_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA"
+      ]
     }
   }
 }
