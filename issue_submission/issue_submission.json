@@ -1,27 +1,40 @@
 {
-  "storage_credentials": {
-    "Jake_H_CRED": {
+  "schema": {
+    "dbo": {
       "environment": "dev",
       "create_or_delete": "Create",
-      "resource_name": "Jake_H_CRED",
-      "sc_role_arn": "arn:aws:iam::969341422355:role/s3-dbricks-prod-bucket-role",
-      "sc_principal_name": "contributors",
-      "sc_principal_privileges": [
-        "ALL_PRIVILEGES"
+      "resource_name": "dbo",
+      "catalog_name": "main",
+      "catalog_principal_name": "my-sp-dev",
+      "catalog_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA"
+      ],
+      "schema_principal_name": "contributors",
+      "schema_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA",
+        "EXECUTE",
+        "REFRESH",
+        "SELECT",
+        "CREATE_TABLE"
       ]
-    }
-  },
-  "storage_credential": {
-    "my-sc-22222": {
+    },
+    "dbo22": {
       "gh_branch_name": "bsa-feature-branch",
       "environment": "dev",
       "create_or_delete": "Create",
-      "resource_name": "my-sc-22222",
-      "sc_role_arn": "arn:aws:iam::111111111111:role/Temp-Product-IAM-Role_1111111111111",
-      "sc_principal_name": "contributors",
-      "sc_principal_privileges": [
-        "CREATE_EXTERNAL_TABLE",
-        "ALL_PRIVILEGES"
+      "resource_name": "dbo22",
+      "catalog_name": "main",
+      "catalog_principal_name": "my-sp-dev",
+      "catalog_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA"
+      ],
+      "schema_principal_name": "contributors",
+      "schema_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA"
       ]
     }
   }
