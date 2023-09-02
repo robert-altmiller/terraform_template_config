@@ -5,20 +5,31 @@ on:
     types: [opened, edited]
 
 jobs:
+
+  branch-check:
+    runs-on: ubuntu-latest
+    outputs:
+      skip: ${{ steps.check.outputs.skip }}
+    
+    steps:
+    - name: Check if it's a feature branch
+      id: check
+      run: |
+        if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+          echo "::set-output name=skip::true"
+        else
+          echo "::set-output name=skip::false"
+        fi
+
   get_issue_in_json:
+    needs: branch-check
+    if: needs.branch-check.outputs.skip == 'false'
     runs-on: ubuntu-latest
     
     env:
       ISSUE_TITLE: ${{ github.event.issue.title }}
 
     steps:
-
-      - name: Check branch to ensure its a feature branch
-        run: |
-          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-            echo "This is the main branch. Exiting workflow."
-            exit 1
-          fi
 
       - uses: actions/checkout@v3
         with:
