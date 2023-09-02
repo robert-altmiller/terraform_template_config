@@ -23,6 +23,7 @@
         "CREATE_EXTERNAL_TABLE",
         "CREATE_MANAGED_STORAGE",
         "READ_FILES",
+        "WRITE_FILES",
         "ALL_PRIVILEGES"
       ]
     }
