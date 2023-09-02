@@ -31,11 +31,19 @@ jobs:
 
     steps:
 
+      - name: Print Issue Body
+        run: |
+          echo "Issue Body: ${{ github.event.issue.body }}"
+
       - name: Get issue branch name
         id: extract_data
         run: |
           BODY="${{ github.event.issue.body }}"
-          ISSUE_BRANCH_NAME=$(echo "$BODY" | grep -oP "Please Enter the Github Feature Branch Name\s+\K\S+")
+          ISSUE_BRANCH_NAME=$(echo "$BODY" | grep -oP "Please Enter the Github Feature Branch Name\s+\K\S+" || echo "No Match Found")
+          if [ "$ISSUE_BRANCH_NAME" == "No Match Found" ]; then
+            echo "Failed to extract branch name from the issue body."
+            exit 1
+          fi
           echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
 
       - name: Print extracted issue branch name
