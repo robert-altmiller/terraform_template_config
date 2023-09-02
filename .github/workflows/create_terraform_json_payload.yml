@@ -31,15 +31,16 @@ jobs:
 
     steps:
 
-      - name: Get the Github issue feature branch name
+      - name: Get issue branch name
+        id: extract_data
         run: |
           BODY="${{ github.event.issue.body }}"
-          ISSUE_BRANCH_NAME=$(echo "$BODY" | grep -oP "Please Enter the Github Feature Branch Name\n\n\K.*(?=\n)")
+          ISSUE_BRANCH_NAME=$(echo "$BODY" | grep -oP "Please Enter the Github Feature Branch Name\s+\K\S+")
           echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
 
-      - name: Print Extracted Data
+      - name: Print extracted issue branch name
         run: |
-          echo "Extracted Branch Name: $ISSUE_BRANCH_NAME"
+          echo ISSUE_BRANCH_NAME: ${{ env.ISSUE_BRANCH_NAME }}
 
       # - name: Get the Github issue feature branch name
       #   id: extract_branch
