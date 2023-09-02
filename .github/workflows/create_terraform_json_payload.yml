@@ -3,9 +3,6 @@ name: Create Terraform Json Payload
 on:
   issues:
     types: [opened, edited]
-  # pull_request:
-  #   branches:
-  #     - main
 
 jobs:
 
@@ -36,7 +33,7 @@ jobs:
 
       - name: Use the branch name
         run: |
-          BRANCH_NAME=${{ steps.get_inputs.outputs.branch_name }}
+          ISSUE_BRANCH_NAME=${{ steps.get_inputs.outputs.branch_name }}
           echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
           echo GitHub Issue Branch Name: $ISSUE_BRANCH_NAME
 
