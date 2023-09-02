@@ -105,6 +105,8 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com" && \
           git config --global user.name "github-actions[bot]" && \
           git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/robert-altmiller/terraform_template_config.git
+          git fetch
+          git checkout bsa_feature_branch
           git pull && \
           git add issue_submission/ && \ # This line adds the whole folder
           git commit -m 'new infrastructure submission' && \
