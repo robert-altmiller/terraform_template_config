@@ -70,6 +70,9 @@ jobs:
           ISSUE_JSON=$(cat issue_submission/issue_submission.json)
           ISSUE_ENVIRONMENT=$(echo $ISSUE_JSON | jq -r .environment)
           echo "ISSUE_ENVIRONMENT=$ISSUE_ENVIRONMENT" >> $GITHUB_ENV
+          BRANCH_NAME=$(echo $ISSUE_JSON | jq -r .gh_branch_name)
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+          
 
       # - name: Fetch Terraform Json master config JSON file from the target repo
       #   run: |
@@ -97,7 +100,7 @@ jobs:
 
       - name: Get Github repo url and write to issue_submission --> env.sh
         run: |
-          echo export REF_GITHUB_URL=${{ github.server_url }}/${{ github.event.repository.name }} > issue_submission/env.sh  
+          echo export REF_GITHUB_URL=${{ github.server_url }}/${{ github.repository_owner }}/${{ github.event.repository.name }} > issue_submission/env.sh  
 
       - name: Commit updated issue submission JSON file to Terraform Config repo
         run: |
@@ -105,12 +108,12 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/robert-altmiller/terraform_template_config.git
           git fetch
-          git checkout bsa_feature_branch || git checkout -b bsa_feature_branch # Check out the branch if it exists, otherwise create it
-          git pull origin bsa_feature_branch || true # If the branch is new, this pull will fail, hence we use `|| true` to prevent the workflow from stopping
+          git checkout ${{ env.gh_branch_name }} || git checkout -b ${{ env.gh_branch_name }} # Check out the branch if it exists, otherwise create it
+          git pull origin ${{ env.gh_branch_name }} || true # If the branch is new, this pull will fail, hence we use `|| true` to prevent the workflow from stopping
           # Adding the entire issue_submission folder
           git add issue_submission/
           git commit -m 'new infrastructure submission' || echo "No changes to commit"
-          git push origin bsa_feature_branch
+          git push origin ${{ env.gh_branch_name }}
 
       # - name: Commit updated issue submission JSON file to Terraform Config repo
       #   shell: bash
