@@ -45,11 +45,11 @@ jobs:
           echo "${{ github.event.issue.body }}" > issue_body.txt
 
           # Extract the branch name
-          ISSUE_BRANCH_NAME=$(grep -A1 'Please Enter the Github Feature Branch Name' issue_body.txt | awk 'NR==2')
+          #ISSUE_BRANCH_NAME=$(grep -A1 'Please Enter the Github Feature Branch Name' issue_body.txt | awk 'NR==2')
       
           # Set as environment variable and print
-          echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
-          echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
+          # echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
+          # echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
       
           # Debugging: Print the file content
           cat issue_body.txt
