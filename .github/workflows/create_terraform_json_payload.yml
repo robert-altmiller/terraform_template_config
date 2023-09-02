@@ -12,7 +12,7 @@ jobs:
       skip: ${{ steps.check.outputs.skip }}
     
     steps:
-    - name: Check if it's a feature branch
+    - name: Check if it's a feature branch (if yes continue...)
       id: check
       run: |
         if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
