@@ -3,7 +3,7 @@ name: Create Terraform Json Payload
 on:
   issues:
     types: [opened, edited]
-  
+
 jobs:
   get_issue_in_json:
     runs-on: ubuntu-latest
@@ -12,6 +12,13 @@ jobs:
       ISSUE_TITLE: ${{ github.event.issue.title }}
 
     steps:
+
+      - name: Check branch to ensure its a feature branch
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "This is the main branch. Exiting workflow."
+            exit 1
+          fi
 
       - uses: actions/checkout@v3
         with:
