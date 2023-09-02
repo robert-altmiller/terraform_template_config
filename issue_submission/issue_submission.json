@@ -20,7 +20,6 @@
       "sc_role_arn": "arn:aws:iam::969341422355:role/s3-dbricks-prod-bucket-role",
       "sc_principal_name": "contributors",
       "sc_principal_privileges": [
-        "CREATE_EXTERNAL_TABLE",
         "CREATE_MANAGED_STORAGE",
         "READ_FILES",
         "ALL_PRIVILEGES"
