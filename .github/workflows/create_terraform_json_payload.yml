@@ -38,7 +38,7 @@ jobs:
       - name: Get issue branch name
         run: |
           BODY="${{ github.event.issue.body }}"
-          ISSUE_BRANCH_NAME=$(echo "$BODY" | sed -n '/Please Enter the Github Feature Branch Name/{n;p;}')
+          ISSUE_BRANCH_NAME=$(echo "$BODY" | grep -A1 'Please Enter the Github Feature Branch Name' | awk 'NR==2')
           echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
 
       # - name: Get issue branch name
