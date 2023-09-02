@@ -31,16 +31,15 @@ jobs:
 
     steps:
 
-      - name: Use the branch name
-        run: |
-          ISSUE_BRANCH_NAME=${{ steps.get_inputs.outputs.gh_branch_name }}
-          echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
-          echo GitHub Issue Branch Name: $ISSUE_BRANCH_NAME
+      # - name: Get the Github issue feature branch name
+      #   run: |
+      #     ISSUE_BRANCH_NAME=${{ steps.get_inputs.outputs.gh_branch_name }}
+      #     echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
+      #     echo GitHub Issue Branch Name: $ISSUE_BRANCH_NAME
 
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.GH_TOKEN }}
-          ref: ${{ env.ISSUE_BRANCH_NAME }}
 
       - name: Convert Github issues title to lowercase with underscore and put in env vars
         run: |    
@@ -69,6 +68,8 @@ jobs:
           ISSUE_JSON=$(cat issue_submission/issue_submission.json)
           ISSUE_ENVIRONMENT=$(echo $ISSUE_JSON | jq -r .environment)
           echo "ISSUE_ENVIRONMENT=$ISSUE_ENVIRONMENT" >> $GITHUB_ENV
+          ISSUE_BRANCH_NAME=$(echo $ISSUE_JSON | jq -r .gh_branch_name)
+          echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
           
 
       # - name: Fetch Terraform Json master config JSON file from the target repo
@@ -98,6 +99,11 @@ jobs:
       - name: Get Github repo url and write to issue_submission --> env.sh
         run: |
           echo export REF_GITHUB_URL=${{ github.server_url }}/${{ github.repository_owner }}/${{ github.event.repository.name }}.git > issue_submission/env.sh  
+
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          ref: ${{ env.ISSUE_BRANCH_NAME }}
 
       - name: Commit updated issue submission JSON file to Terraform Config repo
         run: |
