@@ -1,11 +1,11 @@
 name: Create Terraform Json Payload
 
 on:
-  # issues:
-  #   types: [opened, edited]
-  pull_request:
-    branches:
-      - main
+  issues:
+    types: [opened, edited]
+  # pull_request:
+  #   branches:
+  #     - main
 
 jobs:
 
