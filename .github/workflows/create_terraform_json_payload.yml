@@ -87,6 +87,10 @@ jobs:
           echo UPDATED_MASTER_CONFIG: $UPDATED_MASTER_CONFIG
           echo "$UPDATED_MASTER_CONFIG" > issue_submission/issue_submission.json
 
+      - name: Get Github repo url and write to issue_submission --> env.sh
+        run: |
+          echo export REF_GITHUB_URL=${{ github.server_url }}/${{ github.event.repository.name }} > issue_submission/env.sh  
+
       - name: Commit updated issue submission JSON file to Terraform Config repo
         shell: bash
         run: |
@@ -94,12 +98,7 @@ jobs:
           git config --global user.name "github-actions[bot]" && \
           git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/robert-altmiller/terraform_template_config.git
           git pull && \
-          git add issue_submission/issue_submission.json && \
+          git add issue_submission/ && \ # This line adds the whole folder
           git commit -m 'new infrastructure submission' && \
           git push
-
-
-          # github refname is the branch, and the github event repository name is the name of the repository and server_url is the base url
-          echo export REF_GITHUB_URL=${{ github.server_url }}/${{ github.event.repository.name }} > issue_submission/env.sh
-
-          echo server url ${{ github.server_url }} github refname  ${{ github.ref_name }} ${{ github.event.repository.name }}
+  
