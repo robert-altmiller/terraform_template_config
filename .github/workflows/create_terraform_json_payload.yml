@@ -15,26 +15,26 @@ jobs:
 
     steps:
 
-      - uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.GH_TOKEN }}
-          # ref: ${{ env.ISSUE_BRANCH_NAME }}
-
-      - name: Print Issue Body
+      - name: Print issue body (raw)
         run: |
           echo "Issue Body: ${{ github.event.issue.body }}"
 
-      - name: Cat the Issue body
+      - name: Get issue Github feature branch name
         run: |
           echo "${{ github.event.issue.body }}" > issue_body.txt
           grep '\w' issue_body.txt > temp.txt && mv temp.txt issue_body.txt
-          echo ISSUE BODY COMING UP
+          echo issue_body.txt printed out...
           cat issue_body.txt
+          ISSUE_BRANCH_NAME=$(awk '/Please Enter the Github Feature Branch Name/ {getline; print}' issue_body.txt)
+          echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
+          echo ISSUE BRANCH NAME printed out...
+          echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
 
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          ref: ${{ env.ISSUE_BRANCH_NAME }}
 
-      - name: Print extracted issue branch name
-        run: |
-          echo ISSUE_BRANCH_NAME: ${{ env.ISSUE_BRANCH_NAME }}
 
       # - name: Get the Github issue feature branch name
       #   id: extract_branch
