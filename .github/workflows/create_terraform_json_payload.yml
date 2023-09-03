@@ -35,15 +35,6 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           ref: ${{ env.ISSUE_BRANCH_NAME }}
 
-
-      # - name: Get the Github issue feature branch name
-      #   id: extract_branch
-      #   run: |
-      #     BODY="${{ github.event.issue.body }}"
-      #     ISSUE_BRANCH_NAME=$(echo "$BODY" | grep -oP "Please Enter the Github Feature Branch Name\n\n\K.*(?=\n)")
-      #     echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
-      #     echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
-
       - name: Convert Github issues title to lowercase with underscore and put in env vars
         run: |    
           FORMATTED_TITLE=$(echo "$ISSUE_TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/ /_/g')
