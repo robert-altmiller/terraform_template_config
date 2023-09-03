@@ -80,10 +80,10 @@ body:
     label: Please Select the Grants for the 'Schema' Principal or Group Name
     description: "Please note: If selecting 'ALL_PRIVILEGES', ensure no other boxes are checked."
     options:
-      - label: USE_CATALOG
       - label: USE_SCHEMA
       - label: APPLY_TAG
       - label: EXECUTE
+      - label: MODIFY
       - label: READ_VOLUME
       - label: REFRESH
       - label: SELECT
@@ -91,7 +91,6 @@ body:
       - label: CREATE_FUNCTION
       - label: CREATE_MATERIALIZED_VIEW
       - label: CREATE_MODEL
-      - label: CREATE_SCHEMA
       - label: CREATE_TABLE
       - label: CREATE_VOLUME
   validations:
