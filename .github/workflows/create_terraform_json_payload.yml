@@ -121,9 +121,9 @@ jobs:
           source_branch: ${{ env.ISSUE_BRANCH_NAME }}
           destination_branch: main
           github_token: ${{ secrets.GH_TOKEN }}
-          pr_title: "databricks - ${{ env.ISSUE_TITLE }} request (${{ env.ISSUE_ENVIRONMENT }})"
+          pr_title: "databricks - ${{ env.ISSUE_TITLE }} - request (${{ env.ISSUE_ENVIRONMENT }})"
           pr_body: |
             PR Request Time: ${{ steps.date.outputs.date }}
             PR Request Person: ${{ github.actor }}
             Databricks Environment: ${{ env.ISSUE_ENVIRONMENT }}
-            Databricks Infrastructure: ${{ env.ISSUE_TITLE }}
+            Databricks Infrastructure Type: ${{ env.ISSUE_TITLE }}
