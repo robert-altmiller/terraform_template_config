@@ -69,6 +69,8 @@ jobs:
           ISSUE_JSON=$(cat issue_submission/issue_submission.json)
           ISSUE_ENVIRONMENT=$(echo $ISSUE_JSON | jq -r .environment)
           echo "ISSUE_ENVIRONMENT=$ISSUE_ENVIRONMENT" >> $GITHUB_ENV
+          ISSUE_CREATE_DESTROY=$(echo $ISSUE_JSON | jq -r .create_or_delete)
+          echo "ISSUE_CREATE_DESTROY=$ISSUE_CREATE_DESTROY" >> $GITHUB_ENV
 
 
       - name: Append / Remove issue submission to / from master config JSON file
@@ -95,6 +97,7 @@ jobs:
         run: |
           echo export ENVIRONMENT=${{ env.ISSUE_ENVIRONMENT }} > issue_submission/env.sh
           echo export ISSUE_BRANCH_NAME=${{ env.ISSUE_BRANCH_NAME }} >> issue_submission/env.sh
+          echo export ISSUE_CREATE_DESTROY=${{ env.ISSUE_CREATE_DESTROY }} >> issue_submission/env.sh
           echo export MASTER_CONFIG_JSON_FNAME=${{ env.ISSUE_TITLE }}.json >> issue_submission/env.sh
           echo export REF_GITHUB_URL=${{ github.server_url }}/${{ github.repository_owner }}/${{ github.event.repository.name }}.git >> issue_submission/env.sh
 
@@ -129,4 +132,4 @@ jobs:
             PR Request Time: ${{ steps.date.outputs.date }}
             PR Request Person: ${{ github.actor }}
             Databricks Environment: ${{ env.ISSUE_ENVIRONMENT }}
-            Databricks Infrastructure Type: create ${{ env.ISSUE_TITLE }}
+            Databricks Infrastructure Type: ${{ env.ISSUE_CREATE_DESTROY }} ${{ env.ISSUE_TITLE }}
