@@ -27,6 +27,7 @@ jobs:
       - name: Cat the Issue body
         run: |
           echo "${{ github.event.issue.body }}" > issue_body.txt
+          grep '\w' issue_body.txt > temp.txt && mv temp.txt issue_body.txt
           echo ISSUE BODY COMING UP
           cat issue_body.txt
 
