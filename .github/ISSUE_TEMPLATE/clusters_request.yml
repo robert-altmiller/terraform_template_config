@@ -1,0 +1,68 @@
+name: Workspace Cluster Request
+description: Create Workspace Cluster Request Form
+labels: [cluster policy]
+
+title: "Clusters"
+
+body:
+
+- type: input
+  id: gh_branch_name
+  attributes:
+    label: Please Enter the Github Feature Branch Name
+  validations:
+    required: True
+
+- type: dropdown
+  id: environment
+  attributes:
+    label: Select Environment
+    options:
+      - dev
+      - prod
+  validations:
+    required: True
+
+- type: dropdown
+  id: create_or_delete
+  attributes:
+    label: Select to 'Create' or 'Destroy' Resource
+    options:
+      - Create
+      - Destroy
+  validations:
+    required: True
+
+- type: input
+  id: resource_name
+  attributes:
+    description: "Please note: 'underscores' or 'dashes' can be used in the name."
+    label: Please Enter the Cluster Name
+  validations:
+    required: True
+
+- type: input
+  id: min_workers
+  attributes:
+    label: Please Enter Min Workers
+  validations:
+    required: True
+
+- type: input
+  id: max_workers
+  attributes:
+    label: Please Enter Max Workers
+  validations:
+    required: True
+
+- type: dropdown
+  id: auto_termination_mins
+  attributes:
+    label: Please Select Auto Termination Minutes
+    options: 
+      - 30
+      - 60
+      - 90
+      - 120
+  validations:
+    required: True
