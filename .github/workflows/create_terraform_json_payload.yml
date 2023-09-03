@@ -129,4 +129,4 @@ jobs:
             PR Request Time: ${{ steps.date.outputs.date }}
             PR Request Person: ${{ github.actor }}
             Databricks Environment: ${{ env.ISSUE_ENVIRONMENT }}
-            Databricks Infrastructure Type: ${{ env.ISSUE_TITLE }}
+            Databricks Infrastructure Type: create ${{ env.ISSUE_TITLE }}

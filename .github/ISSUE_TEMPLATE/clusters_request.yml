@@ -59,7 +59,9 @@ body:
   id: auto_termination_mins
   attributes:
     label: Please Select Auto Termination Minutes
-    options: 
+    options:
+      - 10
+      - 20
       - 30
       - 60
       - 90
