@@ -56,3 +56,19 @@ jobs:
 #     fi
 #     echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
     
+# - name: Fetch Terraform Json master config JSON file from the target repo
+#   run: |
+#     curl -H "Authorization: token ${{ secrets.GH_TOKEN }}" -H "Accept: application/vnd.github.v3.raw" -o master_config.json \
+#       "https://raw.githubusercontent.com/robert-altmiller/terraform_template/main/master_tfstate/${{ env.ISSUE_ENVIRONMENT }}/storage_credential.json"
+
+# - name: Commit updated issue submission JSON file to Terraform Config repo
+#   shell: bash
+#   run: |
+#     git config --global user.email "github-actions[bot]@users.noreply.github.com" && \
+#     git config --global user.name "github-actions[bot]" && \
+#     git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/robert-altmiller/terraform_template_config.git
+#     git pull && \
+#     git add issue_submission/ && \ # This line adds the whole folder
+#     git commit -m 'new infrastructure submission' && \
+#     git push
+  

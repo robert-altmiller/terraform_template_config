@@ -19,6 +19,7 @@ jobs:
         run: |
           echo "Issue Body: ${{ github.event.issue.body }}"
 
+          
       - name: Get issue Github feature branch name
         run: |
           echo "${{ github.event.issue.body }}" > issue_body.txt
@@ -30,10 +31,12 @@ jobs:
           echo ISSUE BRANCH NAME printed out...
           echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
 
+
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.GH_TOKEN }}
           ref: ${{ env.ISSUE_BRANCH_NAME }}
+
 
       - name: Convert Github issues title to lowercase with underscore and put in env vars
         run: |    
@@ -41,17 +44,21 @@ jobs:
           echo "ISSUE_TITLE=$FORMATTED_TITLE" >> $GITHUB_ENV
           echo ISSUE_TITLE: $FORMATTED_TITLE
 
+
       - name: Install jq
         run: sudo apt-get install jq
+
 
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
 
+
       - uses: stefanbuck/github-issue-parser@v3
         id: issue-parser
         with:
           template-path: .github/ISSUE_TEMPLATE/${{ env.ISSUE_TITLE }}_request.yml
+
 
       - name: Output issue parser JSON results 
         run: cat ${HOME}/issue-parser-result.json
@@ -64,12 +71,7 @@ jobs:
           echo "ISSUE_ENVIRONMENT=$ISSUE_ENVIRONMENT" >> $GITHUB_ENV
           # ISSUE_BRANCH_NAME=$(echo $ISSUE_JSON | jq -r .gh_branch_name)
           # echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
-          
-
-      # - name: Fetch Terraform Json master config JSON file from the target repo
-      #   run: |
-      #     curl -H "Authorization: token ${{ secrets.GH_TOKEN }}" -H "Accept: application/vnd.github.v3.raw" -o master_config.json \
-      #       "https://raw.githubusercontent.com/robert-altmiller/terraform_template/main/master_tfstate/${{ env.ISSUE_ENVIRONMENT }}/storage_credential.json"
+      
 
       - name: Append / Remove issue submission to / from master config JSON file
         run: |
@@ -90,9 +92,11 @@ jobs:
           echo UPDATED_MASTER_CONFIG: $UPDATED_MASTER_CONFIG
           echo "$UPDATED_MASTER_CONFIG" > issue_submission/issue_submission.json
 
+
       - name: Get Github repo url and write to issue_submission --> env.sh
         run: |
           echo export REF_GITHUB_URL=${{ github.server_url }}/${{ github.repository_owner }}/${{ github.event.repository.name }}.git > issue_submission/env.sh  
+
 
       - name: Commit updated issue submission JSON file to Terraform Config repo
         run: |
@@ -107,14 +111,3 @@ jobs:
           git commit -m 'new infrastructure submission' || echo "No changes to commit"
           git push origin ${{ env.ISSUE_BRANCH_NAME }}
 
-      # - name: Commit updated issue submission JSON file to Terraform Config repo
-      #   shell: bash
-      #   run: |
-      #     git config --global user.email "github-actions[bot]@users.noreply.github.com" && \
-      #     git config --global user.name "github-actions[bot]" && \
-      #     git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/robert-altmiller/terraform_template_config.git
-      #     git pull && \
-      #     git add issue_submission/ && \ # This line adds the whole folder
-      #     git commit -m 'new infrastructure submission' && \
-      #     git push
-  
