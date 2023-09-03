@@ -21,6 +21,7 @@
       "sc_principal_name": "contributors",
       "sc_principal_privileges": [
         "CREATE_EXTERNAL_TABLE",
+        "CREATE_EXTERNAL_VOLUME",
         "WRITE_FILES",
         "ALL_PRIVILEGES"
       ]
