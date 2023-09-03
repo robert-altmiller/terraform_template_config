@@ -1,5 +1,5 @@
 {
-  "schema": {
+  "schemas": {
     "dbo": {
       "environment": "dev",
       "create_or_delete": "Create",

@@ -2,7 +2,7 @@ name: Unity Catalog Schema Request
 description: Create UC Schema Request Form
 labels: [schema]
 
-title: "Schema"
+title: "Schemas"
 
 body:
 

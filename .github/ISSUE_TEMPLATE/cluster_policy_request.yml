@@ -2,7 +2,7 @@ name: Workspace Cluster Policy Request
 description: Create Workspace Cluster Policy Request Form
 labels: [cluster policy]
 
-title: "Cluster Policy"
+title: "Cluster Policies"
 
 body:
 
