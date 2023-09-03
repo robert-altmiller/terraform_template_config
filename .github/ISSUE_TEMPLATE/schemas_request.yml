@@ -64,6 +64,8 @@ body:
     options:
       - label: USE_CATALOG
       - label: USE_SCHEMA
+  validations:
+    required: True
 
 - type: input
   id: schema_principal_name
