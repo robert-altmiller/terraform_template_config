@@ -1,0 +1,40 @@
+name: Update Master TF State Json File
+
+on:
+  pull_request:
+    branches: [main]
+    types: [closed]
+
+jobs:
+
+  update_master_config_json_file:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+
+          
+      - name: Set env variables from issue_submission/env.sh
+        run: |
+          source ../issue_submission/env.sh
+          echo "ENVIRONMENT=${ENVIRONMENT}" >> $GITHUB_ENV
+          echo "MASTER_CONFIG_JSON_FILENAME" >> $GITHUB_ENV
+
+
+      - name: Update master tfstate json file after PR approval
+        run: |
+          cp ../issue_submission/issue_submission.json ../master_tfstate/${{ env.ENVIRONMENT }}/${{ env.MASTER_CONFIG_JSON_FNAME }}
+
+
+      - name: Commit changes to terraform_template repo (main branch)
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]" && \
+          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}.git
+          git add master_tfstate/
+          git commit -m 'master_tfstates updated' || echo "No changes to commit"
+          git push origin main

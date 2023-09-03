@@ -7,12 +7,12 @@ on:
 jobs:
 
   get_issue_in_json:
-
+    
     runs-on: ubuntu-latest
     
     env:
       ISSUE_TITLE: ${{ github.event.issue.title }}
-
+    
     steps:
 
       - name: Print issue body (raw)
@@ -69,9 +69,7 @@ jobs:
           ISSUE_JSON=$(cat issue_submission/issue_submission.json)
           ISSUE_ENVIRONMENT=$(echo $ISSUE_JSON | jq -r .environment)
           echo "ISSUE_ENVIRONMENT=$ISSUE_ENVIRONMENT" >> $GITHUB_ENV
-          # ISSUE_BRANCH_NAME=$(echo $ISSUE_JSON | jq -r .gh_branch_name)
-          # echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
-      
+
 
       - name: Append / Remove issue submission to / from master config JSON file
         run: |
@@ -93,9 +91,11 @@ jobs:
           echo "$UPDATED_MASTER_CONFIG" > issue_submission/issue_submission.json
 
 
-      - name: Get Github repo url and write to issue_submission --> env.sh
+      - name: Get Github env, repo url and master tfstate config fname, and write to issue_submission --> env.sh
         run: |
-          echo export REF_GITHUB_URL=${{ github.server_url }}/${{ github.repository_owner }}/${{ github.event.repository.name }}.git > issue_submission/env.sh  
+          echo export ENVIRONMENT=${{ env.ISSUE_ENVIRONMENT }} > issue_submission/env.sh
+          echo export MASTER_CONFIG_JSON_FNAME=${{ env.ISSUE_TITLE }}.json >> issue_submission/env.sh
+          echo export REF_GITHUB_URL=${{ github.server_url }}/${{ github.repository_owner }}/${{ github.event.repository.name }}.git >> issue_submission/env.sh
 
 
       - name: Commit updated issue submission JSON file to Terraform Config repo
@@ -111,9 +111,11 @@ jobs:
           git commit -m 'new infrastructure submission' || echo "No changes to commit"
           git push origin ${{ env.ISSUE_BRANCH_NAME }}
 
+
       - name: Get the current date for Github issue pull request
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d %H:%M:%S')"
+
 
       - name: Create Github issue pull request to main branch + approval
         uses: repo-sync/pull-request@v2
