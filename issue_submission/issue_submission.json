@@ -1,13 +1,23 @@
 {
-  "clusters": {
-    "my-cluster-2": {
+  "schemas": {
+    "dbo": {
       "gh_branch_name": "feature-branch",
       "environment": "dev",
       "create_or_delete": "Create",
-      "resource_name": "my-cluster-2",
-      "min_workers": "1",
-      "max_workers": "2",
-      "auto_termination_mins": "20"
+      "resource_name": "dbo",
+      "catalog_name": "main",
+      "catalog_principal_name": "my-sp-dev",
+      "catalog_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA"
+      ],
+      "schema_principal_name": "contributors",
+      "schema_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA",
+        "EXECUTE",
+        "SELECT"
+      ]
     }
   }
 }
