@@ -42,6 +42,7 @@ jobs:
           git checkout main
           git pull
           git checkout -b ${{ env.ISSUE_BRANCH_NAME }}
+          git pull
           git push origin ${{ env.ISSUE_BRANCH_NAME }}
 
 
