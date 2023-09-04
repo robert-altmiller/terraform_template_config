@@ -42,8 +42,8 @@ jobs:
           git checkout main
           git pull
           git checkout -b ${{ env.ISSUE_BRANCH_NAME }}
-          git pull
-          git push origin ${{ env.ISSUE_BRANCH_NAME }}
+          # Force push the branch to the remote, overwriting if it already exists
+          git push -f origin ${{ env.ISSUE_BRANCH_NAME }}
 
 
       - uses: actions/checkout@v3
