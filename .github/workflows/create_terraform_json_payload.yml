@@ -76,7 +76,7 @@ jobs:
       - name: Output issue parser JSON results 
         run: cat ${HOME}/issue-parser-result.json
 
-      - name: Write issue submission JSON file to local Terraform Template Config repo and environment to environment vars
+      - name: Write issue submission JSON file to local Terraform Template Config repo and create environment vars
         run: |
           echo '${{ steps.issue-parser.outputs.jsonString }}' > issue_submission/issue_submission.json
           ISSUE_JSON=$(cat issue_submission/issue_submission.json)
@@ -84,6 +84,8 @@ jobs:
           echo "ISSUE_ENVIRONMENT=$ISSUE_ENVIRONMENT" >> $GITHUB_ENV
           ISSUE_CREATE_DESTROY=$(echo $ISSUE_JSON | jq -r .create_or_delete)
           echo "ISSUE_CREATE_DESTROY=$ISSUE_CREATE_DESTROY" >> $GITHUB_ENV
+          ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
+          echo "ISSUE_RESOURCE_NAME=$ISSUE_RESOURCE_NAME" >> $GITHUB_ENV
 
 
       - name: Append / Remove issue submission to / from master config JSON file
@@ -145,4 +147,6 @@ jobs:
             PR Request Time: ${{ steps.date.outputs.date }}
             PR Request Person: ${{ github.actor }}
             Databricks Environment: ${{ env.ISSUE_ENVIRONMENT }}
-            Databricks Infrastructure Type: ${{ env.ISSUE_CREATE_DESTROY }} ${{ env.ISSUE_TITLE }}
+            Databricks Infrastructure Type: ${{ env.ISSUE_TITLE }}
+            Databricks Infrastructure Action:${{ env.ISSUE_CREATE_DESTROY }}
+            Databricks Infrastructure Name: ${{ env.ISSUE_RESOURCE_NAME  }}

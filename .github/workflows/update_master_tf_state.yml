@@ -7,7 +7,7 @@ on:
 
 jobs:
   update_master_config_json_file:
-    
+
     # Ensure the PR was merged and not just closed
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
@@ -24,7 +24,7 @@ jobs:
         source issue_submission/env.sh
         echo "ENVIRONMENT=${ENVIRONMENT}" >> $GITHUB_ENV
         echo "MASTER_CONFIG_JSON_FNAME=${MASTER_CONFIG_JSON_FNAME}" >> $GITHUB_ENV
-        echo "ISSUE_BRANCH_NAME"=${ISSUE_BRANCH_NAME}" >> $GITHUB_ENV
+        echo "ISSUE_BRANCH_NAME=${ISSUE_BRANCH_NAME}" >> $GITHUB_ENV
 
 
     - name: Update master tfstate json file after PR approval
