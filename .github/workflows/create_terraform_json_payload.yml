@@ -30,6 +30,19 @@ jobs:
           echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
           echo ISSUE BRANCH NAME printed out...
           echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
+      
+
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+
+          
+      - name: Create new feature branch from main branch
+        run: |
+          git checkout main
+          git pull
+          git checkout -b ${{ env.ISSUE_BRANCH_NAME }}
+          git push origin ${{ env.ISSUE_BRANCH_NAME }}
 
 
       - uses: actions/checkout@v3
