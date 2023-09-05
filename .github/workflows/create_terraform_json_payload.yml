@@ -56,8 +56,8 @@ jobs:
           
       - name: Print the github issue labels
         run: |
-          LABELS="${{ toJson(github.event.issue.labels) }}"
-          echo "Labels on the issue: $LABELS"
+          LABEL_NAME="${{ github.event.issue.labels[0].name }}"
+          echo "Label on the issue: $LABEL_NAME"
 
 
       - name: Convert Github issues title to lowercase with underscore and put in env vars
