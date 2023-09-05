@@ -12,6 +12,21 @@
         "WRITE_FILES",
         "ALL_PRIVILEGES"
       ]
+    },
+    "my-sc-2": {
+      "gh_branch_name": "bsa-feature-branch",
+      "environment": "dev",
+      "create_or_delete": "Create",
+      "resource_name": "my-sc-2",
+      "sc_role_arn": "arn:aws:iam::969341422355:role/s3-dbricks-prod-bucket-role",
+      "sc_principal_name": "contributors",
+      "sc_principal_privileges": [
+        "CREATE_EXTERNAL_TABLE",
+        "CREATE_EXTERNAL_VOLUME",
+        "CREATE_MANAGED_STORAGE",
+        "READ_FILES",
+        "WRITE_FILES"
+      ]
     }
   }
 }
