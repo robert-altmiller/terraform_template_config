@@ -151,7 +151,7 @@ jobs:
       - name: Create Github issue pull request to main branch + approval
         uses: repo-sync/pull-request@v2
         with:
-          labels: ${{ github.event.issue.labels[0].name }}
+          labels: ${{ github.event.issue.labels.name }}
           source_branch: ${{ env.ISSUE_BRANCH_NAME }}
           destination_branch: main
           github_token: ${{ secrets.GH_TOKEN }}
@@ -159,7 +159,7 @@ jobs:
           pr_body: |
             PR Request Time: ${{ steps.date.outputs.date }}
             PR Request Person: ${{ github.actor }}
-            Databricks Resouce Environment: ${{ env.ISSUE_ENVIRONMENT }}
+            Databricks Resource Environment: ${{ env.ISSUE_ENVIRONMENT }}
             Databricks Resource Type: ${{ env.ISSUE_TITLE }}
             Databricks Resource Action:${{ env.ISSUE_CREATE_DESTROY }}
             Databricks Resource Name: ${{ env.ISSUE_RESOURCE_NAME  }}
