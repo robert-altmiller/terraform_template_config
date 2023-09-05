@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      ISSUE_TITLE: ${{ github.event.issue.title }}
+      ISSUE_TITLE: "${{ github.event.issue.labels[0].name }}"
     
     steps:
 
