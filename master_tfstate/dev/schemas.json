@@ -34,6 +34,23 @@
       "schema_principal_privileges": [
         "USE_SCHEMA"
       ]
+    },
+    "dbo23333": {
+      "gh_branch_name": "bsa-feature-br",
+      "environment": "dev",
+      "create_or_delete": "Create",
+      "resource_name": "dbo23333",
+      "catalog_name": "main",
+      "catalog_principal_name": "my-sp-dev",
+      "catalog_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA"
+      ],
+      "schema_principal_name": "contributors",
+      "schema_principal_privileges": [
+        "CREATE_MATERIALIZED_VIEW",
+        "CREATE_MODEL"
+      ]
     }
   }
 }
