@@ -1,90 +1,13 @@
 {
-  "schemas": {
-    "dbo": {
-      "gh_branch_name": "feature-branch",
+  "clusters": {
+    "branch-cluster-1": {
+      "gh_branch_name": "branch-cluster-1",
       "environment": "dev",
       "create_or_delete": "Create",
-      "resource_name": "dbo",
-      "catalog_name": "main",
-      "catalog_principal_name": "my-sp-dev",
-      "catalog_principal_privileges": [
-        "USE_CATALOG",
-        "USE_SCHEMA"
-      ],
-      "schema_principal_name": "contributors",
-      "schema_principal_privileges": [
-        "USE_CATALOG",
-        "USE_SCHEMA",
-        "EXECUTE",
-        "SELECT"
-      ]
-    },
-    "dbo2": {
-      "gh_branch_name": "feature",
-      "environment": "dev",
-      "create_or_delete": "Create",
-      "resource_name": "dbo2",
-      "catalog_name": "main",
-      "catalog_principal_name": "my-sp-dev",
-      "catalog_principal_privileges": [
-        "USE_CATALOG",
-        "USE_SCHEMA"
-      ],
-      "schema_principal_name": "contributors",
-      "schema_principal_privileges": [
-        "USE_SCHEMA",
-        "APPLY_TAG"
-      ]
-    },
-    "dbo23333": {
-      "gh_branch_name": "bsa-feature-br",
-      "environment": "dev",
-      "create_or_delete": "Create",
-      "resource_name": "dbo23333",
-      "catalog_name": "main",
-      "catalog_principal_name": "my-sp-dev",
-      "catalog_principal_privileges": [
-        "USE_CATALOG",
-        "USE_SCHEMA"
-      ],
-      "schema_principal_name": "contributors",
-      "schema_principal_privileges": [
-        "CREATE_MATERIALIZED_VIEW",
-        "CREATE_MODEL"
-      ]
-    },
-    "jake-schema": {
-      "gh_branch_name": "jake-feature",
-      "environment": "dev",
-      "create_or_delete": "Create",
-      "resource_name": "jake-schema",
-      "catalog_name": "main",
-      "catalog_principal_name": "my-sp-dev",
-      "catalog_principal_privileges": [
-        "USE_CATALOG",
-        "USE_SCHEMA"
-      ],
-      "schema_principal_name": "contributors",
-      "schema_principal_privileges": [
-        "CREATE_VOLUME"
-      ]
-    },
-    "brian_schema": {
-      "gh_branch_name": "brian-feature",
-      "environment": "dev",
-      "create_or_delete": "Create",
-      "resource_name": "brian_schema",
-      "catalog_name": "main",
-      "catalog_principal_name": "my-sp-dev",
-      "catalog_principal_privileges": [
-        "USE_CATALOG",
-        "USE_SCHEMA"
-      ],
-      "schema_principal_name": "contributors",
-      "schema_principal_privileges": [
-        "USE_SCHEMA",
-        "APPLY_TAG"
-      ]
+      "resource_name": "branch-cluster-1",
+      "min_workers": "1",
+      "max_workers": "2",
+      "auto_termination_mins": "10"
     }
   }
 }
