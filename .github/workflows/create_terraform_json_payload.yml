@@ -53,6 +53,12 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           ref: ${{ env.ISSUE_BRANCH_NAME }}
 
+          
+      - name: Print the github issue labels
+        run: |
+          LABELS="${{ toJson(github.event.issue.labels) }}"
+          echo "Labels on the issue: $LABELS"
+
 
       - name: Convert Github issues title to lowercase with underscore and put in env vars
         run: |    
