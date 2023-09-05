@@ -156,3 +156,4 @@ jobs:
             Databricks Resource Type: ${{ env.ISSUE_TITLE }}
             Databricks Resource Action:${{ env.ISSUE_CREATE_DESTROY }}
             Databricks Resource Name: ${{ env.ISSUE_RESOURCE_NAME  }}
+            Issue Number: [#${{ github.event.issue.number }}](https://github.com/${{ github.repository }}/issues/${{ github.event.issue.number }})
