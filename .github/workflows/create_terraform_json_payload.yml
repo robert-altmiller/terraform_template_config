@@ -151,7 +151,6 @@ jobs:
       - name: Create Github issue pull request to main branch + approval
         uses: repo-sync/pull-request@v2
         with:
-          labels: 'Storage Credentials'
           source_branch: ${{ env.ISSUE_BRANCH_NAME }}
           destination_branch: main
           github_token: ${{ secrets.GH_TOKEN }}
@@ -164,3 +163,11 @@ jobs:
             Databricks Resource Action:${{ env.ISSUE_CREATE_DESTROY }}
             Databricks Resource Name: ${{ env.ISSUE_RESOURCE_NAME  }}
             Issue Number: [#${{ github.event.issue.number }}](https://github.com/${{ github.repository }}/issues/${{ github.event.issue.number }})
+
+            
+      - name: Add label to the PR
+        run: |
+          PR_NUMBER=$(gh pr list --base main --head ${{ env.ISSUE_BRANCH_NAME }} --json number --jq '.[0].number')
+          gh pr edit $PR_NUMBER --add-label "${{ github.event.issue.labels[0].name }}"
+          env:
+            GH_TOKEN: ${{ secrets.GH_TOKEN }}
