@@ -85,6 +85,23 @@
         "USE_SCHEMA",
         "APPLY_TAG"
       ]
+    },
+    "my-sc-2-raqo222": {
+      "gh_branch_name": "bsa-feature-branch222",
+      "environment": "dev",
+      "create_or_delete": "Create",
+      "resource_name": "my-sc-2-raqo222",
+      "catalog_name": "main",
+      "catalog_principal_name": "my-sp-dev",
+      "catalog_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA"
+      ],
+      "schema_principal_name": "contributors",
+      "schema_principal_privileges": [
+        "USE_SCHEMA",
+        "APPLY_TAG"
+      ]
     }
   }
 }
