@@ -53,12 +53,6 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           ref: ${{ env.ISSUE_BRANCH_NAME }}
 
-          
-      - name: Print the github issue labels
-        run: |
-          LABEL_NAME="${{ github.event.issue.labels[0].name }}"
-          echo "Label on the issue: $LABEL_NAME"
-
 
       - name: Convert Github issues title to lowercase with underscore and put in env vars
         run: |    
@@ -161,13 +155,7 @@ jobs:
             Databricks Resource Environment: ${{ env.ISSUE_ENVIRONMENT }}
             Databricks Resource Type: ${{ env.ISSUE_TITLE }}
             Databricks Resource Action:${{ env.ISSUE_CREATE_DESTROY }}
-            Databricks Resource Name: ${{ env.ISSUE_RESOURCE_NAME  }}
-            Issue Number: [#${{ github.event.issue.number }}](https://github.com/${{ github.repository }}/issues/${{ github.event.issue.number }})
+            Databricks Resource Name: ${{ env.ISSUE_RESOURCE_NAME  }} /
 
-            
-      - name: Add label to the PR
-        run: |
-          PR_NUMBER=$(gh pr list --base main --head ${{ env.ISSUE_BRANCH_NAME }} --json number --jq '.[0].number')
-          gh pr edit $PR_NUMBER --add-label "${{ github.event.issue.labels[0].name }}"
-          env:
-            GH_TOKEN: ${{ secrets.GH_TOKEN }}
+            If you have merge conflict add a comment in the issue below:
+            Issue Number: [#${{ github.event.issue.number }}](https://github.com/${{ github.repository }}/issues/${{ github.event.issue.number }})
