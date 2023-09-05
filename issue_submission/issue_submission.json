@@ -85,6 +85,22 @@
         "USE_SCHEMA",
         "APPLY_TAG"
       ]
+    },
+    "schema3": {
+      "gh_branch_name": "schema-test-3",
+      "environment": "dev",
+      "create_or_delete": "Create",
+      "resource_name": "schema3",
+      "catalog_name": "main",
+      "catalog_principal_name": "my-sp-dev",
+      "catalog_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA"
+      ],
+      "schema_principal_name": "contributors",
+      "schema_principal_privileges": [
+        "REFRESH"
+      ]
     }
   }
 }
