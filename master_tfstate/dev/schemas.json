@@ -18,6 +18,22 @@
         "EXECUTE",
         "SELECT"
       ]
+    },
+    "dbo2": {
+      "gh_branch_name": "feature",
+      "environment": "dev",
+      "create_or_delete": "Create",
+      "resource_name": "dbo2",
+      "catalog_name": "main",
+      "catalog_principal_name": "my-sp-dev",
+      "catalog_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA"
+      ],
+      "schema_principal_name": "contributors",
+      "schema_principal_privileges": [
+        "USE_SCHEMA"
+      ]
     }
   }
 }
