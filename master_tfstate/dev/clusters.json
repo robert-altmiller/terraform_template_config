@@ -8,6 +8,15 @@
       "min_workers": "1",
       "max_workers": "2",
       "auto_termination_mins": "10"
+    },
+    "feature2": {
+      "gh_branch_name": "feature2",
+      "environment": "dev",
+      "create_or_delete": "Create",
+      "resource_name": "feature2",
+      "min_workers": "1",
+      "max_workers": "2",
+      "auto_termination_mins": "10"
     }
   }
 }
