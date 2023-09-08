@@ -8,12 +8,9 @@ jobs:
   get_issue_in_json:
     
     runs-on: ubuntu-latest
-    # Ensure the action is triggered by the repository owner and contains a specific command.
-    if: github.event.comment.user.login == github.repository_owner && contains(github.event.comment.body, '[fix pr]') 
-    
-    steps:
 
-          
+    steps:
+  
       - name: Get the Github issue feature branch name
         run: |
           echo "${{ github.event.issue.body }}" > issue_body.txt
@@ -26,25 +23,25 @@ jobs:
           echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
       
 
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+
+
+      - name: Overwrite existing Github issue feature branch changes with main branch changes
+        run: |
+          git fetch
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git checkout ${{ env.ISSUE_BRANCH_NAME }}
+          git merge origin/main --allow-unrelated-histories -X theirs
+          git push origin ${{ env.ISSUE_BRANCH_NAME }}
+
 
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.GH_TOKEN }}
           ref: ${{ env.ISSUE_BRANCH_NAME }}
-
-          
-      - name: Update existing Github issue feature branch with main branch changes
-        run: |
-          git fetch
-          git checkout ${{ env.ISSUE_BRANCH_NAME }}
-          git merge origin/main
-          git push origin ${{ env.ISSUE_BRANCH_NAME }}
-
-
-      # - uses: actions/checkout@v3
-      #   with:
-      #     token: ${{ secrets.GH_TOKEN }}
-      #     ref: ${{ env.ISSUE_BRANCH_NAME }}
 
 
       - name: Convert Github issues title to lowercase with underscore and put in env vars
