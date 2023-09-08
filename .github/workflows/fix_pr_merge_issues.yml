@@ -1,49 +1,130 @@
-name: Create Terraform Json Payload
+name: Fix Terraform PR Merge Issues
 
 on:
   issue_comment:
-      types: [created]
+    types: [created]
 
 jobs:
-
   get_issue_in_json:
     
     runs-on: ubuntu-latest
-    
-    # env:
-    #   ISSUE_TITLE: "${{ github.event.issue.labels[0].name }}"
+    # Ensure the action is triggered by the repository owner and contains a specific command.
+    if: github.event.comment.user.login == github.repository_owner && contains(github.event.comment.body, '[fix pr]') 
     
     steps:
 
-      # - name: Print issue body (raw)
-      #   run: |
-      #     echo "Issue Body: ${{ github.event.issue.body }}"
-
           
-      # - name: Get the Github issue feature branch name
-      #   run: |
-      #     echo "${{ github.event.issue.body }}" > issue_body.txt
-      #     grep '\w' issue_body.txt > temp.txt && mv temp.txt issue_body.txt
-      #     echo issue_body.txt printed out...
-      #     cat issue_body.txt
-      #     ISSUE_BRANCH_NAME=$(awk '/Please Enter the Github Feature Branch Name/ {getline; print}' issue_body.txt)
-      #     echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
-      #     echo ISSUE BRANCH NAME printed out...
-      #     echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
+      - name: Get the Github issue feature branch name
+        run: |
+          echo "${{ github.event.issue.body }}" > issue_body.txt
+          grep '\w' issue_body.txt > temp.txt && mv temp.txt issue_body.txt
+          echo issue_body.txt printed out...
+          cat issue_body.txt
+          ISSUE_BRANCH_NAME=$(awk '/Please Enter the Github Feature Branch Name/ {getline; print}' issue_body.txt)
+          echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
+          echo ISSUE BRANCH NAME printed out...
+          echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
       
+
 
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.GH_TOKEN }}
-      
+          ref: ${{ env.ISSUE_BRANCH_NAME }}
 
-      - name: Reset main branch to match new main branch changes from previous approved PR
+          
+      - name: Update existing Github issue feature branch with main branch changes
+        run: |
+          git fetch
+          git checkout ${{ env.ISSUE_BRANCH_NAME }}
+          git merge origin/main
+          git push origin ${{ env.ISSUE_BRANCH_NAME }}
+
+
+      # - uses: actions/checkout@v3
+      #   with:
+      #     token: ${{ secrets.GH_TOKEN }}
+      #     ref: ${{ env.ISSUE_BRANCH_NAME }}
+
+
+      - name: Convert Github issues title to lowercase with underscore and put in env vars
+        run: |    
+          FORMATTED_TITLE=$(echo "$ISSUE_TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/ /_/g')
+          echo "ISSUE_TITLE=$FORMATTED_TITLE" >> $GITHUB_ENV
+          echo ISSUE_TITLE: $FORMATTED_TITLE
+
+
+      - name: Install jq
+        run: sudo apt-get install jq
+
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+
+      - uses: stefanbuck/github-issue-parser@v3
+        id: issue-parser
+        with:
+          template-path: .github/ISSUE_TEMPLATE/${{ env.ISSUE_TITLE }}_request.yml
+
+
+      - name: Output issue parser JSON results 
+        run: cat ${HOME}/issue-parser-result.json
+
+      - name: Write issue submission JSON file to local Terraform Template Config repo and create environment vars
+        run: |
+          echo '${{ steps.issue-parser.outputs.jsonString }}' > issue_submission/issue_submission.json
+          ISSUE_JSON=$(cat issue_submission/issue_submission.json)
+          ISSUE_ENVIRONMENT=$(echo $ISSUE_JSON | jq -r .environment)
+          echo "ISSUE_ENVIRONMENT=$ISSUE_ENVIRONMENT" >> $GITHUB_ENV
+          ISSUE_CREATE_DESTROY=$(echo $ISSUE_JSON | jq -r .create_or_delete)
+          echo "ISSUE_CREATE_DESTROY=$ISSUE_CREATE_DESTROY" >> $GITHUB_ENV
+          ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
+          echo "ISSUE_RESOURCE_NAME=$ISSUE_RESOURCE_NAME" >> $GITHUB_ENV
+
+
+      - name: Append / Remove issue submission to / from master config JSON file
+        run: |
+          ISSUE_JSON=$(cat issue_submission/issue_submission.json)
+          echo ISSUE_JSON: $ISSUE_JSON
+          MASTER_CONFIG_JSON=$(cat master_tfstate/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json)
+          echo MASTER_CONFIG_JSON: $MASTER_CONFIG_JSON
+          ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
+          ISSUE_ACTION=$(echo $ISSUE_JSON | jq -r .create_or_delete)
+          if [[ "$ISSUE_ACTION" == "Create" ]]; then
+            UPDATED_MASTER_CONFIG=$(echo $MASTER_CONFIG_JSON | jq ".${{ env.ISSUE_TITLE }}.\"$ISSUE_RESOURCE_NAME\" = $ISSUE_JSON")
+          elif [[ "$ISSUE_ACTION" == "Destroy" ]]; then
+            UPDATED_MASTER_CONFIG=$(echo $MASTER_CONFIG_JSON | jq "del(.${{ env.ISSUE_TITLE }}.\"$ISSUE_RESOURCE_NAME\")")
+          else
+            echo "Unknown ISSUE_ACTION: $ISSUE_ACTION"
+            exit 1
+          fi
+          echo UPDATED_MASTER_CONFIG: $UPDATED_MASTER_CONFIG
+          echo "$UPDATED_MASTER_CONFIG" > issue_submission/issue_submission.json
+
+
+      - name: Get Github env, repo url and master tfstate config fname, and write to issue_submission --> env.sh
+        run: |
+          echo export ENVIRONMENT=${{ env.ISSUE_ENVIRONMENT }} > issue_submission/env.sh
+          echo export ISSUE_BRANCH_NAME=${{ env.ISSUE_BRANCH_NAME }} >> issue_submission/env.sh
+          echo export ISSUE_CREATE_DESTROY=${{ env.ISSUE_CREATE_DESTROY }} >> issue_submission/env.sh
+          echo export MASTER_CONFIG_JSON_FNAME=${{ env.ISSUE_TITLE }}.json >> issue_submission/env.sh
+          echo export GITHUB_ISSUE_NUMBER=${{ github.event.issue.number }} >> issue_submission/env.sh
+          echo export GITHUB_REPO_OWNER=${{ github.repository_owner }} >> issue_submission/env.sh
+          echo export GITHUB_REPO_NAME=${{ github.event.repository.name }} >> issue_submission/env.sh
+          echo export GITHUB_REPO_URL=${{ github.server_url }}/${{ github.repository_owner }}/${{ github.event.repository.name }}.git >> issue_submission/env.sh
+
+
+      - name: Commit updated issue submission JSON file to Terraform Config repo
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}.git
-      
-          git checkout main
-          git fetch origin
-          git reset --hard origin/main
-          git push origin main --force-with-lease
+          git fetch
+          git checkout ${{ env.ISSUE_BRANCH_NAME }} || git checkout -b ${{ env.ISSUE_BRANCH_NAME }} # Check out the branch if it exists, otherwise create it
+          git pull origin ${{ env.ISSUE_BRANCH_NAME }} || true # If the branch is new, this pull will fail, hence we use `|| true` to prevent the workflow from stopping
+          # Adding the entire issue_submission folder
+          git add issue_submission/
+          git commit -m 'new infrastructure submission' || echo "No changes to commit"
+          git push origin ${{ env.ISSUE_BRANCH_NAME }}
