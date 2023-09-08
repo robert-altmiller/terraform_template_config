@@ -28,22 +28,6 @@
         "WRITE_FILES"
       ]
     },
-    "feature2": {
-      "gh_branch_name": "feature2",
-      "environment": "dev",
-      "create_or_delete": "Create",
-      "resource_name": "feature2",
-      "sc_role_arn": "arn:aws:iam::969341422355:role/s3-dbricks-prod-bucket-role",
-      "sc_principal_name": "contributors",
-      "sc_principal_privileges": [
-        "CREATE_EXTERNAL_TABLE",
-        "CREATE_EXTERNAL_VOLUME",
-        "CREATE_MANAGED_STORAGE",
-        "READ_FILES",
-        "WRITE_FILES",
-        "ALL_PRIVILEGES"
-      ]
-    },
     "feature1": {
       "gh_branch_name": "feature1",
       "environment": "dev",
