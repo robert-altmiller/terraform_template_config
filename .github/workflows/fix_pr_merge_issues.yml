@@ -9,7 +9,7 @@ jobs:
     
     runs-on: ubuntu-latest
     # Ensure the action is triggered by the repository owner and contains a specific command.
-    if: github.event.comment.user.login == github.repository_owner && contains(github.event.comment.body, '[fix pr]') 
+    if: contains(github.event.comment.body, '[fix pr]') 
     
     steps:
 
