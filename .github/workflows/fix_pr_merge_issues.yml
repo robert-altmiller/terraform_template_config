@@ -5,7 +5,7 @@ on:
     types: [created]
 
 jobs:
-  
+
   fix_terraform_merge_pr_issue:
     
     runs-on: ubuntu-latest
@@ -38,6 +38,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
           git checkout ${{ env.ISSUE_BRANCH_NAME }}
+          # by using -X theirs, you're instructing Git to favor the changes in the main branch whenever there's a conflict
           git merge origin/main --allow-unrelated-histories -X theirs
           git push origin ${{ env.ISSUE_BRANCH_NAME }}
 
