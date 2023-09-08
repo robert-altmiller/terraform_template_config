@@ -154,7 +154,7 @@ jobs:
             Databricks Resource Environment: ${{ env.ISSUE_ENVIRONMENT }}
             Databricks Resource Type: ${{ env.ISSUE_TITLE }}
             Databricks Resource Action:${{ env.ISSUE_CREATE_DESTROY }}
-            Databricks Resource Name: ${{ env.ISSUE_RESOURCE_NAME  }} /
+            Databricks Resource Name: ${{ env.ISSUE_RESOURCE_NAME  }}
 
             If you have merge conflict add a comment 'fix pr' in the issue below:
             Issue Number: [#${{ github.event.issue.number }}](https://github.com/${{ github.repository }}/issues/${{ github.event.issue.number }})
