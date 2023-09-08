@@ -23,12 +23,11 @@ jobs:
           echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
       
 
-      # - uses: actions/checkout@v3
-      #   with:
-      #     token: ${{ secrets.GH_TOKEN }}
-      #     ref: ${{ env.ISSUE_BRANCH_NAME }}
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
 
-          
+
       - name: Update existing Github issue feature branch with main branch changes
         run: |
           git fetch
@@ -37,10 +36,10 @@ jobs:
           git push origin ${{ env.ISSUE_BRANCH_NAME }}
 
 
-      # - uses: actions/checkout@v3
-      #   with:
-      #     token: ${{ secrets.GH_TOKEN }}
-      #     ref: ${{ env.ISSUE_BRANCH_NAME }}
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          ref: ${{ env.ISSUE_BRANCH_NAME }}
 
 
       - name: Convert Github issues title to lowercase with underscore and put in env vars
