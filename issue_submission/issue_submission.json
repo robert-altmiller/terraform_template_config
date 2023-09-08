@@ -1,31 +1,105 @@
 {
-  "storage_credentials": {
-    "my-sc-2-raqo": {
-      "gh_branch_name": "bsa-feature-branch2",
+  "schemas": {
+    "dbo": {
+      "gh_branch_name": "feature-branch",
       "environment": "dev",
       "create_or_delete": "Create",
-      "resource_name": "my-sc-2-raqo",
-      "sc_role_arn": "arn:aws:iam::111111111111:role/Temp-Product-IAM-Role_1111111111111",
-      "sc_principal_name": "contributors",
-      "sc_principal_privileges": [
-        "READ_FILES",
-        "WRITE_FILES",
-        "ALL_PRIVILEGES"
+      "resource_name": "dbo",
+      "catalog_name": "main",
+      "catalog_principal_name": "my-sp-dev",
+      "catalog_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA"
+      ],
+      "schema_principal_name": "contributors",
+      "schema_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA",
+        "EXECUTE",
+        "SELECT"
       ]
     },
-    "my-sc-2": {
-      "gh_branch_name": "bsa-feature-branch",
+    "dbo2": {
+      "gh_branch_name": "feature",
       "environment": "dev",
       "create_or_delete": "Create",
-      "resource_name": "my-sc-2",
-      "sc_role_arn": "arn:aws:iam::969341422355:role/s3-dbricks-prod-bucket-role",
-      "sc_principal_name": "contributors",
-      "sc_principal_privileges": [
-        "CREATE_EXTERNAL_TABLE",
-        "CREATE_EXTERNAL_VOLUME",
-        "CREATE_MANAGED_STORAGE",
-        "READ_FILES",
-        "WRITE_FILES"
+      "resource_name": "dbo2",
+      "catalog_name": "main",
+      "catalog_principal_name": "my-sp-dev",
+      "catalog_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA"
+      ],
+      "schema_principal_name": "contributors",
+      "schema_principal_privileges": [
+        "USE_SCHEMA",
+        "APPLY_TAG"
+      ]
+    },
+    "dbo23333": {
+      "gh_branch_name": "bsa-feature-br",
+      "environment": "dev",
+      "create_or_delete": "Create",
+      "resource_name": "dbo23333",
+      "catalog_name": "main",
+      "catalog_principal_name": "my-sp-dev",
+      "catalog_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA"
+      ],
+      "schema_principal_name": "contributors",
+      "schema_principal_privileges": [
+        "CREATE_MATERIALIZED_VIEW",
+        "CREATE_MODEL"
+      ]
+    },
+    "jake-schema": {
+      "gh_branch_name": "jake-feature",
+      "environment": "dev",
+      "create_or_delete": "Create",
+      "resource_name": "jake-schema",
+      "catalog_name": "main",
+      "catalog_principal_name": "my-sp-dev",
+      "catalog_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA"
+      ],
+      "schema_principal_name": "contributors",
+      "schema_principal_privileges": [
+        "CREATE_VOLUME"
+      ]
+    },
+    "brian_schema": {
+      "gh_branch_name": "brian-feature",
+      "environment": "dev",
+      "create_or_delete": "Create",
+      "resource_name": "brian_schema",
+      "catalog_name": "main",
+      "catalog_principal_name": "my-sp-dev",
+      "catalog_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA"
+      ],
+      "schema_principal_name": "contributors",
+      "schema_principal_privileges": [
+        "USE_SCHEMA",
+        "APPLY_TAG"
+      ]
+    },
+    "feature1": {
+      "gh_branch_name": "feature1",
+      "environment": "dev",
+      "create_or_delete": "Create",
+      "resource_name": "feature1",
+      "catalog_name": "main",
+      "catalog_principal_name": "my-sp-dev",
+      "catalog_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA"
+      ],
+      "schema_principal_name": "contributors",
+      "schema_principal_privileges": [
+        "USE_SCHEMA"
       ]
     }
   }
