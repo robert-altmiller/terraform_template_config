@@ -151,6 +151,7 @@ jobs:
           pr_body: |
             PR Request Time: ${{ steps.date.outputs.date }}
             PR Request Person: ${{ github.actor }}
+            PR Request Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
             Databricks Resource Environment: ${{ env.ISSUE_ENVIRONMENT }}
             Databricks Resource Type: ${{ env.ISSUE_TITLE }}
             Databricks Resource Action:${{ env.ISSUE_CREATE_DESTROY }}
