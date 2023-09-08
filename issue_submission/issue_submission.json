@@ -40,7 +40,8 @@
         "CREATE_EXTERNAL_VOLUME",
         "CREATE_MANAGED_STORAGE",
         "READ_FILES",
-        "WRITE_FILES"
+        "WRITE_FILES",
+        "ALL_PRIVILEGES"
       ]
     }
   }
