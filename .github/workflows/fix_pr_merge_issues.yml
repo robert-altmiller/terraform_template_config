@@ -8,12 +8,9 @@ jobs:
   get_issue_in_json:
     
     runs-on: ubuntu-latest
-    # Ensure the action is triggered by the repository owner and contains a specific command.
-    if: contains(github.event.comment.body, '[fix pr]') 
-    
-    steps:
 
-          
+    steps:
+  
       - name: Get the Github issue feature branch name
         run: |
           echo "${{ github.event.issue.body }}" > issue_body.txt
@@ -25,7 +22,6 @@ jobs:
           echo ISSUE BRANCH NAME printed out...
           echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
       
-
 
       - uses: actions/checkout@v3
         with:
