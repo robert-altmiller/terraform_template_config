@@ -42,6 +42,18 @@
         "READ_FILES",
         "WRITE_FILES"
       ]
+    },
+    "feature1": {
+      "gh_branch_name": "feature1",
+      "environment": "dev",
+      "create_or_delete": "Create",
+      "resource_name": "feature1",
+      "sc_role_arn": "arn:aws:iam::111111111111:role/Temp-Product-IAM-Role_1111111111111",
+      "sc_principal_name": "contributors",
+      "sc_principal_privileges": [
+        "CREATE_MANAGED_STORAGE",
+        "ALL_PRIVILEGES"
+      ]
     }
   }
 }
