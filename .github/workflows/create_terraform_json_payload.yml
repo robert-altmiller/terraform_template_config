@@ -22,7 +22,7 @@ jobs:
           echo "Issue Body: ${{ github.event.issue.body }}"
 
           
-      - name: Get issue Github feature branch name
+      - name: Get the Github issue feature branch name
         run: |
           echo "${{ github.event.issue.body }}" > issue_body.txt
           grep '\w' issue_body.txt > temp.txt && mv temp.txt issue_body.txt

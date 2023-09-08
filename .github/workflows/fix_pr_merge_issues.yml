@@ -1,0 +1,49 @@
+name: Create Terraform Json Payload
+
+on:
+  issue_comment:
+      types: [created]
+
+jobs:
+
+  get_issue_in_json:
+    
+    runs-on: ubuntu-latest
+    
+    # env:
+    #   ISSUE_TITLE: "${{ github.event.issue.labels[0].name }}"
+    
+    steps:
+
+      # - name: Print issue body (raw)
+      #   run: |
+      #     echo "Issue Body: ${{ github.event.issue.body }}"
+
+          
+      # - name: Get the Github issue feature branch name
+      #   run: |
+      #     echo "${{ github.event.issue.body }}" > issue_body.txt
+      #     grep '\w' issue_body.txt > temp.txt && mv temp.txt issue_body.txt
+      #     echo issue_body.txt printed out...
+      #     cat issue_body.txt
+      #     ISSUE_BRANCH_NAME=$(awk '/Please Enter the Github Feature Branch Name/ {getline; print}' issue_body.txt)
+      #     echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
+      #     echo ISSUE BRANCH NAME printed out...
+      #     echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
+      
+
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+      
+
+      - name: Reset main branch to match new main branch changes from previous approved PR
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}.git
+      
+          git checkout main
+          git fetch origin
+          git reset --hard origin/main
+          git push origin main --force-with-lease
