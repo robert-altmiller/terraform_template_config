@@ -9,6 +9,9 @@ jobs:
     
     runs-on: ubuntu-latest
 
+    env:
+      ISSUE_TITLE: "${{ github.event.issue.labels[0].name }}"
+
     steps:
   
       - name: Get the Github issue feature branch name
