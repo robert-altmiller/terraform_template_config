@@ -34,7 +34,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
           git checkout ${{ env.ISSUE_BRANCH_NAME }}
-          git merge origin/main -X theirs
+          git merge origin/main --allow-unrelated-histories -X theirs
           git push origin ${{ env.ISSUE_BRANCH_NAME }}
 
 
