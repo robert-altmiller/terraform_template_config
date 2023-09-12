@@ -8,7 +8,7 @@ on:
 jobs:
   start_terraform_template_repo_composite_action:
 
-    runs-on: [self-hosted, linux, x64, medium]
+    runs-on: ubuntu-latest
 
     steps:
     - uses: robert-altmiller/terraform_template@main
