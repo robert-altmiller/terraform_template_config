@@ -27,7 +27,8 @@ jobs:
           grep '\w' issue_body.txt > temp.txt && mv temp.txt issue_body.txt
           echo issue_body.txt printed out...
           cat issue_body.txt
-          ISSUE_BRANCH_NAME=$(awk '/Please Enter the Github Feature Branch Name/ {getline; print}' issue_body.txt)
+          #ISSUE_BRANCH_NAME=$(awk '/Please Enter the Github Feature Branch Name/ {getline; print}' issue_body.txt)
+          ISSUE_BRANCH_NAME=issue-${{github.event.issue.number}}-branch
           echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
           echo ISSUE BRANCH NAME printed out...
           echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
@@ -108,7 +109,7 @@ jobs:
           fi
           echo UPDATED_MASTER_CONFIG: $UPDATED_MASTER_CONFIG
           echo "$UPDATED_MASTER_CONFIG" > issue_submission/issue_submission.json
-
+          cp issue_submission/issue_submission.json master_tfstate/${{ env.ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json
 
       - name: Get Github env, repo url and master tfstate config fname, and write to issue_submission --> env.sh
         run: |
@@ -154,7 +155,7 @@ jobs:
             PR Request Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
             Databricks Resource Environment: ${{ env.ISSUE_ENVIRONMENT }}
             Databricks Resource Type: ${{ env.ISSUE_TITLE }}
-            Databricks Resource Action:${{ env.ISSUE_CREATE_DESTROY }}
+            Databricks Resource Action: ${{ env.ISSUE_CREATE_DESTROY }}
             Databricks Resource Name: ${{ env.ISSUE_RESOURCE_NAME  }}
 
             If you have merge conflict add a comment 'fix pr' in the issue below:

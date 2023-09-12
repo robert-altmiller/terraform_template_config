@@ -21,7 +21,8 @@ jobs:
           grep '\w' issue_body.txt > temp.txt && mv temp.txt issue_body.txt
           echo issue_body.txt printed out...
           cat issue_body.txt
-          ISSUE_BRANCH_NAME=$(awk '/Please Enter the Github Feature Branch Name/ {getline; print}' issue_body.txt)
+          # ISSUE_BRANCH_NAME=$(awk '/Please Enter the Github Feature Branch Name/ {getline; print}' issue_body.txt)
+          ISSUE_BRANCH_NAME=ISSUE-${{github.event.issue.number}}
           echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
           echo ISSUE BRANCH NAME printed out...
           echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
