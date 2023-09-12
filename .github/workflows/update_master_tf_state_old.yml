@@ -1,0 +1,32 @@
+# name: Update Master TF State Json File
+
+# on:
+#   pull_request:
+#     branches: [main]
+#     types: [closed]
+
+# jobs:
+#   update_master_config_json_file:
+
+#     # Ensure the PR was merged and not just closed
+#     if: github.event.pull_request.merged == true
+#     runs-on: ubuntu-latest
+
+
+#     steps:
+#     - uses: actions/checkout@v3
+#       with:
+#         token: ${{ secrets.GH_TOKEN }}
+
+
+#     # - name: Set env variables from issue_submission/env.sh
+#     #   run: |
+#     #     source issue_submission/env.sh
+#     #     echo "ENVIRONMENT=${ENVIRONMENT}" >> $GITHUB_ENV
+#     #     echo "MASTER_CONFIG_JSON_FNAME=${MASTER_CONFIG_JSON_FNAME}" >> $GITHUB_ENV
+#     #     echo "ISSUE_BRANCH_NAME=${ISSUE_BRANCH_NAME}" >> $GITHUB_ENV
+
+
+#     - name: Delete the feature branch after PR merge to main branch
+#       run: |
+#         git push --delete origin ${{ env.ISSUE_BRANCH_NAME}}

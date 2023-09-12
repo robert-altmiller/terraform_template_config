@@ -1,0 +1,14 @@
+name: Start Terraform Template Repo Composite Action to Deploy Infrastructure
+
+on:
+  push:
+    branches:
+      - main  # or master, depending on your default branch
+
+jobs:
+  start_terraform_template_repo_composite_action:
+
+    runs-on: [self-hosted, linux, x64, medium]
+
+    steps:
+    - uses: robert-altmiller/terraform_template@main
