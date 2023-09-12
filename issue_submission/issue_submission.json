@@ -1,22 +1,42 @@
 {
-  "clusters": {
-    "branch-cluster-1": {
-      "gh_branch_name": "branch-cluster-1",
+  "storage_credentials": {
+    "my-sc-2-raqo": {
+      "gh_branch_name": "bsa-feature-branch2",
       "environment": "dev",
       "create_or_delete": "Create",
-      "resource_name": "branch-cluster-1",
-      "min_workers": "1",
-      "max_workers": "2",
-      "auto_termination_mins": "10"
+      "resource_name": "my-sc-2-raqo",
+      "sc_role_arn": "arn:aws:iam::111111111111:role/Temp-Product-IAM-Role_1111111111111",
+      "sc_principal_name": "contributors",
+      "sc_principal_privileges": [
+        "READ_FILES",
+        "WRITE_FILES",
+        "ALL_PRIVILEGES"
+      ]
     },
-    "feature2": {
-      "gh_branch_name": "feature2",
+    "my-sc-2": {
+      "gh_branch_name": "bsa-feature-branch",
       "environment": "dev",
       "create_or_delete": "Create",
-      "resource_name": "feature2",
-      "min_workers": "1",
-      "max_workers": "2",
-      "auto_termination_mins": "10"
+      "resource_name": "my-sc-2",
+      "sc_role_arn": "arn:aws:iam::969341422355:role/s3-dbricks-prod-bucket-role",
+      "sc_principal_name": "contributors",
+      "sc_principal_privileges": [
+        "CREATE_EXTERNAL_TABLE",
+        "CREATE_EXTERNAL_VOLUME",
+        "CREATE_MANAGED_STORAGE",
+        "READ_FILES",
+        "WRITE_FILES"
+      ]
+    },
+    "aaaaaaaa": {
+      "environment": "dev",
+      "create_or_delete": "Create",
+      "resource_name": "aaaaaaaa",
+      "sc_role_arn": "arn:aws:iam::111111111111:role/Temp-Product-IAM-Role_1111111111111",
+      "sc_principal_name": "contributors",
+      "sc_principal_privileges": [
+        "CREATE_EXTERNAL_TABLE"
+      ]
     }
   }
 }
