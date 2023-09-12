@@ -28,11 +28,11 @@
         "WRITE_FILES"
       ]
     },
-    "my-sc-222222": {
+    "my-sc-2-raqo-cccccc": {
       "environment": "dev",
       "create_or_delete": "Create",
-      "resource_name": "my-sc-222222",
-      "sc_role_arn": "arn:aws:iam::969341422355:role/s3-dbricks-prod-bucket-role",
+      "resource_name": "my-sc-2-raqo-cccccc",
+      "sc_role_arn": "arn:aws:iam::111111111111:role/Temp-Product-IAM-Role_1111111111111",
       "sc_principal_name": "contributors",
       "sc_principal_privileges": [
         "ALL_PRIVILEGES"
