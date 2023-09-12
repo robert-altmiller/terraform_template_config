@@ -28,14 +28,14 @@
         "WRITE_FILES"
       ]
     },
-    "aaaaaaaa": {
+    "my-sc-222222": {
       "environment": "dev",
       "create_or_delete": "Create",
-      "resource_name": "aaaaaaaa",
-      "sc_role_arn": "arn:aws:iam::111111111111:role/Temp-Product-IAM-Role_1111111111111",
+      "resource_name": "my-sc-222222",
+      "sc_role_arn": "arn:aws:iam::969341422355:role/s3-dbricks-prod-bucket-role",
       "sc_principal_name": "contributors",
       "sc_principal_privileges": [
-        "CREATE_EXTERNAL_TABLE"
+        "ALL_PRIVILEGES"
       ]
     }
   }
