@@ -1,11 +1,6 @@
 {
   "environment": "dev",
   "create_or_delete": "destroy",
-  "resource_name": "my-et-123",
-  "description": "my catalog",
-  "sc_role_arn": "arn:aws:iam::969341422355:role/s3-dbricks-prod-bucket-role",
-  "el_principal_name": "contributors",
-  "el_principal_privileges": [
-    "ALL_PRIVILEGES"
-  ]
+  "resource_name": "abc-catalog",
+  "description": "abc-catalog"
 }
