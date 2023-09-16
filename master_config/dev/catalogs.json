@@ -11,12 +11,6 @@
       "create_or_delete": "create",
       "resource_name": "a-catalog",
       "description": "my catalog"
-    },
-    "123123123": {
-      "environment": "dev",
-      "create_or_delete": "create",
-      "resource_name": "123123123",
-      "description": "123123123"
     }
   }
 }
