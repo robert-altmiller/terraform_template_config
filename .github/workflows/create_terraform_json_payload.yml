@@ -115,7 +115,7 @@ jobs:
             keyname="${filename%.*}"
             FILE_CONTENTS=$(cat "$filepath")
             # Merge this file into our main JSON object under the key "$keyname"
-            OUTPUT_JSON=$(echo "$OUTPUT_JSON" | jq --argjson file "$FILE_CONTENTS" --arg key "$keyname" '. + {($key): $file}')
+            OUTPUT_JSON=$(echo "$OUTPUT_JSON" | jq --argjson file "$FILE_CONTENTS" --arg key "$keyname" '. + {$file}')
           done
           # Save the merged JSON
           echo "$OUTPUT_JSON" > issue_submission/tf_issue_submission.json

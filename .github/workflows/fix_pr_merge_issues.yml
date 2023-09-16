@@ -17,7 +17,7 @@ jobs:
   
       - name: Get the Github issue feature branch name
         run: |
-          ISSUE_BRANCH_NAME=ISSUE-${{github.event.issue.number}}
+          ISSUE_BRANCH_NAME=ISSUE-${{github.event.issue.number}}-branch
           echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
           echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
       
@@ -69,7 +69,7 @@ jobs:
       - name: Output issue parser JSON results 
         run: cat ${HOME}/issue-parser-result.json
 
-        
+
       - name: Write issue submission JSON file to local Terraform Template Config repo and create environment vars
         run: |
           echo '${{ steps.issue-parser.outputs.jsonString }}' > issue_submission/github_issue_submission.json
@@ -112,7 +112,7 @@ jobs:
             keyname="${filename%.*}"
             FILE_CONTENTS=$(cat "$filepath")
             # Merge this file into our main JSON object under the key "$keyname"
-            OUTPUT_JSON=$(echo "$OUTPUT_JSON" | jq --argjson file "$FILE_CONTENTS" --arg key "$keyname" '. + {($key): $file}')
+            OUTPUT_JSON=$(echo "$OUTPUT_JSON" | jq --argjson file "$FILE_CONTENTS" --arg key "$keyname" '. + {$file}')
           done
           # Save the merged JSON
           echo "$OUTPUT_JSON" > issue_submission/tf_issue_submission.json
