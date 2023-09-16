@@ -11,6 +11,12 @@
       "create_or_delete": "create",
       "resource_name": "a-catalog",
       "description": "my catalog"
+    },
+    "my-cat-1": {
+      "environment": "dev",
+      "create_or_delete": "create",
+      "resource_name": "my-cat-1",
+      "description": "my-cat-1"
     }
   }
 }

@@ -1,51 +1,5 @@
 {
-  "catalogs": {
-    "catalogs": {
-      "abc-catalog": {
-        "environment": "dev",
-        "create_or_delete": "create",
-        "resource_name": "abc-catalog",
-        "description": "my catalog"
-      },
-      "a-catalog": {
-        "environment": "dev",
-        "create_or_delete": "create",
-        "resource_name": "a-catalog",
-        "description": "my catalog"
-      }
-    }
-  },
-  "cluster_policies": {
-    "cluster_policies": {}
-  },
-  "clusters": {
-    "clusters": {}
-  },
-  "external_locations": {
-    "external_locations": {}
-  },
-  "schemas": {
-    "schemas": {
-      "dbo": {
-        "environment": "dev",
-        "create_or_delete": "create",
-        "resource_name": "dbo",
-        "catalog_name": "main",
-        "catalog_principal_name": "my-sp-dev",
-        "catalog_principal_privileges": [
-          "USE_CATALOG",
-          "USE_SCHEMA"
-        ],
-        "schema_principal_name": "contributors",
-        "schema_principal_privileges": [
-          "USE_SCHEMA",
-          "SELECT",
-          "CREATE_TABLE"
-        ]
-      }
-    }
-  },
-  "storage_credentials": {
+  "file": {
     "storage_credentials": {
       "my-sc-3": {
         "environment": "dev",
