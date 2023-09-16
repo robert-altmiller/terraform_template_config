@@ -117,7 +117,7 @@ jobs:
         run: |
           OUTPUT_JSON="{}" # initialize an empty JSON object
           # Iterate over each JSON file in the directory
-          for filepath in master_config/${{ env.ENVIRONMENT }}/*.json; do
+          for filepath in master_config/${{ env.ISSUE_ENVIRONMENT }}/*.json; do
             # Get the filename without path and extension
             filename=$(basename -- "$filepath")
             keyname="${filename%.*}"
