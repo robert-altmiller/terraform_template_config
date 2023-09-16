@@ -12,11 +12,11 @@
       "resource_name": "a-catalog",
       "description": "my catalog"
     },
-    "my-catr": {
+    "123123123": {
       "environment": "dev",
       "create_or_delete": "create",
-      "resource_name": "my-catr",
-      "description": "my-catr"
+      "resource_name": "123123123",
+      "description": "123123123"
     }
   },
   "cluster_policies": {},
