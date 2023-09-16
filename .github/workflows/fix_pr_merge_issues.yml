@@ -135,7 +135,7 @@ jobs:
           git fetch
           git checkout ${{ env.ISSUE_BRANCH_NAME }} || git checkout -b ${{ env.ISSUE_BRANCH_NAME }} # Check out the branch if it exists, otherwise create it
           git pull origin ${{ env.ISSUE_BRANCH_NAME }} || true # If the branch is new, this pull will fail, hence we use `|| true` to prevent the workflow from stopping
-          # Adding the entire issue_submission folder
-          git add issue_submission/
+          # Adding all folders and changes
+          git add --all
           git commit -m 'new infrastructure submission' || echo "No changes to commit"
           git push origin ${{ env.ISSUE_BRANCH_NAME }}
