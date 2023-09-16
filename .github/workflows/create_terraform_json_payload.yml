@@ -113,6 +113,22 @@ jobs:
           echo "$UPDATED_MASTER_CONFIG" > master_config/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json
 
 
+      - name: Combine all the Master Config json files together into a single dictionary (e.g. issue_submission.json)
+        run: |
+          OUTPUT_JSON="{}" # initialize an empty JSON object
+          # Iterate over each JSON file in the directory
+          for filepath in master_config/${{ env.ENVIRONMENT }}/*.json; do
+            # Get the filename without path and extension
+            filename=$(basename -- "$filepath")
+            keyname="${filename%.*}"
+            FILE_CONTENTS=$(cat "$filepath")
+            # Merge this file into our main JSON object under the key "$keyname"
+            OUTPUT_JSON=$(echo "$OUTPUT_JSON" | jq --argjson file "$FILE_CONTENTS" --arg key "$keyname" '. + {($key): $file}')
+          done
+          # Save the merged JSON
+          echo "$OUTPUT_JSON" > issue_submission/issue_submission.json
+
+
       - name: Get Github env, repo url and master config config fname, and write to issue_submission --> env.sh
         run: |
           echo export ENVIRONMENT=${{ env.ISSUE_ENVIRONMENT }} > issue_submission/env.sh
