@@ -33,3 +33,10 @@ body:
     label: Please Enter the UC Catalog Name
   validations:
     required: True
+
+- type: input
+  id: description
+  attributes:
+    label: Please Enter a Description for the UC Catalog
+  validations:
+    required: False

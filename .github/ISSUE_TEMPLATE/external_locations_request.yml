@@ -1,0 +1,69 @@
+name: UC External Location Request
+description: Create UC External Location Request Form
+labels: [External Locations]
+
+title: "External Locations"
+
+body:
+
+- type: dropdown
+  id: environment
+  attributes:
+    label: Select Environment
+    options:
+      - dev
+      - prod
+  validations:
+    required: True
+
+- type: dropdown
+  id: create_or_delete
+  attributes:
+    label: Select to 'create' or 'destroy' Resource
+    options:
+      - create
+      - destroy
+  validations:
+    required: True
+
+- type: input
+  id: resource_name
+  attributes:
+    description: "Please note: 'underscores' or 'dashes' can be used in the name."
+    label: Please Enter the UC External Location Name
+  validations:
+    required: True
+
+- type: input
+  id: description
+  attributes:
+    label: Please Enter the External Location S3 Url
+    placeholder: "Example: s3://${aws_s3_bucket.external.id}/some"
+  validations:
+    required: False
+
+- type: input
+  id: sc_role_arn
+  attributes:
+    label: Please Enter the Integrated Access Management (IAM) Role AWS ARN for Use With External Location
+    placeholder: "Example: arn:aws:iam::111111111111:role/Temp-Product-IAM-Role_1111111111111"
+  validations:
+    required: True
+
+- type: input
+  id: el_principal_name
+  attributes:
+    label: Please Enter the Principal or Group Name for External Location Access
+  validations:
+    required: True
+
+- type: checkboxes
+  id: el_principal_privileges
+  attributes:
+    label: Please Select the Grants for the Principal or Group Name
+    description: "Please note: If selecting 'ALL_PRIVILEGES', ensure no other boxes are checked."
+    options:
+      - label: ALL_PRIVILEGES
+        required: False
+  validations:
+    required: True
