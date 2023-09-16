@@ -17,14 +17,8 @@ jobs:
   
       - name: Get the Github issue feature branch name
         run: |
-          echo "${{ github.event.issue.body }}" > issue_body.txt
-          grep '\w' issue_body.txt > temp.txt && mv temp.txt issue_body.txt
-          echo issue_body.txt printed out...
-          cat issue_body.txt
-          # ISSUE_BRANCH_NAME=$(awk '/Please Enter the Github Feature Branch Name/ {getline; print}' issue_body.txt)
           ISSUE_BRANCH_NAME=ISSUE-${{github.event.issue.number}}
           echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
-          echo ISSUE BRANCH NAME printed out...
           echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
       
 
@@ -75,10 +69,11 @@ jobs:
       - name: Output issue parser JSON results 
         run: cat ${HOME}/issue-parser-result.json
 
+        
       - name: Write issue submission JSON file to local Terraform Template Config repo and create environment vars
         run: |
-          echo '${{ steps.issue-parser.outputs.jsonString }}' > issue_submission/issue_submission.json
-          ISSUE_JSON=$(cat issue_submission/issue_submission.json)
+          echo '${{ steps.issue-parser.outputs.jsonString }}' > issue_submission/github_issue_submission.json
+          ISSUE_JSON=$(cat issue_submission/github_issue_submission.json)
           ISSUE_ENVIRONMENT=$(echo $ISSUE_JSON | jq -r .environment)
           echo "ISSUE_ENVIRONMENT=$ISSUE_ENVIRONMENT" >> $GITHUB_ENV
           ISSUE_CREATE_DESTROY=$(echo $ISSUE_JSON | jq -r .create_or_delete)
@@ -89,9 +84,9 @@ jobs:
 
       - name: Append / Remove issue submission to / from master config JSON file
         run: |
-          ISSUE_JSON=$(cat issue_submission/issue_submission.json)
+          ISSUE_JSON=$(cat issue_submission/github_issue_submission.json)
           echo ISSUE_JSON: $ISSUE_JSON
-          MASTER_CONFIG_JSON=$(cat master_tfstate/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json)
+          MASTER_CONFIG_JSON=$(cat master_config/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json)
           echo MASTER_CONFIG_JSON: $MASTER_CONFIG_JSON
           ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
           ISSUE_ACTION=$(echo $ISSUE_JSON | jq -r .create_or_delete)
@@ -104,10 +99,26 @@ jobs:
             exit 1
           fi
           echo UPDATED_MASTER_CONFIG: $UPDATED_MASTER_CONFIG
-          echo "$UPDATED_MASTER_CONFIG" > issue_submission/issue_submission.json
+          echo "$UPDATED_MASTER_CONFIG" > master_config/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json
 
 
-      - name: Get Github env, repo url and master tfstate config fname, and write to issue_submission --> env.sh
+      - name: Combine all the Master Config json files together into a single dictionary (e.g. tf_issue_submission.json)
+        run: |
+          OUTPUT_JSON="{}" # initialize an empty JSON object
+          # Iterate over each JSON file in the directory
+          for filepath in master_config/${{ env.ISSUE_ENVIRONMENT }}/*.json; do
+            # Get the filename without path and extension
+            filename=$(basename -- "$filepath")
+            keyname="${filename%.*}"
+            FILE_CONTENTS=$(cat "$filepath")
+            # Merge this file into our main JSON object under the key "$keyname"
+            OUTPUT_JSON=$(echo "$OUTPUT_JSON" | jq --argjson file "$FILE_CONTENTS" --arg key "$keyname" '. + {($key): $file}')
+          done
+          # Save the merged JSON
+          echo "$OUTPUT_JSON" > issue_submission/tf_issue_submission.json
+
+
+      - name: Get Github env, repo url and master config fname, and write to issue_submission --> env.sh
         run: |
           echo export ENVIRONMENT=${{ env.ISSUE_ENVIRONMENT }} > issue_submission/env.sh
           echo export ISSUE_BRANCH_NAME=${{ env.ISSUE_BRANCH_NAME }} >> issue_submission/env.sh
