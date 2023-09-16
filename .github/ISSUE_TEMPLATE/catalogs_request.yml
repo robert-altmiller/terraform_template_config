@@ -39,4 +39,4 @@ body:
   attributes:
     label: Please Enter a Description for the UC Catalog
   validations:
-    required: False
+    required: True

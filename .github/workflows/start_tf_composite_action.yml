@@ -7,6 +7,9 @@ on:
 
 jobs:
   start_terraform_template_repo_composite_action:
+    # Ensure the PR was merged and not just closed
+    if: github.event.pull_request.merged == true
+    
     runs-on: ubuntu-latest
 
     steps:
