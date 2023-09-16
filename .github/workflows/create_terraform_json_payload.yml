@@ -30,7 +30,6 @@ jobs:
           #ISSUE_BRANCH_NAME=$(awk '/Please Enter the Github Feature Branch Name/ {getline; print}' issue_body.txt)
           ISSUE_BRANCH_NAME=issue-${{github.event.issue.number}}-branch
           echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
-          echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
       
 
       - uses: actions/checkout@v3
