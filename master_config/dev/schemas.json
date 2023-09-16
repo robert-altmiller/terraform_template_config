@@ -1,3 +1,21 @@
 {
-  "schemas": {}
+  "schemas": {
+    "dbo": {
+      "environment": "dev",
+      "create_or_delete": "create",
+      "resource_name": "dbo",
+      "catalog_name": "main",
+      "catalog_principal_name": "my-sp-dev",
+      "catalog_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA"
+      ],
+      "schema_principal_name": "contributors",
+      "schema_principal_privileges": [
+        "USE_SCHEMA",
+        "SELECT",
+        "CREATE_TABLE"
+      ]
+    }
+  }
 }
