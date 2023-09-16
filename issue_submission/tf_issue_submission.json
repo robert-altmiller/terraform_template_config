@@ -1,62 +1,62 @@
 {
   "catalogs": {
-    "catalogs": {
-      "abc-catalog": {
-        "environment": "dev",
-        "create_or_delete": "create",
-        "resource_name": "abc-catalog",
-        "description": "my catalog"
-      },
-      "a-catalog": {
-        "environment": "dev",
-        "create_or_delete": "create",
-        "resource_name": "a-catalog",
-        "description": "my catalog"
-      }
+    "abc-catalog": {
+      "environment": "dev",
+      "create_or_delete": "create",
+      "resource_name": "abc-catalog",
+      "description": "my catalog"
+    },
+    "a-catalog": {
+      "environment": "dev",
+      "create_or_delete": "create",
+      "resource_name": "a-catalog",
+      "description": "my catalog"
     }
   },
-  "cluster_policies": {
-    "cluster_policies": {}
-  },
-  "clusters": {
-    "clusters": {}
-  },
+  "cluster_policies": {},
+  "clusters": {},
   "external_locations": {
-    "external_locations": {}
+    "123-et": {
+      "environment": "dev",
+      "create_or_delete": "create",
+      "resource_name": "123-et",
+      "description": "s3//",
+      "sc_role_arn": "arn:aws:iam::969341422355:role/s3-dbricks-prod-bucket-role",
+      "el_principal_name": "contributors",
+      "el_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ]
+    }
   },
   "schemas": {
-    "schemas": {
-      "dbo": {
-        "environment": "dev",
-        "create_or_delete": "create",
-        "resource_name": "dbo",
-        "catalog_name": "main",
-        "catalog_principal_name": "my-sp-dev",
-        "catalog_principal_privileges": [
-          "USE_CATALOG",
-          "USE_SCHEMA"
-        ],
-        "schema_principal_name": "contributors",
-        "schema_principal_privileges": [
-          "USE_SCHEMA",
-          "SELECT",
-          "CREATE_TABLE"
-        ]
-      }
+    "dbo": {
+      "environment": "dev",
+      "create_or_delete": "create",
+      "resource_name": "dbo",
+      "catalog_name": "main",
+      "catalog_principal_name": "my-sp-dev",
+      "catalog_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA"
+      ],
+      "schema_principal_name": "contributors",
+      "schema_principal_privileges": [
+        "USE_SCHEMA",
+        "SELECT",
+        "CREATE_TABLE"
+      ]
     }
   },
   "storage_credentials": {
-    "storage_credentials": {
-      "my-sc-3": {
-        "environment": "dev",
-        "create_or_delete": "create",
-        "resource_name": "my-sc-3",
-        "sc_role_arn": "arn:aws:iam::111111111111:role/Temp-Product-IAM-Role_1111111111111",
-        "sc_principal_name": "contributors",
-        "sc_principal_privileges": [
-          "ALL_PRIVILEGES"
-        ]
-      }
+    "my-sc-3": {
+      "environment": "dev",
+      "create_or_delete": "create",
+      "resource_name": "my-sc-3",
+      "sc_role_arn": "arn:aws:iam::111111111111:role/Temp-Product-IAM-Role_1111111111111",
+      "sc_principal_name": "contributors",
+      "sc_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ]
     }
   }
 }
