@@ -1,9 +1,27 @@
 {
+  "catalogs": {
+    "catalogs": {}
+  },
   "cluster_policies": {
     "cluster_policies": {}
   },
   "clusters": {
     "clusters": {}
+  },
+  "external_locations": {
+    "external_locations": {
+      "et-mine": {
+        "environment": "dev",
+        "create_or_delete": "create",
+        "resource_name": "et-mine",
+        "description": "s3//",
+        "sc_role_arn": "arn:aws:iam::111111111111:role/Temp-Product-IAM-Role_1111111111111",
+        "el_principal_name": "contributors",
+        "el_principal_privileges": [
+          "ALL_PRIVILEGES"
+        ]
+      }
+    }
   },
   "schemas": {
     "schemas": {
