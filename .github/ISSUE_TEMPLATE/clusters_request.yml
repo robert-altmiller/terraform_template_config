@@ -6,13 +6,6 @@ title: "Clusters"
 
 body:
 
-# - type: input
-#   id: gh_branch_name
-#   attributes:
-#     label: Please Enter the Github Feature Branch Name
-#   validations:
-#     required: True
-
 - type: dropdown
   id: environment
   attributes:

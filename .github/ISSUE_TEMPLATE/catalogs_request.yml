@@ -1,0 +1,35 @@
+name: UC Catalog Request
+description: Create UC Catalog Request Form
+labels: [Catalogs]
+
+title: "Catalogs"
+
+body:
+
+- type: dropdown
+  id: environment
+  attributes:
+    label: Select Environment
+    options:
+      - dev
+      - prod
+  validations:
+    required: True
+
+- type: dropdown
+  id: create_or_delete
+  attributes:
+    label: Select to 'create' or 'destroy' Resource
+    options:
+      - create
+      - destroy
+  validations:
+    required: True
+
+- type: input
+  id: resource_name
+  attributes:
+    description: "Please note: 'underscores' or 'dashes' can be used in the name."
+    label: Please Enter the UC Catalog Name
+  validations:
+    required: True
