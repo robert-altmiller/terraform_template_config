@@ -1,0 +1,30 @@
+name: Delete the Terraform Config Feature Branch
+
+on:
+  pull_request:
+    branches: [main]
+    types: [closed]
+
+jobs:
+  delete_terraform_config_feature_branch:
+
+    # Ensure the PR was merged and not just closed
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GH_TOKEN }}
+
+
+    - name: Set env variables from issue_submission/env.sh
+      run: |
+        source issue_submission/env.sh
+        echo "ISSUE_BRANCH_NAME=${ISSUE_BRANCH_NAME}" >> $GITHUB_ENV
+
+
+    - name: Delete the feature branch after PR merge to main branch
+      run: |
+        git push --delete origin ${{ env.ISSUE_BRANCH_NAME}}

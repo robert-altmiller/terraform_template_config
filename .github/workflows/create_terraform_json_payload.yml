@@ -95,23 +95,25 @@ jobs:
         run: |
           ISSUE_JSON=$(cat issue_submission/issue_submission.json)
           echo ISSUE_JSON: $ISSUE_JSON
-          MASTER_CONFIG_JSON=$(cat master_tfstate/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json)
+          MASTER_CONFIG_JSON=$(cat master_config/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json)
           echo MASTER_CONFIG_JSON: $MASTER_CONFIG_JSON
           ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
           ISSUE_ACTION=$(echo $ISSUE_JSON | jq -r .create_or_delete)
-          if [[ "$ISSUE_ACTION" == "Create" ]]; then
+          if [[ "$ISSUE_ACTION" == "create" ]]; then
             UPDATED_MASTER_CONFIG=$(echo $MASTER_CONFIG_JSON | jq ".${{ env.ISSUE_TITLE }}.\"$ISSUE_RESOURCE_NAME\" = $ISSUE_JSON")
-          elif [[ "$ISSUE_ACTION" == "Destroy" ]]; then
+          elif [[ "$ISSUE_ACTION" == "destroy" ]]; then
             UPDATED_MASTER_CONFIG=$(echo $MASTER_CONFIG_JSON | jq "del(.${{ env.ISSUE_TITLE }}.\"$ISSUE_RESOURCE_NAME\")")
           else
             echo "Unknown ISSUE_ACTION: $ISSUE_ACTION"
             exit 1
           fi
           echo UPDATED_MASTER_CONFIG: $UPDATED_MASTER_CONFIG
-          echo "$UPDATED_MASTER_CONFIG" > issue_submission/issue_submission.json
-          cp issue_submission/issue_submission.json master_tfstate/${{ env.ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json
+          # echo "$UPDATED_MASTER_CONFIG" > issue_submission/issue_submission.json
+          # cp issue_submission/issue_submission.json master_config/${{ env.ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json
+          echo "$UPDATED_MASTER_CONFIG" > master_config/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json
 
-      - name: Get Github env, repo url and master tfstate config fname, and write to issue_submission --> env.sh
+
+      - name: Get Github env, repo url and master config config fname, and write to issue_submission --> env.sh
         run: |
           echo export ENVIRONMENT=${{ env.ISSUE_ENVIRONMENT }} > issue_submission/env.sh
           echo export ISSUE_BRANCH_NAME=${{ env.ISSUE_BRANCH_NAME }} >> issue_submission/env.sh

@@ -28,8 +28,8 @@ body:
   attributes:
     label: Select to 'Create' or 'Destroy' Resource
     options:
-      - Create
-      - Destroy
+      - create
+      - destroy
   validations:
     required: True
 
