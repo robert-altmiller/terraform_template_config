@@ -26,7 +26,7 @@ body:
 - type: dropdown
   id: create_or_delete
   attributes:
-    label: Select to 'Create' or 'Destroy' Resource
+    label: Select to 'create' or 'destroy' Resource
     options:
       - create
       - destroy
