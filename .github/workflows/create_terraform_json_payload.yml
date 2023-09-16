@@ -108,8 +108,6 @@ jobs:
             exit 1
           fi
           echo UPDATED_MASTER_CONFIG: $UPDATED_MASTER_CONFIG
-          # echo "$UPDATED_MASTER_CONFIG" > issue_submission/issue_submission.json
-          # cp issue_submission/issue_submission.json master_config/${{ env.ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json
           echo "$UPDATED_MASTER_CONFIG" > master_config/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json
 
 
