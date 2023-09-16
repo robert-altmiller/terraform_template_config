@@ -1,3 +1,10 @@
 {
-    "catalogs": {}
+  "catalogs": {
+    "abc-catalog": {
+      "environment": "dev",
+      "create_or_delete": "create",
+      "resource_name": "abc-catalog",
+      "description": "my catalog"
+    }
+  }
 }
