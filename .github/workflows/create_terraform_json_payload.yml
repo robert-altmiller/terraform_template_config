@@ -75,8 +75,8 @@ jobs:
 
       - name: Write issue submission JSON file to local Terraform Template Config repo and create environment vars
         run: |
-          echo '${{ steps.issue-parser.outputs.jsonString }}' > issue_submission/issue_submission.json
-          ISSUE_JSON=$(cat issue_submission/issue_submission.json)
+          echo '${{ steps.issue-parser.outputs.jsonString }}' > issue_submission/github_issue_submission.json
+          ISSUE_JSON=$(cat issue_submission/github_issue_submission.json)
           ISSUE_ENVIRONMENT=$(echo $ISSUE_JSON | jq -r .environment)
           echo "ISSUE_ENVIRONMENT=$ISSUE_ENVIRONMENT" >> $GITHUB_ENV
           ISSUE_CREATE_DESTROY=$(echo $ISSUE_JSON | jq -r .create_or_delete)
@@ -87,7 +87,7 @@ jobs:
 
       - name: Append / Remove issue submission to / from master config JSON file
         run: |
-          ISSUE_JSON=$(cat issue_submission/issue_submission.json)
+          ISSUE_JSON=$(cat issue_submission/github_issue_submission.json)
           echo ISSUE_JSON: $ISSUE_JSON
           MASTER_CONFIG_JSON=$(cat master_config/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json)
           echo MASTER_CONFIG_JSON: $MASTER_CONFIG_JSON
@@ -105,7 +105,7 @@ jobs:
           echo "$UPDATED_MASTER_CONFIG" > master_config/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json
 
 
-      - name: Combine all the Master Config json files together into a single dictionary (e.g. issue_submission.json)
+      - name: Combine all the Master Config json files together into a single dictionary (e.g. tf_issue_submission.json)
         run: |
           OUTPUT_JSON="{}" # initialize an empty JSON object
           # Iterate over each JSON file in the directory
@@ -118,7 +118,7 @@ jobs:
             OUTPUT_JSON=$(echo "$OUTPUT_JSON" | jq --argjson file "$FILE_CONTENTS" --arg key "$keyname" '. + {($key): $file}')
           done
           # Save the merged JSON
-          echo "$OUTPUT_JSON" > issue_submission/issue_submission.json
+          echo "$OUTPUT_JSON" > issue_submission/tf_issue_submission.json
 
 
       - name: Get Github env, repo url and master config config fname, and write to issue_submission --> env.sh
@@ -141,7 +141,7 @@ jobs:
           git fetch
           git checkout ${{ env.ISSUE_BRANCH_NAME }} || git checkout -b ${{ env.ISSUE_BRANCH_NAME }} # Check out the branch if it exists, otherwise create it
           git pull origin ${{ env.ISSUE_BRANCH_NAME }} || true # If the branch is new, this pull will fail, hence we use `|| true` to prevent the workflow from stopping
-          # Adding the entire issue_submission folder
+          # Adding all folders and changes
           git add --all
           git commit -m 'new infrastructure submission' || echo "No changes to commit"
           git push origin ${{ env.ISSUE_BRANCH_NAME }}
