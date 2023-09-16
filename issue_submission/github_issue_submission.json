@@ -1,6 +1,6 @@
 {
   "environment": "dev",
-  "create_or_delete": "create",
-  "resource_name": "123123123",
-  "description": "123123123"
+  "create_or_delete": "destroy",
+  "resource_name": "abc-catalog",
+  "description": "abc-catalog"
 }
