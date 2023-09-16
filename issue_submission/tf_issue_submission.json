@@ -11,6 +11,12 @@
       "create_or_delete": "create",
       "resource_name": "a-catalog",
       "description": "my catalog"
+    },
+    "my-catr": {
+      "environment": "dev",
+      "create_or_delete": "create",
+      "resource_name": "my-catr",
+      "description": "my-catr"
     }
   },
   "cluster_policies": {},
