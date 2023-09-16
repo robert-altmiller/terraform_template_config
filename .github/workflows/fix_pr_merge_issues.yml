@@ -17,7 +17,7 @@ jobs:
   
       - name: Get the Github issue feature branch name
         run: |
-          ISSUE_BRANCH_NAME=ISSUE-${{github.event.issue.number}}-branch
+          ISSUE_BRANCH_NAME=issue-${{github.event.issue.number}}-branch
           echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
           echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
       
