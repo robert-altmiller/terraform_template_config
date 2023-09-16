@@ -107,12 +107,9 @@ jobs:
           OUTPUT_JSON="{}" # initialize an empty JSON object
           # Iterate over each JSON file in the directory
           for filepath in master_config/${{ env.ISSUE_ENVIRONMENT }}/*.json; do
-            # Get the filename without path and extension
-            filename=$(basename -- "$filepath")
-            keyname="${filename%.*}"
             FILE_CONTENTS=$(cat "$filepath")
-            # Merge this file into our main JSON object under the key "$keyname"
-            OUTPUT_JSON=$(echo "$OUTPUT_JSON" | jq --argjson file "$FILE_CONTENTS" --arg key "$keyname" '. + {$file}')
+            # Directly merge this file into our main JSON object
+            OUTPUT_JSON=$(jq -s '.[0] * .[1]' <<< "$OUTPUT_JSON $FILE_CONTENTS")
           done
           # Save the merged JSON
           echo "$OUTPUT_JSON" > issue_submission/tf_issue_submission.json
