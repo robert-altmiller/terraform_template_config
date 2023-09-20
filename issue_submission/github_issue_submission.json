@@ -1,6 +1,6 @@
 {
   "environment": "dev",
-  "create_or_delete": "create",
+  "create_or_delete": "destroy",
   "resource_name": "dbo2",
   "catalog_name": "main",
   "catalog_principal_name": "my-sp-dev",
@@ -8,7 +8,7 @@
     "USE_CATALOG",
     "USE_SCHEMA"
   ],
-  "schema_principal_name": "dev-contributors",
+  "schema_principal_name": "contributors",
   "schema_principal_privileges": [
     "USE_SCHEMA"
   ]
