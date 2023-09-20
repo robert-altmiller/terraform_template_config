@@ -1,8 +1,8 @@
 export ENVIRONMENT=dev
-export ISSUE_BRANCH_NAME=issue-234-branch
+export ISSUE_BRANCH_NAME=issue-236-branch
 export ISSUE_CREATE_DESTROY=create
-export MASTER_CONFIG_JSON_FNAME=cluster_policies.json
-export GITHUB_ISSUE_NUMBER=234
+export MASTER_CONFIG_JSON_FNAME=clusters.json
+export GITHUB_ISSUE_NUMBER=236
 export GITHUB_REPO_OWNER=robert-altmiller
 export GITHUB_REPO_NAME=terraform_template_config
 export GITHUB_REPO_URL=https://github.com/robert-altmiller/terraform_template_config.git
