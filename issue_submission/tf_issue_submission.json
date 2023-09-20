@@ -1,6 +1,26 @@
 {
   "catalogs": {},
-  "cluster_policies": {},
+  "cluster_policies": {
+    "my-cluster-policy": {
+      "environment": "dev",
+      "create_or_delete": "create",
+      "resource_name": "my-cluster-policy",
+      "cluster_profile": "singleNode",
+      "cluster_type": "all-purpose",
+      "runtime_engine": "STANDARD",
+      "nodetype_id": [
+        "i3.xlarge",
+        "i3.2xlarge"
+      ],
+      "spark_version": "auto:latest-ml",
+      "num_workers": "1",
+      "min_workers": "1",
+      "max_workers": "2",
+      "auto_termination_mins": "60",
+      "cluster_policy_principal_name": "dev-contributors",
+      "cluster_policy_principal_privileges": "CAN_USE"
+    }
+  },
   "clusters": {},
   "external_locations": {},
   "schemas": {
