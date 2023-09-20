@@ -1,15 +1,3 @@
 {
-  "external_locations": {
-    "123-et": {
-      "environment": "dev",
-      "create_or_delete": "create",
-      "resource_name": "123-et",
-      "description": "s3//",
-      "sc_role_arn": "arn:aws:iam::969341422355:role/s3-dbricks-prod-bucket-role",
-      "el_principal_name": "contributors",
-      "el_principal_privileges": [
-        "ALL_PRIVILEGES"
-      ]
-    }
-  }
+  "external_locations": {}
 }
