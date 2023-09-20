@@ -1,10 +1,10 @@
 {
   "environment": "dev",
-  "create_or_delete": "destroy",
+  "create_or_delete": "create",
   "resource_name": "my-sc-1",
-  "sc_role_arn": "arn:aws:iam::111111111111:role/Temp-Product-IAM-Role_1111111111111",
-  "sc_principal_name": "contributors",
+  "sc_role_arn": "arn:aws:iam::997819012307:role/one-env-admin-cross-account-access-role",
+  "sc_principal_name": "dev-contributors",
   "sc_principal_privileges": [
-    "CREATE_EXTERNAL_VOLUME"
+    "ALL_PRIVILEGES"
   ]
 }
