@@ -1,10 +1,15 @@
 {
   "environment": "dev",
-  "create_or_delete": "destroy",
-  "resource_name": "my-sc-3",
-  "sc_role_arn": "arn:aws:iam::969341422355:role/s3-dbricks-prod-bucket-role",
-  "sc_principal_name": "contributors",
-  "sc_principal_privileges": [
-    "CREATE_EXTERNAL_VOLUME"
+  "create_or_delete": "create",
+  "resource_name": "dbo2",
+  "catalog_name": "main2",
+  "catalog_principal_name": "dev-contributors",
+  "catalog_principal_privileges": [
+    "USE_CATALOG",
+    "USE_SCHEMA"
+  ],
+  "schema_principal_name": "dev-contributors",
+  "schema_principal_privileges": [
+    "USE_SCHEMA"
   ]
 }
