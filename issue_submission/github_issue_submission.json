@@ -1,8 +1,16 @@
 {
   "environment": "dev",
   "create_or_delete": "create",
-  "resource_name": "my-cluster-raqo",
-  "min_workers": "1",
-  "max_workers": "2",
-  "auto_termination_mins": "30"
+  "resource_name": "dbo2",
+  "catalog_name": "main2",
+  "catalog_principal_name": "dev-contributors",
+  "catalog_principal_privileges": [
+    "USE_CATALOG",
+    "USE_SCHEMA"
+  ],
+  "schema_principal_name": "dev-contributors",
+  "schema_principal_privileges": [
+    "USE_SCHEMA",
+    "CREATE_TABLE"
+  ]
 }
