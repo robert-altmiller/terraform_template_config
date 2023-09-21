@@ -1,10 +1,16 @@
 {
   "environment": "dev",
   "create_or_delete": "create",
-  "resource_name": "my-sc-3",
-  "sc_role_arn": "arn:aws:iam::111111111111:role/Temp-Product-IAM-Role_1111111111111",
-  "sc_principal_name": "dev-contributors",
-  "sc_principal_privileges": [
-    "ALL_PRIVILEGES"
+  "resource_name": "dbo2",
+  "catalog_name": "main2",
+  "catalog_principal_name": "dev-contributors",
+  "catalog_principal_privileges": [
+    "USE_CATALOG",
+    "USE_SCHEMA"
+  ],
+  "schema_principal_name": "dev-contributors",
+  "schema_principal_privileges": [
+    "USE_SCHEMA",
+    "SELECT"
   ]
 }
