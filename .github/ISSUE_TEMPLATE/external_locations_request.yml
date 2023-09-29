@@ -35,7 +35,7 @@ body:
     required: True
 
 - type: input
-  id: description
+  id: el_s3_url
   attributes:
     label: Please Enter the External Location S3 Url
     placeholder: "Example: s3://${aws_s3_bucket.external.id}/some"
@@ -43,7 +43,7 @@ body:
     required: False
 
 - type: input
-  id: sc_role_arn
+  id: el_role_arn
   attributes:
     label: Please Enter the Integrated Access Management (IAM) Role AWS ARN for Use With External Location
     placeholder: "Example: arn:aws:iam::111111111111:role/Temp-Product-IAM-Role_1111111111111"
