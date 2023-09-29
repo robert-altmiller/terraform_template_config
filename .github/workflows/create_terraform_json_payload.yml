@@ -146,7 +146,7 @@ jobs:
 
       - name: Get the current date for Github issue pull request
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d %H:%M:%S')"
+        run: echo "date=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
 
 
       - name: Create Github issue pull request to main branch + approval
@@ -157,7 +157,7 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           pr_title: "databricks - ${{ env.ISSUE_TITLE }} - request (${{ env.ISSUE_ENVIRONMENT }})"
           pr_body: |
-            PR Request Time: ${{ steps.date.outputs.date }}
+            PR Request Time: ${{ env.date }}
             PR Request Person: ${{ github.actor }}
             PR Request Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
             Databricks Resource Environment: ${{ env.ISSUE_ENVIRONMENT }}
