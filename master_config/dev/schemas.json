@@ -13,7 +13,7 @@
       "schema_principal_name": "dev-contributors",
       "schema_principal_privileges": [
         "USE_SCHEMA",
-        "CREATE_VOLUME"
+        "SELECT"
       ]
     }
   }
