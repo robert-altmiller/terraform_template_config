@@ -87,6 +87,15 @@ jobs:
 
       - name: Append / Remove issue submission to / from master config JSON file
         run: |
+          ### Here is the fix for no master config json file present
+          FILE="master_config//${{ env.CONFIG_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json"
+          if [[ ! -f "$FILE" ]]; then
+              echo '{"${{ env.ISSUE_TITLE }}": {}}' > "$FILE"
+              echo "$FILE created."
+          else
+              echo "$FILE already exists."
+          fi
+
           ISSUE_JSON=$(cat issue_submission/github_issue_submission.json)
           echo ISSUE_JSON: $ISSUE_JSON
           MASTER_CONFIG_JSON=$(cat master_config/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json)
@@ -107,17 +116,6 @@ jobs:
 
       - name: Combine all the Master Config json files together into a single dictionary (e.g. tf_issue_submission.json)
         run: |
-
-          ### Here is the fix for no json file present
-          FILE="master_config//${{ env.CONFIG_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json"
-          if [[ ! -f "$FILE" ]]; then
-              echo '{${{ env.ISSUE_TITLE }}: {}}' > "$FILE"
-              echo "$FILE created."
-          else
-              echo "$FILE already exists."
-          fi
-
-
           OUTPUT_JSON="{}" # initialize an empty JSON object
           # Iterate over each JSON file in the directory
           for filepath in master_config/${{ env.ISSUE_ENVIRONMENT }}/*.json; do
