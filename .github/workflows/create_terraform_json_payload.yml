@@ -88,7 +88,7 @@ jobs:
       - name: Append / Remove issue submission to / from master config JSON file
         run: |
           ### Here is the fix for no master config json file present
-          FILE="master_config//${{ env.CONFIG_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json"
+          FILE="master_config/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json"
           if [[ ! -f "$FILE" ]]; then
               echo '{"${{ env.ISSUE_TITLE }}": {}}' > "$FILE"
               echo "$FILE created."
