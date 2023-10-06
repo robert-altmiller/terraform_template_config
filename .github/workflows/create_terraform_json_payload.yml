@@ -45,16 +45,11 @@ jobs:
   execute_common_workflow_steps:
     
     needs: get_issue_in_json_step1
-
-    uses: "./.github/workflows/common_workflow_steps.yml"
+    uses: ./.github/workflows/common_workflow_steps.yml
     with:
       ISSUE_TITLE: ${{ env.ISSUE_TITLE }}
       ISSUE_BRANCH_NAME: ${{ env.ISSUE_BRANCH_NAME }}
     secrets: inherit
-
-
-      # chmod +x "./.github/workflows/common_workflow_steps.yml"
-        # "./.github/workflows/common_workflow_steps.yml"
 
 
       # - uses: actions/checkout@v3
@@ -154,40 +149,41 @@ jobs:
       #     echo export GITHUB_REPO_URL=${{ github.server_url }}/${{ github.repository_owner }}/${{ github.event.repository.name }}.git >> issue_submission/env.sh
 
 
-      - name: Commit updated issue submission JSON file to Terraform Config repo
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}.git
-          git fetch
-          git checkout ${{ env.ISSUE_BRANCH_NAME }} || git checkout -b ${{ env.ISSUE_BRANCH_NAME }} # Check out the branch if it exists, otherwise create it
-          git pull origin ${{ env.ISSUE_BRANCH_NAME }} || true # If the branch is new, this pull will fail, hence we use `|| true` to prevent the workflow from stopping
-          # Adding all folders and changes
-          git add --all
-          git commit -m 'new infrastructure submission' || echo "No changes to commit"
-          git push origin ${{ env.ISSUE_BRANCH_NAME }}
+      # THIS IS WHERE COMMON CODE ENDS
+      # - name: Commit updated issue submission JSON file to Terraform Config repo
+      #   run: |
+      #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      #     git config --global user.name "github-actions[bot]"
+      #     git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}.git
+      #     git fetch
+      #     git checkout ${{ env.ISSUE_BRANCH_NAME }} || git checkout -b ${{ env.ISSUE_BRANCH_NAME }} # Check out the branch if it exists, otherwise create it
+      #     git pull origin ${{ env.ISSUE_BRANCH_NAME }} || true # If the branch is new, this pull will fail, hence we use `|| true` to prevent the workflow from stopping
+      #     # Adding all folders and changes
+      #     git add --all
+      #     git commit -m 'new infrastructure submission' || echo "No changes to commit"
+      #     git push origin ${{ env.ISSUE_BRANCH_NAME }}
 
 
-      - name: Get the current date for Github issue pull request
-        id: date
-        run: echo "date=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+      # - name: Get the current date for Github issue pull request
+      #   id: date
+      #   run: echo "date=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
 
 
-      - name: Create Github issue pull request to main branch + approval
-        uses: repo-sync/pull-request@v2
-        with:
-          source_branch: ${{ env.ISSUE_BRANCH_NAME }}
-          destination_branch: main
-          github_token: ${{ secrets.GH_TOKEN }}
-          pr_title: "databricks - ${{ env.ISSUE_TITLE }} - request (${{ env.ISSUE_ENVIRONMENT }})"
-          pr_body: |
-            PR Request Time: ${{ env.date }}
-            PR Request Person: ${{ github.actor }}
-            PR Request Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
-            Databricks Resource Environment: ${{ env.ISSUE_ENVIRONMENT }}
-            Databricks Resource Type: ${{ env.ISSUE_TITLE }}
-            Databricks Resource Action: ${{ env.ISSUE_CREATE_DESTROY }}
-            Databricks Resource Name: ${{ env.ISSUE_RESOURCE_NAME  }}
+      # - name: Create Github issue pull request to main branch + approval
+      #   uses: repo-sync/pull-request@v2
+      #   with:
+      #     source_branch: ${{ env.ISSUE_BRANCH_NAME }}
+      #     destination_branch: main
+      #     github_token: ${{ secrets.GH_TOKEN }}
+      #     pr_title: "databricks - ${{ env.ISSUE_TITLE }} - request (${{ env.ISSUE_ENVIRONMENT }})"
+      #     pr_body: |
+      #       PR Request Time: ${{ env.date }}
+      #       PR Request Person: ${{ github.actor }}
+      #       PR Request Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
+      #       Databricks Resource Environment: ${{ env.ISSUE_ENVIRONMENT }}
+      #       Databricks Resource Type: ${{ env.ISSUE_TITLE }}
+      #       Databricks Resource Action: ${{ env.ISSUE_CREATE_DESTROY }}
+      #       Databricks Resource Name: ${{ env.ISSUE_RESOURCE_NAME  }}
 
-            If you have merge conflict add a comment 'fix pr' in the issue below:
-            Issue Number: [#${{ github.event.issue.number }}](https://github.com/${{ github.repository }}/issues/${{ github.event.issue.number }})
+      #       If you have merge conflict add a comment 'fix pr' in the issue below:
+      #       Issue Number: [#${{ github.event.issue.number }}](https://github.com/${{ github.repository }}/issues/${{ github.event.issue.number }})
