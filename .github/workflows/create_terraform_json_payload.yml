@@ -43,7 +43,7 @@ jobs:
 
 
   execute_common_workflow_steps:
-
+    
     needs: get_issue_in_json_step1
 
     uses: "./.github/workflows/common_workflow_steps.yml"
