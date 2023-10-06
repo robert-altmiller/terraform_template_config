@@ -1,0 +1,10 @@
+{
+  "catalogs": {
+    "my-catalog-1": {
+      "environment": "dev",
+      "create_or_delete": "create",
+      "resource_name": "my-catalog-1",
+      "description": "my-catalog-1"
+    }
+  }
+}
