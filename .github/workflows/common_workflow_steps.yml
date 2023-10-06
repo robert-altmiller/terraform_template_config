@@ -2,11 +2,13 @@ name: hello world
 
 runs-on: ubuntu-latest
 
+
+
 steps:
 
   - name: hello world to screen
     run: |
-      echo hello world
+      echo ${{hellovar}}
   
 
 # name: Terraform Shared Workflow Steps
