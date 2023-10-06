@@ -1,4 +1,9 @@
 {
+  "catalogs": {},
+  "cluster_policies": {},
+  "clusters": {},
+  "external_locations": {},
+  "schemas": {},
   "storage_credentials": {
     "my-test-raqo-sc": {
       "environment": "unity_catalog",
@@ -7,6 +12,7 @@
       "sc_role_arn": "arn:aws:iam::997819012307:role/one-env-admin-cross-account-access-role",
       "sc_principal_name": "dev-contributors",
       "sc_principal_privileges": [
+        "WRITE_FILES",
         "ALL_PRIVILEGES"
       ]
     }
