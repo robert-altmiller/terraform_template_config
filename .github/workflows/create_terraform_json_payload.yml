@@ -43,12 +43,10 @@ jobs:
 
 
       - name: Execute common workflow steps
-        uses: ./.github/workflows/common_workflow_steps.yml
-        with:
-          hellovar: ${{ secrets.GH_TOKEN }}
-          # run: |
-        #     chmod +x "./.github/workflows/common_workflow_steps.yml"
-        #     "./.github/workflows/common_workflow_steps.yml"
+        run: |
+          chmod +x "./.github/workflows/common_workflow_steps.yml"
+          "./.github/workflows/common_workflow_steps.yml"
+          
 
       # - uses: actions/checkout@v3
       #   with:

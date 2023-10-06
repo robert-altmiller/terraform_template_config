@@ -1,33 +1,32 @@
-name: hello world
+# name: hello world
 
-runs-on: ubuntu-latest
-
-
-
-steps:
-
-  - name: hello world to screen
-    run: |
-      echo ${{hellovar}}
-  
-
-# name: Terraform Shared Workflow Steps
-  
 # runs-on: ubuntu-latest
+
+
 
 # steps:
 
-# - name: Checkout code
-#   uses: actions/checkout@v2
-#   with:
-#     token: ${{ secrets.GH_TOKEN }}
-#     ref: ${{ env.ISSUE_BRANCH_NAME }}
+#   - name: hello world to screen
+#     run: |
+#       echo ${{hellovar}}
 
-# - name: Convert Github issue title to lowercase with underscore and put in env vars
-#   run: |
-#     FORMATTED_TITLE=$(echo "$ISSUE_TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/ /_/g')
-#     echo "ISSUE_TITLE=$FORMATTED_TITLE" >> $GITHUB_ENV
-#     echo "ISSUE_TITLE: $FORMATTED_TITLE"
+name: Terraform Shared Workflow Steps
+  
+runs-on: ubuntu-latest
+
+steps:
+
+  - name: Checkout code
+    uses: actions/checkout@v2
+    with:
+      token: ${{ secrets.GH_TOKEN }}
+      ref: ${{ env.ISSUE_BRANCH_NAME }}
+
+  - name: Convert Github issue title to lowercase with underscore and put in env vars
+    run: |
+      FORMATTED_TITLE=$(echo "$ISSUE_TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/ /_/g')
+      echo "ISSUE_TITLE=$FORMATTED_TITLE" >> $GITHUB_ENV
+      echo "ISSUE_TITLE: $FORMATTED_TITLE"
 
 # - name: Install jq
 #   run: |
