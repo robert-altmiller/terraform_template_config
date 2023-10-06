@@ -4,6 +4,11 @@ on:
   issues:
     types: [opened, edited]
 
+  workflow_call:  
+    outputs:
+      ISSUE_TITLE:
+        description: "Issue Title Description"
+        value: "${{ github.event.issue.labels[0].name }}"
 
 jobs:
 
