@@ -44,7 +44,7 @@ jobs:
 
       - name: Execute common workflow steps
         run: |
-          chmod +x "./.github/workflosw/common_workflow_steps.yml"
+          chmod +x "./.github/workflows/common_workflow_steps.yml"
           "./.github/workflows/common_workflow_steps.yml"
 
       # - uses: actions/checkout@v3
