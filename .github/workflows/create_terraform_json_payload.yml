@@ -47,8 +47,8 @@ jobs:
     needs: get_issue_in_json_step1
     uses: robert-altmiller/terraform_template_config/blob/main/.github/workflows/common_workflow_steps.yml@main
     with:
-      ISSUE_TITLE: ${{ env.ISSUE_TITLE }}
-      ISSUE_BRANCH_NAME: ${{ env.ISSUE_BRANCH_NAME }}
+      ISSUE_TITLE: ${{ needs.get_issue_in_json_step1.ISSUE_TITLE }}
+      ISSUE_BRANCH_NAME: ${{ needs.get_issue_in_json_step1.ISSUE_BRANCH_NAME }}
     secrets: inherit
 
 
