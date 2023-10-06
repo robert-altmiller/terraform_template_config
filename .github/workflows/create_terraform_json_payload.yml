@@ -45,13 +45,14 @@ jobs:
   execute_common_workflow_steps:
 
     needs: get_issue_in_json_step1
-    
-    runs-on: ubuntu-latest
-    
-    steps:
 
-      - name: Execute common workflow steps
-        uses: "./.github/workflows/common_workflow_steps.yml"
+    uses: "./.github/workflows/common_workflow_steps.yml"
+    with:
+      ISSUE_TITLE: ${{ env.ISSUE_TITLE }}
+      ISSUE_BRANCH_NAME: ${{ env.ISSUE_BRANCH_NAME }}
+    secrets: inherit
+
+
       # chmod +x "./.github/workflows/common_workflow_steps.yml"
         # "./.github/workflows/common_workflow_steps.yml"
 
