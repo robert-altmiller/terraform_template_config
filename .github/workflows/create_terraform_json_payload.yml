@@ -45,7 +45,7 @@ jobs:
   execute_common_workflow_steps:
 
     needs: get_issue_in_json_step1
-    uses: robert-altmiller/terraform_template_config/blob/main/.github/workflows/common_workflow_steps.yml@main
+    uses: "./.github/workflows/common_workflow_steps.yml"
     with:
       ISSUE_TITLE: ${{ needs.get_issue_in_json_step1.ISSUE_TITLE }}
       ISSUE_BRANCH_NAME: ${{ needs.get_issue_in_json_step1.ISSUE_BRANCH_NAME }}
