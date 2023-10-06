@@ -1,98 +1,98 @@
-name: Terraform Shared Workflow Steps
+# name: Terraform Shared Workflow Steps
   
-runs-on: ubuntu-latest
+# runs-on: ubuntu-latest
 
-steps:
+# steps:
 
-  - name: Checkout code
-    uses: actions/checkout@v2
-    with:
-      token: ${{ secrets.GH_TOKEN }}
-      ref: ${{ env.ISSUE_BRANCH_NAME }}
+- name: Checkout code
+  uses: actions/checkout@v2
+  with:
+    token: ${{ secrets.GH_TOKEN }}
+    ref: ${{ env.ISSUE_BRANCH_NAME }}
 
-  - name: Convert Github issue title to lowercase with underscore and put in env vars
-    run: |
-      FORMATTED_TITLE=$(echo "$ISSUE_TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/ /_/g')
-      echo "ISSUE_TITLE=$FORMATTED_TITLE" >> $GITHUB_ENV
-      echo "ISSUE_TITLE: $FORMATTED_TITLE"
+- name: Convert Github issue title to lowercase with underscore and put in env vars
+  run: |
+    FORMATTED_TITLE=$(echo "$ISSUE_TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/ /_/g')
+    echo "ISSUE_TITLE=$FORMATTED_TITLE" >> $GITHUB_ENV
+    echo "ISSUE_TITLE: $FORMATTED_TITLE"
 
-  - name: Install jq
-    run: |
-      sudo apt-get update
-      sudo apt-get install -y jq
+- name: Install jq
+  run: |
+    sudo apt-get update
+    sudo apt-get install -y jq
 
-  - name: Setup Node.js
-    uses: actions/setup-node@v2
-    with:
-      node-version: '16'
+- name: Setup Node.js
+  uses: actions/setup-node@v2
+  with:
+    node-version: '16'
 
-  - name: Parse Github issue
-    uses: stefanbuck/github-issue-parser@v3
-    id: issue-parser
-    with:
-      template-path: .github/ISSUE_TEMPLATE/${{ env.ISSUE_TITLE }}_request.yml
+- name: Parse Github issue
+  uses: stefanbuck/github-issue-parser@v3
+  id: issue-parser
+  with:
+    template-path: .github/ISSUE_TEMPLATE/${{ env.ISSUE_TITLE }}_request.yml
 
-  - name: Output issue parser JSON results 
-    run: |
-      cat ${{ steps.issue-parser.outputs.jsonFile }}
+- name: Output issue parser JSON results 
+  run: |
+    cat ${{ steps.issue-parser.outputs.jsonFile }}
 
-  - name: Write issue submission JSON file to local Terraform Template Config repo and create environment vars
-    run: |
-      echo "${{ steps.issue-parser.outputs.jsonString }}" > issue_submission/github_issue_submission.json
-      ISSUE_JSON=$(cat issue_submission/github_issue_submission.json)
-      ISSUE_ENVIRONMENT=$(echo $ISSUE_JSON | jq -r .environment)
-      echo "ISSUE_ENVIRONMENT=$ISSUE_ENVIRONMENT" >> $GITHUB_ENV
-      ISSUE_CREATE_DESTROY=$(echo $ISSUE_JSON | jq -r .create_or_delete)
-      echo "ISSUE_CREATE_DESTROY=$ISSUE_CREATE_DESTROY" >> $GITHUB_ENV
-      ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
-      echo "ISSUE_RESOURCE_NAME=$ISSUE_RESOURCE_NAME" >> $GITHUB_ENV
+- name: Write issue submission JSON file to local Terraform Template Config repo and create environment vars
+  run: |
+    echo "${{ steps.issue-parser.outputs.jsonString }}" > issue_submission/github_issue_submission.json
+    ISSUE_JSON=$(cat issue_submission/github_issue_submission.json)
+    ISSUE_ENVIRONMENT=$(echo $ISSUE_JSON | jq -r .environment)
+    echo "ISSUE_ENVIRONMENT=$ISSUE_ENVIRONMENT" >> $GITHUB_ENV
+    ISSUE_CREATE_DESTROY=$(echo $ISSUE_JSON | jq -r .create_or_delete)
+    echo "ISSUE_CREATE_DESTROY=$ISSUE_CREATE_DESTROY" >> $GITHUB_ENV
+    ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
+    echo "ISSUE_RESOURCE_NAME=$ISSUE_RESOURCE_NAME" >> $GITHUB_ENV
 
-  - name: Append/Remove issue submission to/from master config JSON file
-    run: |
-      FILE="master_config/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json"
-      if [[ ! -f "$FILE" ]]; then
-        echo "{\"${{ env.ISSUE_TITLE }}\": {}}" > "$FILE"
-        echo "$FILE created."
-      else
-        echo "$FILE already exists."
-      fi
+- name: Append/Remove issue submission to/from master config JSON file
+  run: |
+    FILE="master_config/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json"
+    if [[ ! -f "$FILE" ]]; then
+      echo "{\"${{ env.ISSUE_TITLE }}\": {}}" > "$FILE"
+      echo "$FILE created."
+    else
+      echo "$FILE already exists."
+    fi
 
-      ISSUE_JSON=$(cat issue_submission/github_issue_submission.json)
-      echo "ISSUE_JSON: $ISSUE_JSON"
-      MASTER_CONFIG_JSON=$(cat "master_config/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json")
-      echo "MASTER_CONFIG_JSON: $MASTER_CONFIG_JSON"
-      ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
-      ISSUE_ACTION=$(echo $ISSUE_JSON | jq -r .create_or_delete)
-      if [[ "$ISSUE_ACTION" == "create" ]]; then
-        UPDATED_MASTER_CONFIG=$(echo $MASTER_CONFIG_JSON | jq ".${{ env.ISSUE_TITLE }}.\"$ISSUE_RESOURCE_NAME\" = $ISSUE_JSON")
-      elif [[ "$ISSUE_ACTION" == "destroy" ]]; then
-        UPDATED_MASTER_CONFIG=$(echo $MASTER_CONFIG_JSON | jq "del(.${{ env.ISSUE_TITLE }}.\"$ISSUE_RESOURCE_NAME\")")
-      else
-        echo "Unknown ISSUE_ACTION: $ISSUE_ACTION"
-        exit 1
-      fi
-      echo "UPDATED_MASTER_CONFIG: $UPDATED_MASTER_CONFIG"
-      echo "$UPDATED_MASTER_CONFIG" > "master_config/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json"
+    ISSUE_JSON=$(cat issue_submission/github_issue_submission.json)
+    echo "ISSUE_JSON: $ISSUE_JSON"
+    MASTER_CONFIG_JSON=$(cat "master_config/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json")
+    echo "MASTER_CONFIG_JSON: $MASTER_CONFIG_JSON"
+    ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
+    ISSUE_ACTION=$(echo $ISSUE_JSON | jq -r .create_or_delete)
+    if [[ "$ISSUE_ACTION" == "create" ]]; then
+      UPDATED_MASTER_CONFIG=$(echo $MASTER_CONFIG_JSON | jq ".${{ env.ISSUE_TITLE }}.\"$ISSUE_RESOURCE_NAME\" = $ISSUE_JSON")
+    elif [[ "$ISSUE_ACTION" == "destroy" ]]; then
+      UPDATED_MASTER_CONFIG=$(echo $MASTER_CONFIG_JSON | jq "del(.${{ env.ISSUE_TITLE }}.\"$ISSUE_RESOURCE_NAME\")")
+    else
+      echo "Unknown ISSUE_ACTION: $ISSUE_ACTION"
+      exit 1
+    fi
+    echo "UPDATED_MASTER_CONFIG: $UPDATED_MASTER_CONFIG"
+    echo "$UPDATED_MASTER_CONFIG" > "master_config/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json"
 
-  - name: Combine all the Master Config JSON files into a single dictionary (e.g., tf_issue_submission.json)
-    run: |
-      OUTPUT_JSON="{}" # initialize an empty JSON object
-      # Iterate over each JSON file in the directory
-      for filepath in "master_config/${{ env.ISSUE_ENVIRONMENT }}"/*.json; do
-        FILE_CONTENTS=$(cat "$filepath")
-        # Directly merge this file into our main JSON object
-        OUTPUT_JSON=$(jq -s '.[0] * .[1]' <<< "$OUTPUT_JSON $FILE_CONTENTS")
-      done
-      # Save the merged JSON
-      echo "$OUTPUT_JSON" > issue_submission/tf_issue_submission.json
+- name: Combine all the Master Config JSON files into a single dictionary (e.g., tf_issue_submission.json)
+  run: |
+    OUTPUT_JSON="{}" # initialize an empty JSON object
+    # Iterate over each JSON file in the directory
+    for filepath in "master_config/${{ env.ISSUE_ENVIRONMENT }}"/*.json; do
+      FILE_CONTENTS=$(cat "$filepath")
+      # Directly merge this file into our main JSON object
+      OUTPUT_JSON=$(jq -s '.[0] * .[1]' <<< "$OUTPUT_JSON $FILE_CONTENTS")
+    done
+    # Save the merged JSON
+    echo "$OUTPUT_JSON" > issue_submission/tf_issue_submission.json
 
-  - name: Get Github env, repo URL, and master config file name, and write to issue_submission --> env.sh
-    run: |
-      echo "export ENVIRONMENT=${{ env.ISSUE_ENVIRONMENT }}" > issue_submission/env.sh
-      echo "export ISSUE_BRANCH_NAME=${{ env.ISSUE_BRANCH_NAME }}" >> issue_submission/env.sh
-      echo "export ISSUE_CREATE_DESTROY=${{ env.ISSUE_CREATE_DESTROY }}" >> issue_submission/env.sh
-      echo "export MASTER_CONFIG_JSON_FNAME=${{ env.ISSUE_TITLE }}.json" >> issue_submission/env.sh
-      echo "export GITHUB_ISSUE_NUMBER=${{ github.event.issue.number }}" >> issue_submission/env.sh
-      echo "export GITHUB_REPO_OWNER=${{ github.repository_owner }}" >> issue_submission/env.sh
-      echo "export GITHUB_REPO_NAME=${{ github.event.repository.name }}" >> issue_submission/env.sh
-      echo "export GITHUB_REPO_URL=${{ github.server_url }}/${{ github.repository_owner }}/${{ github.event.repository.name }}.git" >> issue_submission/env.sh
+- name: Get Github env, repo URL, and master config file name, and write to issue_submission --> env.sh
+  run: |
+    echo "export ENVIRONMENT=${{ env.ISSUE_ENVIRONMENT }}" > issue_submission/env.sh
+    echo "export ISSUE_BRANCH_NAME=${{ env.ISSUE_BRANCH_NAME }}" >> issue_submission/env.sh
+    echo "export ISSUE_CREATE_DESTROY=${{ env.ISSUE_CREATE_DESTROY }}" >> issue_submission/env.sh
+    echo "export MASTER_CONFIG_JSON_FNAME=${{ env.ISSUE_TITLE }}.json" >> issue_submission/env.sh
+    echo "export GITHUB_ISSUE_NUMBER=${{ github.event.issue.number }}" >> issue_submission/env.sh
+    echo "export GITHUB_REPO_OWNER=${{ github.repository_owner }}" >> issue_submission/env.sh
+    echo "export GITHUB_REPO_NAME=${{ github.event.repository.name }}" >> issue_submission/env.sh
+    echo "export GITHUB_REPO_URL=${{ github.server_url }}/${{ github.repository_owner }}/${{ github.event.repository.name }}.git" >> issue_submission/env.sh
