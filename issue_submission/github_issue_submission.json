@@ -1,6 +1,12 @@
 {
-  "environment": "dev",
+  "environment": "unity_catalog",
   "create_or_delete": "create",
-  "resource_name": "my-catalog-1",
-  "description": "my-catalog-1"
+  "resource_name": "my-sc-2-raqo123",
+  "sc_role_arn": "arn:aws:iam::969341422355:role/s3-dbricks-prod-bucket-role",
+  "sc_principal_name": "dev-contributors",
+  "sc_principal_privileges": [
+    "CREATE_EXTERNAL_LOCATION",
+    "CREATE_EXTERNAL_TABLE",
+    "READ_FILES"
+  ]
 }
