@@ -43,7 +43,7 @@ jobs:
 
 
       - name: Execute common workflow steps
-        uses: "./.github/workflows/common_workflow_steps.yml"
+        uses: "./common_workflow_steps/common_workflow_steps.yml"
 
       # - uses: actions/checkout@v3
       #   with:
