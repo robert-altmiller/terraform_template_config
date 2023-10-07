@@ -8,7 +8,7 @@
       "el_role_arn": "arn:aws:iam::332745928618:role/ggm-dce-db-dev-iam",
       "el_principal_name": "dev-contributors",
       "el_principal_privileges": [
-        "ALL_PRIVILEGES"
+        "WRITE_FILES"
       ]
     }
   }
