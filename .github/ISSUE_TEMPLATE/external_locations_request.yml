@@ -42,10 +42,9 @@ body:
     required: False
 
 - type: input
-  id: el_role_arn
+  id: el_sc_name
   attributes:
-    label: Please Enter the Integrated Access Management (IAM) Role AWS ARN for Use With External Location
-    placeholder: "Example: arn:aws:iam::111111111111:role/Temp-Product-IAM-Role_1111111111111"
+    label: Please Enter the Storage Credential Name
   validations:
     required: True
 
