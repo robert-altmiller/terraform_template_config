@@ -1,11 +1,11 @@
 {
   "environment": "unity_catalog",
-  "create_or_delete": "create",
+  "create_or_delete": "destroy",
   "resource_name": "my-el-raqo",
   "el_s3_url": "s3://ggm-dce-db-dev-01/",
-  "el_role_arn": "arn:aws:iam::332745928618:role/ggm-dce-db-dev-iam",
-  "el_principal_name": "dev-contributors",
+  "el_sc_name": "fff",
+  "el_principal_name": "fff",
   "el_principal_privileges": [
-    "WRITE_FILES"
+    "CREATE_EXTERNAL_TABLE"
   ]
 }
