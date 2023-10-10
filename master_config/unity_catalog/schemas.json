@@ -9,12 +9,13 @@
       "catalog_principal_name": "my-sp-dev",
       "catalog_principal_privileges": [
         "USE_CATALOG",
-        "USE_SCHEMA"
+        "USE_SCHEMA",
+        "CREATE_SCHEMA"
       ],
       "schema_principal_name": "dev-contributors",
       "schema_principal_privileges": [
         "USE_SCHEMA",
-        "CREATE_TABLE"
+        "SELECT"
       ]
     }
   }
