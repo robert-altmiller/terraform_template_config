@@ -15,7 +15,25 @@
       ]
     }
   },
-  "schemas": {},
+  "schemas": {
+    "def-schema": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "def-schema",
+      "el_resource_name": "s3://uc-dlt-test-kapil/abc",
+      "catalog_name": "altmiller-catalog",
+      "catalog_principal_name": "my-sp-dev",
+      "catalog_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA"
+      ],
+      "schema_principal_name": "dev-contributors",
+      "schema_principal_privileges": [
+        "USE_SCHEMA",
+        "CREATE_TABLE"
+      ]
+    }
+  },
   "storage_credentials": {
     "my-test-raqo-sc": {
       "environment": "unity_catalog",
