@@ -34,6 +34,14 @@ body:
     required: True
 
 - type: input
+  id: el_resource_name
+  attributes:
+    description: "Example: s3://<external location name>/subfolder
+    label: Please Enter the External Location Name
+  validations:
+    required: True
+
+- type: input
   id: catalog_name
   attributes:
     description: "Please note: 'underscores' or 'dashes' can be used in the name."
