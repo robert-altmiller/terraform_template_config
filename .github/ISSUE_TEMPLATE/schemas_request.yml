@@ -64,6 +64,7 @@ body:
     options:
       - label: USE_CATALOG
       - label: USE_SCHEMA
+      - label: CREATE_SCHEMA
   validations:
     required: True
 
