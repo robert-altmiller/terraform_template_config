@@ -37,7 +37,7 @@ body:
   id: el_s3_url
   attributes:
     label: Please Enter the External Location S3 Url
-    placeholder: "Example: s3://${aws_s3_bucket.external.id}/some"
+    placeholder: "Example: s3://bucketname/folder"
   validations:
     required: False
 
