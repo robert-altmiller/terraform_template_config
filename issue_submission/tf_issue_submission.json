@@ -2,19 +2,7 @@
   "catalogs": {},
   "cluster_policies": {},
   "clusters": {},
-  "external_locations": {
-    "ggm-dce-raqo": {
-      "environment": "unity_catalog",
-      "create_or_delete": "create",
-      "resource_name": "ggm-dce-raqo",
-      "el_s3_url": "s3://ggm-dce-db-dev-01/",
-      "el_sc_name": "ggm-dce-cred",
-      "el_principal_name": "dev-contributors",
-      "el_principal_privileges": [
-        "WRITE_FILES"
-      ]
-    }
-  },
+  "external_locations": {},
   "schemas": {
     "def-schema": {
       "environment": "unity_catalog",
@@ -31,7 +19,25 @@
       "schema_principal_name": "dev-contributors",
       "schema_principal_privileges": [
         "USE_SCHEMA",
+        "REFRESH",
         "SELECT"
+      ]
+    },
+    "schema-qqq": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "schema-qqq",
+      "el_resource_name": "s3://uc-dlt-kapil/abc",
+      "catalog_name": "altmiller-catalog",
+      "catalog_principal_name": "my-sp-dev",
+      "catalog_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA",
+        "CREATE_SCHEMA"
+      ],
+      "schema_principal_name": "dev-contributors",
+      "schema_principal_privileges": [
+        "ALL_PRIVILEGES"
       ]
     }
   },

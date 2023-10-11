@@ -1,8 +1,8 @@
 {
   "environment": "unity_catalog",
   "create_or_delete": "create",
-  "resource_name": "def-schema",
-  "el_resource_name": "s3://uc-dlt-test-kapil/abc",
+  "resource_name": "schema-qqq",
+  "el_resource_name": "s3://uc-dlt-kapil/abc",
   "catalog_name": "altmiller-catalog",
   "catalog_principal_name": "my-sp-dev",
   "catalog_principal_privileges": [
@@ -12,7 +12,6 @@
   ],
   "schema_principal_name": "dev-contributors",
   "schema_principal_privileges": [
-    "USE_SCHEMA",
-    "SELECT"
+    "ALL_PRIVILEGES"
   ]
 }
