@@ -36,10 +36,10 @@ body:
 - type: input
   id: el_resource_name
   attributes:
-    description: "Example: s3://external_location_name/subfolder"
+    description: "Example: s3:/bucketname/subfolder"
     label: Please Enter the External Location Name
   validations:
-    required: True
+    required: False
 
 - type: input
   id: catalog_name
