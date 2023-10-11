@@ -1,17 +1,17 @@
 {
   "environment": "unity_catalog",
-  "create_or_delete": "create",
+  "create_or_delete": "destroy",
   "resource_name": "schema-qqq",
-  "el_resource_name": "s3://uc-dlt-kapil/abc",
-  "catalog_name": "altmiller-catalog",
-  "catalog_principal_name": "my-sp-dev",
+  "el_resource_name": "sd",
+  "catalog_name": "sdf",
+  "catalog_principal_name": "sd",
   "catalog_principal_privileges": [
     "USE_CATALOG",
     "USE_SCHEMA",
     "CREATE_SCHEMA"
   ],
-  "schema_principal_name": "dev-contributors",
+  "schema_principal_name": "sdfsdf",
   "schema_principal_privileges": [
-    "ALL_PRIVILEGES"
+    "EXECUTE"
   ]
 }
