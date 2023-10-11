@@ -1,11 +1,17 @@
 {
   "environment": "unity_catalog",
-  "create_or_delete": "destroy",
-  "resource_name": "ggm-dce-raqo",
-  "el_s3_url": "fg",
-  "el_sc_name": "dfgdf",
-  "el_principal_name": "dfgdf",
-  "el_principal_privileges": [
-    "CREATE_MANAGED_STORAGE"
+  "create_or_delete": "create",
+  "resource_name": "schema-qqq",
+  "el_resource_name": "s3://uc-dlt-kapil/abc",
+  "catalog_name": "altmiller-catalog",
+  "catalog_principal_name": "my-sp-dev",
+  "catalog_principal_privileges": [
+    "USE_CATALOG",
+    "USE_SCHEMA",
+    "CREATE_SCHEMA"
+  ],
+  "schema_principal_name": "dev-contributors",
+  "schema_principal_privileges": [
+    "ALL_PRIVILEGES"
   ]
 }
