@@ -1,17 +1,11 @@
 {
   "environment": "unity_catalog",
-  "create_or_delete": "destroy",
-  "resource_name": "schema-qqq",
-  "el_resource_name": "sd",
-  "catalog_name": "sdf",
-  "catalog_principal_name": "sd",
-  "catalog_principal_privileges": [
-    "USE_CATALOG",
-    "USE_SCHEMA",
-    "CREATE_SCHEMA"
-  ],
-  "schema_principal_name": "sdfsdf",
-  "schema_principal_privileges": [
-    "EXECUTE"
+  "create_or_delete": "create",
+  "resource_name": "my-el-altmiller",
+  "el_s3_url": "s3://one-env-root-us-east-1/abc",
+  "el_sc_name": "one-env-us-east-1-admin-account-uc-role",
+  "el_principal_name": "dev-contributors",
+  "el_principal_privileges": [
+    "ALL_PRIVILEGES"
   ]
 }
