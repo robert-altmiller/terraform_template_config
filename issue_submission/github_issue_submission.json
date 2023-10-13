@@ -1,17 +1,10 @@
 {
   "environment": "unity_catalog",
   "create_or_delete": "destroy",
-  "resource_name": "def-schema",
-  "el_resource_name": "def-schema",
-  "catalog_name": "def-schema",
-  "catalog_principal_name": "def-schema",
-  "catalog_principal_privileges": [
-    "USE_CATALOG",
-    "USE_SCHEMA",
-    "CREATE_SCHEMA"
-  ],
-  "schema_principal_name": "def-schema",
-  "schema_principal_privileges": [
-    "MODIFY"
+  "resource_name": "my-test-raqo-sc",
+  "sc_role_arn": "my-test-raqo-sc",
+  "sc_principal_name": "my-test-raqo-sc",
+  "sc_principal_privileges": [
+    "ALL_PRIVILEGES"
   ]
 }
