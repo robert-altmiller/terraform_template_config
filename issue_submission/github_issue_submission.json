@@ -1,11 +1,17 @@
 {
   "environment": "unity_catalog",
   "create_or_delete": "destroy",
-  "resource_name": "my-el-altmiller",
-  "el_s3_url": "my-el-altmiller",
-  "el_sc_name": "my-el-altmiller",
-  "el_principal_name": "my-el-altmiller",
-  "el_principal_privileges": [
-    "CREATE_EXTERNAL_TABLE"
+  "resource_name": "def-schema",
+  "el_resource_name": "def-schema",
+  "catalog_name": "def-schema",
+  "catalog_principal_name": "def-schema",
+  "catalog_principal_privileges": [
+    "USE_CATALOG",
+    "USE_SCHEMA",
+    "CREATE_SCHEMA"
+  ],
+  "schema_principal_name": "def-schema",
+  "schema_principal_privileges": [
+    "MODIFY"
   ]
 }
