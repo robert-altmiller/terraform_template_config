@@ -1,17 +1,10 @@
 {
   "environment": "unity_catalog",
-  "create_or_delete": "destroy",
-  "resource_name": "schema-qqq",
-  "el_resource_name": "sd",
-  "catalog_name": "sdf",
-  "catalog_principal_name": "sd",
-  "catalog_principal_privileges": [
-    "USE_CATALOG",
-    "USE_SCHEMA",
-    "CREATE_SCHEMA"
-  ],
-  "schema_principal_name": "sdfsdf",
-  "schema_principal_privileges": [
-    "EXECUTE"
+  "create_or_delete": "create",
+  "resource_name": "dbx-sc-2",
+  "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-s3-access",
+  "sc_principal_name": "my-sp-dev",
+  "sc_principal_privileges": [
+    "ALL_PRIVILEGES"
   ]
 }
