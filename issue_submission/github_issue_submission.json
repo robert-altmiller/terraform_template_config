@@ -5,7 +5,6 @@
   "sc_role_arn": "my-test-raqo-sc",
   "sc_principal_name": "my-test-raqo-sc",
   "sc_principal_privileges": [
-    "WRITE_FILES",
-    "ALL_PRIVILEGES"
+    "WRITE_FILES"
   ]
 }
