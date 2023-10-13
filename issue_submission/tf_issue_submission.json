@@ -4,16 +4,5 @@
   "clusters": {},
   "external_locations": {},
   "schemas": {},
-  "storage_credentials": {
-    "dbx-sc-2": {
-      "environment": "unity_catalog",
-      "create_or_delete": "create",
-      "resource_name": "dbx-sc-2",
-      "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-s3-access",
-      "sc_principal_name": "my-sp-dev",
-      "sc_principal_privileges": [
-        "ALL_PRIVILEGES"
-      ]
-    }
-  }
+  "storage_credentials": {}
 }
