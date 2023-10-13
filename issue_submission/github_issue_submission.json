@@ -5,6 +5,7 @@
   "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-s3-access",
   "sc_principal_name": "my-sp-dev",
   "sc_principal_privileges": [
+    "WRITE_FILES",
     "ALL_PRIVILEGES"
   ]
 }
