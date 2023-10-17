@@ -52,14 +52,14 @@ body:
 - type: input
   id: catalog_principal_name
   attributes:
-    label: Please Enter the Principal or Group Name for Catalog Access
+    label: Please Enter the Group Name for Catalog Access
   validations:
     required: True
 
 - type: checkboxes
   id: catalog_principal_privileges
   attributes:
-    label: Please Select the Grants for the Principal or Group Name
+    label: Please Select the Grants for the Group Name
     description: "Please note: If selecting 'ALL_PRIVILEGES', ensure no other boxes are checked."
     options:
       - label: USE CATALOG
