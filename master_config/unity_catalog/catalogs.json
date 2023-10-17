@@ -10,7 +10,6 @@
       "catalog_principal_privileges": [
         "USE CATALOG",
         "USE SCHEMA",
-        "APPLY_TAG",
         "CREATE_VOLUME"
       ]
     }
