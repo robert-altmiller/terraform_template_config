@@ -52,7 +52,7 @@ body:
 - type: input
   id: catalog_principal_name
   attributes:
-    label: Please Enter the 'Catalog' Service Principal Name for Catalog Access
+    label: Please Enter the 'Catalog' Group Name for Databricks Catalog Access
   validations:
     required: True
 
@@ -62,9 +62,7 @@ body:
     label: Please Select the Grants for the 'Catalog' Principal Name
     description: "Please note: If selecting 'ALL_PRIVILEGES', ensure no other boxes are checked."
     options:
-      - label: USE_CATALOG
-      - label: USE_SCHEMA
-      - label: CREATE_SCHEMA
+      - label: ALL_PRIVILEGES
   validations:
     required: True
 

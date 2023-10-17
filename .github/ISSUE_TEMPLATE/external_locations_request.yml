@@ -36,8 +36,8 @@ body:
 - type: input
   id: el_s3_url
   attributes:
+    description:: "Example: s3://$bucketname/$folder"
     label: Please Enter the External Location S3 Url
-    placeholder: "Example: s3://bucketname/folder"
   validations:
     required: False
 
