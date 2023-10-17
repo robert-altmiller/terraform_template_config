@@ -8,6 +8,7 @@
       "el_resource_name": "s3://dbx-unitycatalog-bucket/",
       "catalog_principal_name": "dev-contributors",
       "catalog_principal_privileges": [
+        "USE CATALOG",
         "CREATE_VOLUME"
       ]
     }
