@@ -44,7 +44,7 @@ body:
 - type: input
   id: el_resource_name
   attributes:
-    description: "Example: s3:/bucketname/folder"
+    description: "Example: s3:/$bucketname/$folder"
     label: Please Enter the Catalog External Location Name
   validations:
     required: False
