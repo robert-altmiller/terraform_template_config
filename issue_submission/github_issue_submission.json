@@ -1,10 +1,11 @@
 {
   "environment": "unity_catalog",
-  "create_or_delete": "create",
-  "resource_name": "dbx-sc",
-  "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-role-external-assume",
-  "sc_principal_name": "dev-contributors",
-  "sc_principal_privileges": [
-    "ALL_PRIVILEGES"
+  "create_or_delete": "destroy",
+  "resource_name": "dbx-el-3",
+  "el_s3_url": "dbx-el-3",
+  "el_sc_name": "dbx-el-3",
+  "el_principal_name": "dbx-el-3",
+  "el_principal_privileges": [
+    "CREATE_EXTERNAL_TABLE"
   ]
 }
