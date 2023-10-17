@@ -13,6 +13,17 @@
       "el_principal_privileges": [
         "ALL_PRIVILEGES"
       ]
+    },
+    "dbx-el-4": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-el-4",
+      "el_s3_url": "s3://dbx-unitycatalog-bucket",
+      "el_sc_name": "dbx-sc-3",
+      "el_principal_name": "dev-contributors",
+      "el_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ]
     }
   },
   "schemas": {},
