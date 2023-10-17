@@ -2,20 +2,7 @@
   "catalogs": {},
   "cluster_policies": {},
   "clusters": {},
-  "external_locations": {
-    "dbx-el-4": {
-      "environment": "unity_catalog",
-      "create_or_delete": "create",
-      "resource_name": "dbx-el-4",
-      "el_s3_url": "s3://dbx-unitycatalog-bucket",
-      "el_sc_name": "dbx-sc-3",
-      "el_principal_name": "dev-contributors",
-      "el_principal_privileges": [
-        "READ_FILES",
-        "WRITE_FILES"
-      ]
-    }
-  },
+  "external_locations": {},
   "schemas": {},
   "storage_credentials": {
     "dbx-sc-3": {
