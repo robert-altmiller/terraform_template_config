@@ -26,12 +26,28 @@ body:
     required: True
 
 - type: input
+  id: catalog_metastore_id
+  attributes:
+    description: "The metastore id can be found in the Databricks admin account console."
+    label: Please Enter the Metastore ID for the UC Catalog
+  validations:
+    required: True
+
+- type: input
   id: resource_name
   attributes:
     description: "Please note: 'underscores' or 'dashes' can be used in the name."
     label: Please Enter the UC Catalog Name
   validations:
     required: True
+
+- type: input
+  id: el_resource_name
+  attributes:
+    description: "Example: s3:/bucketname/folder"
+    label: Please Enter the Catalog External Location Name
+  validations:
+    required: False
 
 - type: input
   id: catalog_principal_name
