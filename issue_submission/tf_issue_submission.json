@@ -22,7 +22,7 @@
       "el_sc_name": "dbx-sc-3",
       "el_principal_name": "dev-contributors",
       "el_principal_privileges": [
-        "ALL_PRIVILEGES"
+        "WRITE_FILES"
       ]
     }
   },
