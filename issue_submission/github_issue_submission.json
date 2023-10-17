@@ -7,7 +7,6 @@
   "catalog_principal_name": "dev-contributors",
   "catalog_principal_privileges": [
     "USE CATALOG",
-    "USE SCHEMA",
     "CREATE_VOLUME"
   ]
 }
