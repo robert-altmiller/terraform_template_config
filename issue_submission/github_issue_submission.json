@@ -1,11 +1,10 @@
 {
   "environment": "unity_catalog",
   "create_or_delete": "destroy",
-  "resource_name": "dbx-el-4",
-  "el_s3_url": "dbx-el-4",
-  "el_sc_name": "dbx-el-4",
-  "el_principal_name": "dbx-el-4",
-  "el_principal_privileges": [
+  "resource_name": "dbx-sc-3",
+  "sc_role_arn": "dbx-sc-3",
+  "sc_principal_name": "dbx-sc-3",
+  "sc_principal_privileges": [
     "ALL_PRIVILEGES"
   ]
 }
