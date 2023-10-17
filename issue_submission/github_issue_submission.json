@@ -1,8 +1,8 @@
 {
   "environment": "unity_catalog",
   "create_or_delete": "create",
-  "resource_name": "schema-qqq",
-  "el_resource_name": "s3://uc-dlt-kapil/abc",
+  "resource_name": "dbx-schema",
+  "el_resource_name": "s3://dbx-unitycatalog-bucket",
   "catalog_name": "altmiller-catalog",
   "catalog_principal_name": "my-sp-dev",
   "catalog_principal_privileges": [

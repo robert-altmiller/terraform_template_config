@@ -2,32 +2,25 @@
   "catalogs": {},
   "cluster_policies": {},
   "clusters": {},
-  "external_locations": {},
-  "schemas": {
-    "def-schema": {
+  "external_locations": {
+    "dbx-el-uc": {
       "environment": "unity_catalog",
       "create_or_delete": "create",
-      "resource_name": "def-schema",
-      "el_resource_name": "s3://uc-dlt-test-kapil/abc",
-      "catalog_name": "altmiller-catalog",
-      "catalog_principal_name": "my-sp-dev",
-      "catalog_principal_privileges": [
-        "USE_CATALOG",
-        "USE_SCHEMA",
-        "CREATE_SCHEMA"
-      ],
-      "schema_principal_name": "dev-contributors",
-      "schema_principal_privileges": [
-        "USE_SCHEMA",
-        "REFRESH",
-        "SELECT"
+      "resource_name": "dbx-el-uc",
+      "el_s3_url": "s3://dbx-unitycatalog-bucket",
+      "el_sc_name": "dbx-sc",
+      "el_principal_name": "dev-contributors",
+      "el_principal_privileges": [
+        "ALL_PRIVILEGES"
       ]
-    },
-    "schema-qqq": {
+    }
+  },
+  "schemas": {
+    "dbx-schema": {
       "environment": "unity_catalog",
       "create_or_delete": "create",
-      "resource_name": "schema-qqq",
-      "el_resource_name": "s3://uc-dlt-kapil/abc",
+      "resource_name": "dbx-schema",
+      "el_resource_name": "s3://dbx-unitycatalog-bucket",
       "catalog_name": "altmiller-catalog",
       "catalog_principal_name": "my-sp-dev",
       "catalog_principal_privileges": [
@@ -42,11 +35,11 @@
     }
   },
   "storage_credentials": {
-    "my-test-raqo-sc": {
+    "dbx-sc": {
       "environment": "unity_catalog",
       "create_or_delete": "create",
-      "resource_name": "my-test-raqo-sc",
-      "sc_role_arn": "arn:aws:iam::997819012307:role/one-env-admin-cross-account-access-role",
+      "resource_name": "dbx-sc",
+      "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-role-external-assume",
       "sc_principal_name": "dev-contributors",
       "sc_principal_privileges": [
         "READ_FILES",
