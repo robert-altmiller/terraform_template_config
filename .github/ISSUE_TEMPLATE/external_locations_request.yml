@@ -33,20 +33,20 @@ body:
   validations:
     required: True
 
-- type: input
-  id: el_s3_url
-  attributes:
-    description:: "Example: s3://$bucketname/$folder"
-    label: Please Enter the External Location S3 Url
-  validations:
-    required: False
+# - type: input
+#   id: el_s3_url
+#   attributes:
+#     description:: "Example: s3://$bucketname/$folder"
+#     label: Please Enter the External Location S3 Url
+#   validations:
+#     required: False
 
-- type: input
-  id: el_sc_name
-  attributes:
-    label: Please Enter the Storage Credential Name
-  validations:
-    required: True
+# - type: input
+#   id: el_sc_name
+#   attributes:
+#     label: Please Enter the Storage Credential Name
+#   validations:
+#     required: True
 
 # - type: input
 #   id: el_principal_name
