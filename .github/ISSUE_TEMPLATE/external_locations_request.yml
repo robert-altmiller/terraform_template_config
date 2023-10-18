@@ -48,12 +48,12 @@ body:
   validations:
     required: True
 
-- type: input
-  id: el_principal_name
-  attributes:
-    label: Please Enter the Principal or Group Name for External Location Access
-  validations:
-    required: True
+# - type: input
+#   id: el_principal_name
+#   attributes:
+#     label: Please Enter the Principal or Group Name for External Location Access
+#   validations:
+#     required: True
 
 # - type: checkboxes
 #   id: el_principal_privileges
