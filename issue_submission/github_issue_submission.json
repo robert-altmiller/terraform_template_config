@@ -1,17 +1,11 @@
 {
   "environment": "unity_catalog",
-  "create_or_delete": "create",
-  "resource_name": "dbx-schema",
-  "el_resource_name": "s3://dbx-unitycatalog-bucket",
-  "catalog_name": "altmiller-catalog",
-  "catalog_principal_name": "my-sp-dev",
+  "create_or_delete": "destroy",
+  "catalog_metastore_id": "dbx-catalog",
+  "resource_name": "dbx-catalog",
+  "el_resource_name": "dbx-catalog",
+  "catalog_principal_name": "dbx-catalog",
   "catalog_principal_privileges": [
-    "USE_CATALOG",
-    "USE_SCHEMA",
-    "CREATE_SCHEMA"
-  ],
-  "schema_principal_name": "dev-contributors",
-  "schema_principal_privileges": [
-    "ALL_PRIVILEGES"
+    "USE CATALOG"
   ]
 }
