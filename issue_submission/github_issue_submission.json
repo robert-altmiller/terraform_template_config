@@ -1,11 +1,11 @@
 {
   "environment": "unity_catalog",
   "create_or_delete": "destroy",
-  "catalog_metastore_id": "dbx-catalog",
-  "resource_name": "dbx-catalog",
-  "el_resource_name": "dbx-catalog",
-  "catalog_principal_name": "dbx-catalog",
-  "catalog_principal_privileges": [
-    "USE CATALOG"
+  "resource_name": "dbx-el-uc",
+  "el_s3_url": "dbx-el-uc",
+  "el_sc_name": "dbx-el-uc",
+  "el_principal_name": "dbx-el-uc",
+  "el_principal_privileges": [
+    "CREATE_EXTERNAL_TABLE"
   ]
 }
