@@ -1,11 +1,15 @@
 {
   "environment": "unity_catalog",
   "create_or_delete": "destroy",
-  "resource_name": "dbx-el-uc",
-  "el_s3_url": "dbx-el-uc",
-  "el_sc_name": "dbx-el-uc",
-  "el_principal_name": "dbx-el-uc",
-  "el_principal_privileges": [
-    "CREATE_EXTERNAL_TABLE"
+  "resource_name": "dbx-schema",
+  "el_resource_name": "dbx-schema",
+  "catalog_name": "dbx-schema",
+  "catalog_principal_name": "dbx-schema",
+  "catalog_principal_privileges": [
+    "ALL_PRIVILEGES"
+  ],
+  "schema_principal_name": "dbx-schema",
+  "schema_principal_privileges": [
+    "USE_SCHEMA"
   ]
 }
