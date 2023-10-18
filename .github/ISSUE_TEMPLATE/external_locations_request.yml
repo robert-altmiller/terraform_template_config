@@ -41,37 +41,37 @@ body:
 #   validations:
 #     required: False
 
-# - type: input
-#   id: el_sc_name
-#   attributes:
-#     label: Please Enter the Storage Credential Name
-#   validations:
-#     required: True
+- type: input
+  id: el_sc_name
+  attributes:
+    label: Please Enter the Storage Credential Name
+  validations:
+    required: True
 
-# - type: input
-#   id: el_principal_name
-#   attributes:
-#     label: Please Enter the Principal or Group Name for External Location Access
-#   validations:
-#     required: True
+- type: input
+  id: el_principal_name
+  attributes:
+    label: Please Enter the Principal or Group Name for External Location Access
+  validations:
+    required: True
 
-# - type: checkboxes
-#   id: el_principal_privileges
-#   attributes:
-#     label: Please Select the Grants for the Principal or Group Name
-#     description: "Please note: If selecting 'ALL_PRIVILEGES', ensure no other boxes are checked."
-#     options:
-#       - label: CREATE_EXTERNAL_TABLE
-#         required: False
-#       - label: CREATE_EXTERNAL_VOLUME
-#         required: False
-#       - label: CREATE_MANAGED_STORAGE
-#         required: False
-#       - label: READ_FILES
-#         required: False
-#       - label: WRITE_FILES
-#         required: False
-#       - label: ALL_PRIVILEGES
-#         required: False
-#   validations:
-#     required: True
+- type: checkboxes
+  id: el_principal_privileges
+  attributes:
+    label: Please Select the Grants for the Principal or Group Name
+    description: "Please note: If selecting 'ALL_PRIVILEGES', ensure no other boxes are checked."
+    options:
+      - label: CREATE_EXTERNAL_TABLE
+        required: False
+      - label: CREATE_EXTERNAL_VOLUME
+        required: False
+      - label: CREATE_MANAGED_STORAGE
+        required: False
+      - label: READ_FILES
+        required: False
+      - label: WRITE_FILES
+        required: False
+      - label: ALL_PRIVILEGES
+        required: False
+  validations:
+    required: True
