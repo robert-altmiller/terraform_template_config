@@ -29,6 +29,7 @@
       "schema_principal_name": "dev-contributors",
       "schema_principal_privileges": [
         "USE_SCHEMA",
+        "REFRESH",
         "CREATE_MODEL",
         "CREATE_TABLE"
       ]
