@@ -12,6 +12,7 @@
       ],
       "schema_principal_name": "dev-contributors",
       "schema_principal_privileges": [
+        "CREATE_MODEL",
         "CREATE_TABLE"
       ]
     }
