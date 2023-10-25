@@ -59,7 +59,7 @@ body:
 - type: checkboxes
   id: catalog_principal_privileges
   attributes:
-    label: Please Select the Grants for the 'Catalog' Principal Name
+    label: Please Select the Grants for the 'Catalog' Group Name
     description: "Please note: If selecting 'ALL_PRIVILEGES', ensure no other boxes are checked."
     options:
       - label: ALL_PRIVILEGES
