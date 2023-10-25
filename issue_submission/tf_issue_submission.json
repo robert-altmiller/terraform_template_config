@@ -15,6 +15,22 @@
   "cluster_policies": {},
   "clusters": {},
   "external_locations": {},
-  "schemas": {},
+  "schemas": {
+    "dbx-schema": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-schema",
+      "el_resource_name": "",
+      "catalog_name": "dbx-catalog",
+      "catalog_principal_name": "dev-contributors",
+      "catalog_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ],
+      "schema_principal_name": "dev-contributors",
+      "schema_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ]
+    }
+  },
   "storage_credentials": {}
 }
