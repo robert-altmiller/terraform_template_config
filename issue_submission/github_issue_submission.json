@@ -10,6 +10,7 @@
   ],
   "schema_principal_name": "dev-contributors",
   "schema_principal_privileges": [
+    "CREATE_MATERIALIZED_VIEW",
     "CREATE_MODEL",
     "CREATE_TABLE"
   ]
