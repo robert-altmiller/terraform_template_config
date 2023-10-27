@@ -1,13 +1,12 @@
 {
   "environment": "unity_catalog",
-  "create_or_delete": "destroy",
+  "create_or_delete": "create",
   "catalog_metastore_id": "0d26daa6-5e44-4c97-a497-ef015f91254a",
   "resource_name": "dbx-catalog",
-  "el_resource_name": "dsf",
-  "catalog_principal_name": "sdfas",
+  "el_resource_name": "",
+  "catalog_principal_name": "dev-contributors",
   "catalog_principal_privileges": [
-    "APPLY_TAG",
-    "EXECUTE",
-    "MODIFY"
+    "USE_CATALOG",
+    "USE_SCHEMA"
   ]
 }
