@@ -1,16 +1,13 @@
 {
   "environment": "unity_catalog",
-  "create_or_delete": "destroy",
-  "resource_name": "dbx-schema",
-  "el_resource_name": "sdfsdf",
-  "catalog_name": "sdafsad",
-  "catalog_principal_name": "sdfasdf",
+  "create_or_delete": "create",
+  "catalog_metastore_id": "0d26daa6-5e44-4c97-a497-ef015f91254a",
+  "resource_name": "dbx-catalog",
+  "el_resource_name": "",
+  "catalog_principal_name": "dev-contributors",
   "catalog_principal_privileges": [
-    "ALL_PRIVILEGES"
-  ],
-  "schema_principal_name": "sdfasdf",
-  "schema_principal_privileges": [
-    "EXECUTE",
-    "MODIFY"
+    "USE_CATALOG",
+    "USE_SCHEMA",
+    "APPLY_TAG"
   ]
 }

@@ -5,11 +5,12 @@
       "create_or_delete": "create",
       "catalog_metastore_id": "0d26daa6-5e44-4c97-a497-ef015f91254a",
       "resource_name": "dbx-catalog",
-      "el_resource_name": "s3://dbx-unitycatalog-bucket",
+      "el_resource_name": "",
       "catalog_principal_name": "dev-contributors",
       "catalog_principal_privileges": [
-        "USE CATALOG",
-        "USE SCHEMA"
+        "USE_CATALOG",
+        "USE_SCHEMA",
+        "APPLY_TAG"
       ]
     }
   },
