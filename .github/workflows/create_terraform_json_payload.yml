@@ -134,6 +134,7 @@ jobs:
         run: |
           echo export ENVIRONMENT=${{ env.ISSUE_ENVIRONMENT }} > issue_submission/env.sh
           echo export ISSUE_BRANCH_NAME=${{ env.ISSUE_BRANCH_NAME }} >> issue_submission/env.sh
+          echo export ISSUE_RESOURCE_NAME=${{ env.ISSUE_RESOURCE_NAME }} >> issue_submission/env.sh
           echo export ISSUE_CREATE_DESTROY=${{ env.ISSUE_CREATE_DESTROY }} >> issue_submission/env.sh
           echo export MASTER_CONFIG_JSON_FNAME=${{ env.ISSUE_TITLE }}.json >> issue_submission/env.sh
           echo export GITHUB_ISSUE_NUMBER=${{ github.event.issue.number }} >> issue_submission/env.sh
