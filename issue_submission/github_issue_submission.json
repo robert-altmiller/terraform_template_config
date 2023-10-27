@@ -1,11 +1,12 @@
 {
   "environment": "unity_catalog",
-  "create_or_delete": "destroy",
-  "catalog_metastore_id": "dbx-schema",
-  "resource_name": "dbx-schema",
-  "el_resource_name": "dbx-schema",
-  "catalog_principal_name": "dbx-schema",
+  "create_or_delete": "create",
+  "catalog_metastore_id": "0d26daa6-5e44-4c97-a497-ef015f91254a",
+  "resource_name": "dbx-catalog",
+  "el_resource_name": "s3://dbx-unitycatalog-bucket",
+  "catalog_principal_name": "dev-contributors",
   "catalog_principal_privileges": [
-    "USE CATALOG"
+    "USE CATALOG",
+    "USE SCHEMA"
   ]
 }
