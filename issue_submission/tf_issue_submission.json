@@ -9,7 +9,8 @@
       "catalog_principal_name": "dev-contributors",
       "catalog_principal_privileges": [
         "USE_CATALOG",
-        "USE_SCHEMA"
+        "USE_SCHEMA",
+        "APPLY_TAG"
       ]
     }
   },
