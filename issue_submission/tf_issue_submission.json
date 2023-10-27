@@ -1,17 +1,5 @@
 {
-  "catalogs": {
-    "dbx-schema": {
-      "environment": "unity_catalog",
-      "create_or_delete": "create",
-      "catalog_metastore_id": "dedc0345-c2c5-475c-8cf3-262335cbcbcd",
-      "resource_name": "dbx-schema",
-      "el_resource_name": "",
-      "catalog_principal_name": "dev-contributors",
-      "catalog_principal_privileges": [
-        "ALL_PRIVILEGES"
-      ]
-    }
-  },
+  "catalogs": {},
   "cluster_policies": {},
   "clusters": {},
   "external_locations": {},
