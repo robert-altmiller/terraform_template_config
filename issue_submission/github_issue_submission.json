@@ -8,7 +8,6 @@
   "catalog_principal_privileges": [
     "USE_CATALOG",
     "USE_SCHEMA",
-    "APPLY_TAG",
-    "EXECUTE"
+    "APPLY_TAG"
   ]
 }
