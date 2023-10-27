@@ -29,7 +29,25 @@
       ]
     }
   },
-  "schemas": {},
+  "schemas": {
+    "dbx-schema": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-schema",
+      "el_resource_name": "s3://dbx-unitycatalog-bucket",
+      "catalog_name": "dbx-catalog",
+      "catalog_principal_name": "dev-contributors",
+      "catalog_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ],
+      "schema_principal_name": "dev-contributors",
+      "schema_principal_privileges": [
+        "USE_SCHEMA",
+        "APPLY_TAG",
+        "EXECUTE"
+      ]
+    }
+  },
   "storage_credentials": {
     "dbx-sc": {
       "environment": "unity_catalog",
