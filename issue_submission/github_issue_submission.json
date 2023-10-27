@@ -6,6 +6,7 @@
   "el_resource_name": "dsf",
   "catalog_principal_name": "sdfas",
   "catalog_principal_privileges": [
+    "EXECUTE",
     "MODIFY"
   ]
 }
