@@ -1,16 +1,11 @@
 {
   "environment": "unity_catalog",
-  "create_or_delete": "create",
+  "create_or_delete": "destroy",
+  "catalog_metastore_id": "dbx-schema",
   "resource_name": "dbx-schema",
-  "el_resource_name": "",
-  "catalog_name": "dbx-catalog",
-  "catalog_principal_name": "dev-contributors",
+  "el_resource_name": "dbx-schema",
+  "catalog_principal_name": "dbx-schema",
   "catalog_principal_privileges": [
-    "ALL_PRIVILEGES"
-  ],
-  "schema_principal_name": "dev-contributors",
-  "schema_principal_privileges": [
-    "WRITE_VOLUME",
-    "CREATE_MODEL"
+    "USE CATALOG"
   ]
 }
