@@ -1,5 +1,6 @@
 export ENVIRONMENT=unity_catalog
 export ISSUE_BRANCH_NAME=issue-442-branch
+export ISSUE_RESOURCE_NAME=dbx-schema
 export ISSUE_CREATE_DESTROY=destroy
 export MASTER_CONFIG_JSON_FNAME=schemas.json
 export GITHUB_ISSUE_NUMBER=442
