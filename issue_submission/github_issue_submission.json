@@ -1,11 +1,15 @@
 {
   "environment": "unity_catalog",
-  "create_or_delete": "create",
-  "resource_name": "dbx-el",
-  "el_s3_url": "s3://dbx-unitycatalog-bucket",
-  "el_sc_name": "dbx-sc",
-  "el_principal_name": "dev-contributors",
-  "el_principal_privileges": [
+  "create_or_delete": "destroy",
+  "resource_name": "dbx-schema",
+  "el_resource_name": "sdfsdf",
+  "catalog_name": "sdafsad",
+  "catalog_principal_name": "sdfasdf",
+  "catalog_principal_privileges": [
     "ALL_PRIVILEGES"
+  ],
+  "schema_principal_name": "sdfasdf",
+  "schema_principal_privileges": [
+    "EXECUTE"
   ]
 }
