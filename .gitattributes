@@ -1,1 +1,3 @@
 * merge=nonemptymerge
+*.json merge=nonemptymerge
+*.sh merge=nonemptymerge
