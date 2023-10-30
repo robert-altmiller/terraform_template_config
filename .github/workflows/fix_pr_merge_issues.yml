@@ -25,8 +25,9 @@ jobs:
       - name: Merge dev into feature branch
         run: |
           git fetch origin
-          git checkout "${{ github.event.pull_request.head.ref }}"
-          git merge origin/dev
-          git push origin "${{ github.event.pull_request.head.ref }}"
+          git checkout "${{ github.event.issue.pull_request.head.ref }}" # Use the PR's branch reference
+          git merge origin/main
+          git push origin "${{ github.event.issue.pull_request.head.ref }}" # Push to the PR's branch
+        shell: bash
 
 
