@@ -25,14 +25,14 @@ jobs:
       - name: Get PR details
         id: get-pr
         run: |
-          PR_DETAILS=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" "${{ github.event.issue.pull_request.url }}")
-          echo "PR_DETAILS=$PR_DETAILS" >> $GITHUB_ENV
+          FEATURE_BRANCH=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" "${{ github.event.issue.pull_request.url }}" | jq -r .head.ref)
+          echo FEATURE_BRANCH: $FEATURE_BRANCH
+          echo "FEATURE_BRANCH=$FEATURE_BRANCH" >> $GITHUB_ENV
         shell: bash
 
-        
+
       - name: Merge main into feature branch
         run: |
-          FEATURE_BRANCH=$(echo "$PR_DETAILS" | jq -r .head.ref)
           git fetch origin
           git checkout "$FEATURE_BRANCH"
           git merge origin/main
