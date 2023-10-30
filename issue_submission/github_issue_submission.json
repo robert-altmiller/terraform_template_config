@@ -1,8 +1,8 @@
 {
   "environment": "unity_catalog",
   "create_or_delete": "create",
-  "resource_name": "dbx-sc-3",
-  "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-role-external-assume",
+  "resource_name": "dbx-sc-5",
+  "sc_role_arn": "arn:aws:iam::969341422355:role/s3-dbricks-prod-bucket-role",
   "sc_principal_name": "dev-contributors",
   "sc_principal_privileges": [
     "ALL_PRIVILEGES"
