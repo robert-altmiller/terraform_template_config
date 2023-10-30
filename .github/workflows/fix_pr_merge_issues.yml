@@ -1,18 +1,17 @@
 name: Fix Terraform PR Merge Issues
 
 on:
-  pull_request_review_comment:
-    types: [created]
+  issue_comment:
+    types: [created, edited]
 
 
 jobs:
 
   fix_terraform_merge_pr_issue:
-    
-    runs-on: ubuntu-latest
+  
+    if: github.event.issue.pull_request != null && contains(github.event.comment.body, 'fix pr')
 
-    env:
-      ISSUE_TITLE: "${{ github.event.issue.labels[0].name }}"
+    runs-on: ubuntu-latest
 
     steps:
   
