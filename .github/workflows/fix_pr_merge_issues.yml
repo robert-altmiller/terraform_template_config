@@ -48,7 +48,7 @@ jobs:
           
           # Configure custom merge driver
           git config merge.nonemptymerge.name "favor non-empty content over empty content"
-          git config merge.nonemptymerge.driver "../shell_scripts/nonemptymerge.sh %O %A %B %P"
+          git config merge.nonemptymerge.driver "./shell_scripts/nonemptymerge.sh %O %A %B %P"
           
           git fetch origin
           git checkout "$FEATURE_BRANCH"
