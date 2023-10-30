@@ -31,31 +31,12 @@ jobs:
         shell: bash
 
 
-      # - name: Merge main into feature branch
-      #   run: |
-      #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
-      #     git config --global user.name "github-actions[bot]"
-      #     git fetch origin
-      #     git checkout "$FEATURE_BRANCH"
-      #     git merge origin/main -X theirs # favore the feature branch over main for merge conflicts
-      #     git push origin "$FEATURE_BRANCH"
-      #   shell: bash
-
-      - name: Favor non-empty conflicts during merge
+      - name: Merge main into feature branch
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
-          
-          # Configure custom merge driver
-          git config merge.nonemptymerge.name "favor non-empty content over empty content"
-          git config merge.nonemptymerge.driver "../shell_scripts/nonemptymerge.sh %O %A %B %P"
-          
           git fetch origin
           git checkout "$FEATURE_BRANCH"
-          
-          # Try to merge
-          git merge origin/main
-          
-          # Push the changes
+          git merge origin/main -X theirs # favore the feature branch over main for merge conflicts
           git push origin "$FEATURE_BRANCH"
         shell: bash
