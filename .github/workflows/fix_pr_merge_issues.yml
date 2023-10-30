@@ -1,20 +1,17 @@
 name: Fix Terraform PR Merge Issues
 
 on:
-  pull_request_review_comment:
-    types: [created]
+  issue_comment:
+    types: [created, edited]
 
 
 jobs:
 
   fix_terraform_merge_pr_issue:
-    
-    if: contains(github.event.comment.body, 'fix pr')
-    
-    runs-on: ubuntu-latest
+  
+    if: github.event.issue.pull_request != null && contains(github.event.comment.body, 'fix pr')
 
-    env:
-      ISSUE_TITLE: "${{ github.event.issue.labels[0].name }}"
+    runs-on: ubuntu-latest
 
     steps:
   
@@ -25,11 +22,21 @@ jobs:
           fetch-depth: 0 # This is important to fetch all branches
       
   
-      - name: Merge dev into feature branch
+      - name: Get PR details
+        id: get-pr
         run: |
+          FEATURE_BRANCH=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" "${{ github.event.issue.pull_request.url }}" | jq -r .head.ref)
+          echo FEATURE_BRANCH: $FEATURE_BRANCH
+          echo "FEATURE_BRANCH=$FEATURE_BRANCH" >> $GITHUB_ENV
+        shell: bash
+
+
+      - name: Merge main into feature branch
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
           git fetch origin
-          git checkout "${{ github.event.pull_request.head.ref }}"
-          git merge origin/dev
-          git push origin "${{ github.event.pull_request.head.ref }}"
-
-
+          git checkout "$FEATURE_BRANCH"
+          git merge origin/main -X theirs # favore the feature branch over main for merge conflicts
+          git push origin "$FEATURE_BRANCH"
+        shell: bash
