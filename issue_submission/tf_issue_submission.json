@@ -78,6 +78,16 @@
       "sc_principal_privileges": [
         "ALL_PRIVILEGES"
       ]
+    },
+    "dbx-sc-4": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-sc-4",
+      "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-role-external-assume",
+      "sc_principal_name": "dev-contributors",
+      "sc_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ]
     }
   }
 }
