@@ -37,6 +37,6 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git fetch origin
           git checkout "$FEATURE_BRANCH"
-          git merge origin/main
+          git merge origin/main -X theirs # favore the feature branch over main for merge conflicts
           git push origin "$FEATURE_BRANCH"
         shell: bash
