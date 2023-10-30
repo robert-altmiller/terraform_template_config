@@ -9,8 +9,6 @@ jobs:
 
   fix_terraform_merge_pr_issue:
     
-    if: contains(github.event.comment.body, 'fix pr')
-    
     runs-on: ubuntu-latest
 
     env:
