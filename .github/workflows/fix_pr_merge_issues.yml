@@ -22,12 +22,19 @@ jobs:
           fetch-depth: 0 # This is important to fetch all branches
       
   
-      - name: Merge dev into feature branch
+      - name: Get PR details
+        id: get-pr
         run: |
-          git fetch origin
-          git checkout "${{ github.event.issue.pull_request.head.ref }}" # Use the PR's branch reference
-          git merge origin/main
-          git push origin "${{ github.event.issue.pull_request.head.ref }}" # Push to the PR's branch
+          PR_DETAILS=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" "${{ github.event.issue.pull_request.url }}")
+          echo "PR_DETAILS=$PR_DETAILS" >> $GITHUB_ENV
         shell: bash
 
-
+        
+      - name: Merge main into feature branch
+        run: |
+          FEATURE_BRANCH=$(echo "$PR_DETAILS" | jq -r .head.ref)
+          git fetch origin
+          git checkout "$FEATURE_BRANCH"
+          git merge origin/main
+          git push origin "$FEATURE_BRANCH"
+        shell: bash
