@@ -47,6 +47,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           
           # Configure custom merge driver
+          chmod +x ./shell_scripts/nonemptymerge.sh
           git config merge.nonemptymerge.name "favor non-empty content over empty content"
           git config merge.nonemptymerge.driver "./shell_scripts/nonemptymerge.sh %O %A %B %P"
           
