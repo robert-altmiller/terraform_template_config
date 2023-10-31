@@ -16,6 +16,21 @@
         "APPLY_TAG",
         "EXECUTE"
       ]
+    },
+    "dbx-schema-1": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-schema-1",
+      "el_resource_name": "s3://failure-bucket",
+      "catalog_name": "dbx-schema",
+      "catalog_principal_name": "dev-contributors",
+      "catalog_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ],
+      "schema_principal_name": "dev-contributors",
+      "schema_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ]
     }
   }
 }
