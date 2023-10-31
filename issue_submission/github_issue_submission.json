@@ -1,15 +1,15 @@
 {
   "environment": "unity_catalog",
-  "create_or_delete": "create",
+  "create_or_delete": "destroy",
   "resource_name": "dbx-schema-1",
-  "el_resource_name": "s3://failure-bucket",
-  "catalog_name": "dbx-schema",
-  "catalog_principal_name": "dev-contributors",
+  "el_resource_name": "dbx-schema-1",
+  "catalog_name": "dbx-schema-1",
+  "catalog_principal_name": "dbx-schema-1",
   "catalog_principal_privileges": [
     "ALL_PRIVILEGES"
   ],
-  "schema_principal_name": "dev-contributors",
+  "schema_principal_name": "dbx-schema-1",
   "schema_principal_privileges": [
-    "ALL_PRIVILEGES"
+    "USE_SCHEMA"
   ]
 }
