@@ -196,22 +196,22 @@ jobs:
             Issue Number: [#${{ github.event.issue.number }}](https://github.com/${{ github.repository }}/issues/${{ github.event.issue.number }})
 
 
-      # - name: Write environment variables to file for composite action.yml
-      #   run: |
-      #     echo runner_temp_path: ${{ runner.temp }}
-      #     mkdir -p ${{ runner.temp }}/env-vars
-      #     echo ISSUE_BRANCH_NAME_MAIN: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
-      #     echo export "ISSUE_BRANCH_NAME_MAIN=${{ env.ISSUE_BRANCH_NAME_MAIN }}" >> ${{ runner.temp }}/env-vars/environment-vars
-      #   shell: bash
+      - name: Write environment variables to file for composite action.yml
+        run: |
+          echo runner_temp_path: ${{ runner.temp }}
+          mkdir -p ${{ runner.temp }}/env-vars
+          echo ISSUE_BRANCH_NAME_MAIN: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
+          echo export "ISSUE_BRANCH_NAME_MAIN=${{ env.ISSUE_BRANCH_NAME_MAIN }}" >> ${{ runner.temp }}/env-vars/environment-vars
+        shell: bash
 
 
       - name: Upload environment variables as an artifact for composite actions workflow
         uses: actions/upload-artifact@v2
         with:
-          name: environment-vars
-          path: ${{ runner.temp }}/env-vars
-        env:
-          ISSUE_BRANCH_NAME_MAIN: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
+          name: env-vars
+          path: ${{ runner.temp }}/env-vars/environment-vars
+          if-no-files-found: warn
+
 
       - name: Debug - List Environment Variables Directory
         run: |
