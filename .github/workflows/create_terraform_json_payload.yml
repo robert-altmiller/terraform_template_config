@@ -202,7 +202,7 @@ jobs:
           mkdir -p composite_actions_env_vars
           echo ISSUE_BRANCH_NAME_MAIN: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
           echo export ISSUE_BRANCH_NAME_MAIN=${{ env.ISSUE_BRANCH_NAME_MAIN }} > composite_actions_env_vars/environment_vars.sh
-          echo workflow_id: ${{ github.event.workflow_run.workflow_id }}
+          echo workflow_id: $GITHUB_RUN_ID
         shell: bash
 
 
