@@ -4,5 +4,16 @@
   "clusters": {},
   "external_locations": {},
   "schemas": {},
-  "storage_credentials": {}
+  "storage_credentials": {
+    "dbx-sc-1": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-sc-1",
+      "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-role-external-assume",
+      "sc_principal_name": "dev-contributors",
+      "sc_principal_privileges": [
+        "WRITE_FILES"
+      ]
+    }
+  }
 }
