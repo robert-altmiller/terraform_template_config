@@ -16,7 +16,7 @@ jobs:
       id: download-artifact
       uses: dawidd6/action-download-artifact@v2
       with:  
-        name: my-artifact
+        name: sample.txt
         check_artifacts: true
 
     - name: List Files
