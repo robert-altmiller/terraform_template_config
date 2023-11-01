@@ -16,10 +16,8 @@ jobs:
         id: download-artifact
         uses: dawidd6/action-download-artifact@v2
         with:  
-          github_token: ${{secrets.GITHUB_TOKEN}}
-          name: comp_actions_env_vars
-          search_artifacts: true
-          workflow_conclusion: success    
+          workflow: "6724959757"
+          workflow_conclusion: success
 
       # - name: Debug - List Workspace Contents
       #   run: ls -R ${{ github.workspace }}
