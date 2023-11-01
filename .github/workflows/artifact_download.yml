@@ -8,11 +8,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout 
-        uses: actions/checkout@v3
     
-      - name: Downlod Artifacts 
-        uses: actions/download-artifact@v3
+    - name: Checkout 
+      uses: actions/checkout@v3
     
-      - name: List Files
-        run: ls -R
+    - name: Download artifact
+      id: download-artifact
+      uses: dawidd6/action-download-artifact@v2
+    
+    - name: List Files
+      run: ls -R
