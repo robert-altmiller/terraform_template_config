@@ -8,11 +8,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download my-artifact
+      - name: Checkout 
+        uses: actions/checkout@v3
+    
+      - name: Downlod Artifacts 
         uses: actions/download-artifact@v3
-        with:
-          name: my-artifact
-          path: .
-
-      - name: Display the content of the artifact
-        run: cat sample.txt
+    
+      - name: List Files
+        run: ls -R
