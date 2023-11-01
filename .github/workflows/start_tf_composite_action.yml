@@ -24,7 +24,6 @@ jobs:
         with:
           name: comp_actions_env_vars
 
-
       # - name: Set Environment Variables from Artifact
       #   run: |
       #     source ./environment_vars.sh
