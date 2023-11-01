@@ -27,17 +27,6 @@
       "el_principal_privileges": [
         "ALL_PRIVILEGES"
       ]
-    },
-    "dbx-el-2": {
-      "environment": "unity_catalog",
-      "create_or_delete": "create",
-      "resource_name": "dbx-el-2",
-      "el_s3_url": "s3://dbx-dev-bucket",
-      "el_sc_name": "dbx-sc",
-      "el_principal_name": "dev-contributors",
-      "el_principal_privileges": [
-        "ALL_PRIVILEGES"
-      ]
     }
   },
   "schemas": {
@@ -57,6 +46,21 @@
         "APPLY_TAG",
         "EXECUTE"
       ]
+    },
+    "dbx-schema-jake": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-schema-jake",
+      "el_resource_name": "s3://my-bucket",
+      "catalog_name": "dbx-catalog",
+      "catalog_principal_name": "dev-contributors",
+      "catalog_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ],
+      "schema_principal_name": "dev-contributors",
+      "schema_principal_privileges": [
+        "WRITE_VOLUME"
+      ]
     }
   },
   "storage_credentials": {
@@ -65,56 +69,6 @@
       "create_or_delete": "create",
       "resource_name": "dbx-sc",
       "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-role-external-assume",
-      "sc_principal_name": "dev-contributors",
-      "sc_principal_privileges": [
-        "ALL_PRIVILEGES"
-      ]
-    },
-    "dbx-sc-prod": {
-      "environment": "unity_catalog",
-      "create_or_delete": "create",
-      "resource_name": "dbx-sc-prod",
-      "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-role-external-assume",
-      "sc_principal_name": "dev-contributors",
-      "sc_principal_privileges": [
-        "ALL_PRIVILEGES"
-      ]
-    },
-    "dbx-sc-dev1": {
-      "environment": "unity_catalog",
-      "create_or_delete": "create",
-      "resource_name": "dbx-sc-dev1",
-      "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-role-external-assume",
-      "sc_principal_name": "dev-contributors",
-      "sc_principal_privileges": [
-        "ALL_PRIVILEGES"
-      ]
-    },
-    "dbx-sc-3": {
-      "environment": "unity_catalog",
-      "create_or_delete": "create",
-      "resource_name": "dbx-sc-3",
-      "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-role-external-assume",
-      "sc_principal_name": "dev-contributors",
-      "sc_principal_privileges": [
-        "ALL_PRIVILEGES"
-      ]
-    },
-    "dbx-sc-5": {
-      "environment": "unity_catalog",
-      "create_or_delete": "create",
-      "resource_name": "dbx-sc-5",
-      "sc_role_arn": "arn:aws:iam::969341422355:role/s3-dbricks-prod-bucket-role",
-      "sc_principal_name": "dev-contributors",
-      "sc_principal_privileges": [
-        "ALL_PRIVILEGES"
-      ]
-    },
-    "dbx-sc-6": {
-      "environment": "unity_catalog",
-      "create_or_delete": "create",
-      "resource_name": "dbx-sc-6",
-      "sc_role_arn": "arn:aws:iam::111111111111:role/Temp-Product-IAM-Role_1111111111111",
       "sc_principal_name": "dev-contributors",
       "sc_principal_privileges": [
         "ALL_PRIVILEGES"
