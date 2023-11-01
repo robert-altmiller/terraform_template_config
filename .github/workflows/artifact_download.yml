@@ -15,7 +15,8 @@ jobs:
     - name: Download artifact
       id: download-artifact
       uses: dawidd6/action-download-artifact@v2
-      with:  
+      with:
+        github_token: ${{secrets.GITHUB_TOKEN}}
         name: sample.txt
         check_artifacts: true
 
