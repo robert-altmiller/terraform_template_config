@@ -213,4 +213,4 @@ jobs:
 
       - name: Debug - List Environment Variables Directory
         run: |
-          ls -R /home/runner/work/_temp/env-vars
+          ls -R /home/runner/work/_temp/env-vars/environment-vars
