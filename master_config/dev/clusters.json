@@ -1,12 +1,3 @@
 {
-  "clusters": {
-    "my-cluster-raqo": {
-      "environment": "dev",
-      "create_or_delete": "create",
-      "resource_name": "my-cluster-raqo",
-      "min_workers": "1",
-      "max_workers": "2",
-      "auto_termination_mins": "30"
-    }
-  }
+  "clusters": {}
 }
