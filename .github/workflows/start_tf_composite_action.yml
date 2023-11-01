@@ -12,17 +12,17 @@ jobs:
 
     steps:
 
-      - name: Debug - List Workspace Contents
-        run: ls -R
-      
-      - name: Debug - List Artifact Directory Contents
-        run: ls -R comp_actions_env_vars
-
-
       - name: Download Environment Variables Artifact
         uses: actions/download-artifact@v3
         with:
           name: comp_actions_env_vars
+          path: ./comp_actions_env_vars
+
+      - name: Debug - List Workspace Contents
+        run: ls -R
+    
+      - name: Debug - List Artifact Directory Contents
+        run: ls -R ./comp_actions_env_vars
 
       # - name: Set Environment Variables from Artifact
       #   run: |
