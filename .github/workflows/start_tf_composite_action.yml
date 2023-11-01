@@ -2,8 +2,6 @@ name: Start Terraform Template Repo Composite Action to Deploy Infrastructure
 
 on:
   pull_request:
-    branches:
-      - main
     types:
       - closed
 
