@@ -20,7 +20,7 @@ jobs:
 
       - name: Set Environment Variables from Artifact
         run: |
-          ./environment-vars
+          source ${{ runner.temp }}/env-vars/environment-vars
           echo "ISSUE_BRANCH_NAME_MAIN=$ISSUE_BRANCH_NAME_MAIN" >> $GITHUB_ENV
 
 
