@@ -200,7 +200,8 @@ jobs:
         run: |
           echo runner_temp_path: ${{ runner.temp }}
           mkdir -p ${{ runner.temp }}/env-vars
-          echo "ISSUE_BRANCH_NAME_MAIN=${{ env.ISSUE_BRANCH_NAME_MAIN }}" > ${{ runner.temp }}/env-vars/environment-vars
+          echo ISSUE_BRANCH_NAME_MAIN: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
+          echo export "ISSUE_BRANCH_NAME_MAIN=${{ env.ISSUE_BRANCH_NAME_MAIN }}" >> ${{ runner.temp }}/env-vars/environment-vars
         shell: bash
 
 
