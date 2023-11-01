@@ -20,8 +20,9 @@ jobs:
 
       - name: Set Environment Variables from Artifact
         run: |
-          source ${{ runner.temp }}/env-vars/environment-vars
+          source ./${{ runner.temp }}/env-vars/environment-vars.sh
           echo "ISSUE_BRANCH_NAME_MAIN=$ISSUE_BRANCH_NAME_MAIN" >> $GITHUB_ENV
+          echo "ISSUE_BRANCH_NAME_MAIN: $ISSUE_BRANCH_NAME_MAIN"
 
 
       - uses: robert-altmiller/terraform_template@main
