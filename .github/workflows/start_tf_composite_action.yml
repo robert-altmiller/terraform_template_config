@@ -12,32 +12,39 @@ jobs:
 
     steps:
 
+      - name: Debug - List Workspace Contents
+        run: ls -R
+      
+      - name: Debug - List Artifact Directory Contents
+        run: ls -R comp_actions_env_vars
+
+
       - name: Download Environment Variables Artifact
         uses: actions/download-artifact@v3
         with:
           name: comp_actions_env_vars
 
 
-      - name: Set Environment Variables from Artifact
-        run: |
-          source ./environment_vars.sh
-          echo "ISSUE_BRANCH_NAME_MAIN=$ISSUE_BRANCH_NAME_MAIN" >> $GITHUB_ENV
-          echo "ISSUE_BRANCH_NAME_MAIN: $ISSUE_BRANCH_NAME_MAIN"
+      # - name: Set Environment Variables from Artifact
+      #   run: |
+      #     source ./environment_vars.sh
+      #     echo "ISSUE_BRANCH_NAME_MAIN=$ISSUE_BRANCH_NAME_MAIN" >> $GITHUB_ENV
+      #     echo "ISSUE_BRANCH_NAME_MAIN: $ISSUE_BRANCH_NAME_MAIN"
 
 
-      - uses: robert-altmiller/terraform_template@main
-        with:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} 
-          AWS_REGION:  ${{ secrets.AWS_REGION }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          DATABRICKS_ACCOUNT_ID: ${{ secrets.DATABRICKS_ACCOUNT_ID }}
-          DATABRICKS_ADMIN_LOGIN: ${{ secrets.DATABRICKS_ADMIN_LOGIN }}
-          DATABRICKS_ADMIN_PASSWORD: ${{ secrets.DATABRICKS_ADMIN_PASSWORD }}
-          DATABRICKS_CLIENT_ID_DEV: ${{ secrets.DATABRICKS_CLIENT_ID_DEV }}
-          DATABRICKS_CLIENT_ID_PROD: ${{ secrets.DATABRICKS_CLIENT_ID_PROD }}
-          DATABRICKS_CLIENT_ID_SECRET_DEV: ${{ secrets.DATABRICKS_CLIENT_ID_SECRET_DEV }}
-          DATABRICKS_CLIENT_ID_SECRET_PROD: ${{ secrets.DATABRICKS_CLIENT_ID_SECRET_PROD }}
-          DATABRICKS_INSTANCE_DEV: ${{ secrets.DATABRICKS_INSTANCE_DEV }}
-          DATABRICKS_INSTANCE_PROD: ${{ secrets.DATABRICKS_INSTANCE_PROD }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          ISSUE_BRANCH_NAME_MAIN: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
+      # - uses: robert-altmiller/terraform_template@main
+      #   with:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} 
+      #     AWS_REGION:  ${{ secrets.AWS_REGION }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     DATABRICKS_ACCOUNT_ID: ${{ secrets.DATABRICKS_ACCOUNT_ID }}
+      #     DATABRICKS_ADMIN_LOGIN: ${{ secrets.DATABRICKS_ADMIN_LOGIN }}
+      #     DATABRICKS_ADMIN_PASSWORD: ${{ secrets.DATABRICKS_ADMIN_PASSWORD }}
+      #     DATABRICKS_CLIENT_ID_DEV: ${{ secrets.DATABRICKS_CLIENT_ID_DEV }}
+      #     DATABRICKS_CLIENT_ID_PROD: ${{ secrets.DATABRICKS_CLIENT_ID_PROD }}
+      #     DATABRICKS_CLIENT_ID_SECRET_DEV: ${{ secrets.DATABRICKS_CLIENT_ID_SECRET_DEV }}
+      #     DATABRICKS_CLIENT_ID_SECRET_PROD: ${{ secrets.DATABRICKS_CLIENT_ID_SECRET_PROD }}
+      #     DATABRICKS_INSTANCE_DEV: ${{ secrets.DATABRICKS_INSTANCE_DEV }}
+      #     DATABRICKS_INSTANCE_PROD: ${{ secrets.DATABRICKS_INSTANCE_PROD }}
+      #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      #     ISSUE_BRANCH_NAME_MAIN: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
