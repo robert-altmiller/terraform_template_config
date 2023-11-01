@@ -196,6 +196,12 @@ jobs:
             Issue Number: [#${{ github.event.issue.number }}](https://github.com/${{ github.repository }}/issues/${{ github.event.issue.number }})
 
 
+      - name: Write environment variables to file for composite action.yml
+        run: |
+          echo "ISSUE_BRANCH_NAME_MAIN=$ISSUE_BRANCH_NAME_MAIN" >> ${{ runner.temp }}/env-vars
+        shell: bash
+
+
       - name: Upload environment variables as an artifact for composite actions workflow
         uses: actions/upload-artifact@v2
         with:
