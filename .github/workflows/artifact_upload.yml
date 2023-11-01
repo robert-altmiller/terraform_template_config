@@ -12,7 +12,7 @@ jobs:
         run: echo "This is a sample file" > sample.txt
 
       - name: Upload sample.txt as an artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: my-artifact
           path: sample.txt
