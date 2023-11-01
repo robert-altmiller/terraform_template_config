@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Download Environment Variables Artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: environment-vars
-        path: ${{ runner.temp }}/env-vars
+    # - name: Download Environment Variables Artifact
+    #   uses: actions/download-artifact@v2
+    #   with:
+    #     name: environment-vars
+    #     path: ${{ runner.temp }}/env-vars
 
 
     - name: Set Environment Variables from Artifact
