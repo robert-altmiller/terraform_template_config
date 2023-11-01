@@ -19,6 +19,7 @@ jobs:
         github_token: ${{secrets.GH_TOKEN}}
         name: my-artifact
         check_artifacts: true
+        search_artifacts: true
 
     - name: List Files
       run: ls -R
