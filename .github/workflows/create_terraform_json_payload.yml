@@ -206,4 +206,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: environment-vars
-          path: ${{ runner.temp }}/env-vars
+          path: ${{ runner.temp }}/env-vars/environment-vars
