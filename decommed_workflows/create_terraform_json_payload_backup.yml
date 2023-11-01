@@ -21,14 +21,11 @@ jobs:
           echo "Issue Body: ${{ github.event.issue.body }}"
 
           
-      - name: Get the Github issue and issue main feature branch names
+      - name: Get the Github issue feature branch name
         run: |
           ISSUE_BRANCH_NAME=issue-${{github.event.issue.number}}-branch
           echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
           echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
-          ISSUE_BRANCH_NAME_MAIN=issue-${{github.event.issue.number}}-main-branch
-          echo "ISSUE_BRANCH_NAME_MAIN=$ISSUE_BRANCH_NAME_MAIN" >> $GITHUB_ENV
-          echo ISSUE_BRANCH_NAME_MAIN: $ISSUE_BRANCH_NAME_MAIN
       
 
       - uses: actions/checkout@v3
@@ -36,23 +33,14 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
 
           
-      - name: Create new feature branch from main branch (e.g. issue-[issuenumber]-branch)
+      - name: Create new feature branch from main branch
         run: |
           git checkout main
           git pull
           git checkout -b ${{ env.ISSUE_BRANCH_NAME }}
           # Force push the branch to the remote, overwriting if it already exists
           git push -f origin ${{ env.ISSUE_BRANCH_NAME }}
-
-
-      - name: Create new feature branch from main branch (e.g. issue-[issuenumber]-main-branch)
-        run: |
-          git checkout main
-          git pull
-          git checkout -b ${{ env.ISSUE_BRANCH_NAME_MAIN }}
-          # Force push the branch to the remote, overwriting if it already exists
-          git push -f origin ${{ env.ISSUE_BRANCH_NAME_MAIN }}
-
+          
 
       - uses: actions/checkout@v3
         with:
@@ -146,7 +134,6 @@ jobs:
         run: |
           echo export ENVIRONMENT=${{ env.ISSUE_ENVIRONMENT }} > issue_submission/env.sh
           echo export ISSUE_BRANCH_NAME=${{ env.ISSUE_BRANCH_NAME }} >> issue_submission/env.sh
-          echo export ISSUE_BRANCH_NAME_MAIN=${{ env.ISSUE_BRANCH_NAME_MAIN }} >> issue_submission/env.sh
           echo export ISSUE_RESOURCE_NAME=${{ env.ISSUE_RESOURCE_NAME }} >> issue_submission/env.sh
           echo export ISSUE_CREATE_DESTROY=${{ env.ISSUE_CREATE_DESTROY }} >> issue_submission/env.sh
           echo export MASTER_CONFIG_JSON_FNAME=${{ env.ISSUE_TITLE }}.json >> issue_submission/env.sh
@@ -179,7 +166,7 @@ jobs:
         uses: repo-sync/pull-request@v2
         with:
           source_branch: ${{ env.ISSUE_BRANCH_NAME }}
-          destination_branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
+          destination_branch: main
           github_token: ${{ secrets.GH_TOKEN }}
           pr_title: "databricks - ${{ env.ISSUE_TITLE }} - request (${{ env.ISSUE_ENVIRONMENT }})"
           pr_body: |
@@ -193,10 +180,3 @@ jobs:
 
             If you have merge conflict add a comment 'fix pr' in the issue below:
             Issue Number: [#${{ github.event.issue.number }}](https://github.com/${{ github.repository }}/issues/${{ github.event.issue.number }})
-
-
-      - name: Upload environment variables as an artifact for composite actions workflow
-        uses: actions/upload-artifact@v2
-        with:
-          name: environment-vars
-          path: ${{ runner.temp }}/env-vars
