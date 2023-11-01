@@ -20,10 +20,12 @@ jobs:
     
 
       - name: Debug - List Workspace Contents
-        run: ls -R
-    
+        run: ls -R ${{ github.workspace }}
+
+
       - name: Debug - List Artifact Directory Contents
-        run: ls -R ./comp_actions_env_vars
+        run: ls -R ${{ github.workspace }}/comp_actions_env_vars
+        
 
       # - name: Set Environment Variables from Artifact
       #   run: |
