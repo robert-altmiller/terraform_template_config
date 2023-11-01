@@ -199,7 +199,7 @@ jobs:
       - name: Write environment variables to file for composite action.yml
         run: |
           echo runner_temp_path: ${{ runner.temp }}
-          mkdir -p ${{ runner.temp }}/env-vars/environment-vars
+          mkdir -p ${{ runner.temp }}/env-vars
           echo "ISSUE_BRANCH_NAME_MAIN=$ISSUE_BRANCH_NAME_MAIN" > ${{ runner.temp }}/env-vars/environment-vars
         shell: bash
 
