@@ -209,3 +209,7 @@ jobs:
         with:
           name: environment-vars
           path: ${{ runner.temp }}/env-vars
+
+      - name: Debug - List Environment Variables Directory
+        run: |
+          ls -R /home/runner/work/_temp/env-vars
