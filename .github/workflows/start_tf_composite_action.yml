@@ -16,7 +16,8 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: comp_actions_env_vars
-          path: ./comp_actions_env_vars
+          path: ${{ github.workspace }}/comp_actions_env_vars
+    
 
       - name: Debug - List Workspace Contents
         run: ls -R
