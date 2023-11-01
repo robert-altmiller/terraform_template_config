@@ -211,3 +211,7 @@ jobs:
           name: comp_actions_env_vars
           path: composite_actions_env_vars/environment_vars.sh
           if-no-files-found: warn
+
+          
+      - name: Debug - List Artifact Directory Contents
+      run: ls -R ${{ github.workspace }}/comp_actions_env_vars
