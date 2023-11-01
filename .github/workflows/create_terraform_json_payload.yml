@@ -201,14 +201,25 @@ jobs:
           echo runner_temp_path: ${{ runner.temp }}
           mkdir -p composite_actions_env_vars
           echo ISSUE_BRANCH_NAME_MAIN: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
-          echo export ISSUE_BRANCH_NAME_MAIN=${{ env.ISSUE_BRANCH_NAME_MAIN }} > composite_actions_env_vars/environment_vars.sh
+          echo export ISSUE_BRANCH_NAME_MAIN=${{ env.ISSUE_BRANCH_NAME_MAIN }} > composite_actions_env_vars/composite_action_env_vars.sh
           echo workflow_id: $GITHUB_RUN_ID
         shell: bash
 
 
-      - name: Upload environment variables as an artifact for composite actions workflow
-        uses: actions/upload-artifact@v3
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          name: comp_actions_env_vars
-          path: composite_actions_env_vars/environment_vars.sh
-          if-no-files-found: warn
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Upload File to S3
+        run: |
+          aws s3 cp composite_actions_env_vars/composite_action_env_vars.sh s3://dbx-artifacts-bucket/composite_actions_env_vars/composite_action_env_vars.sh
+
+      # - name: Upload environment variables as an artifact for composite actions workflow
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: comp_actions_env_vars
+      #     path: composite_actions_env_vars/environment_vars.sh
+      #     if-no-files-found: warn
