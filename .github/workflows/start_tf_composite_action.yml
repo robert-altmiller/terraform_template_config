@@ -13,18 +13,19 @@ jobs:
     steps:
 
       - name: Download Environment Variables Artifact
-        uses: actions/download-artifact@v3
-        with:
+        id: download-artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:  
+          github_token: ${{secrets.GITHUB_TOKEN}}
           name: comp_actions_env_vars
-          path: ${{ github.workspace }}/comp_actions_env_vars
-    
+          search_artifacts: true
+          workflow_conclusion: success    
 
-      - name: Debug - List Workspace Contents
-        run: ls -R ${{ github.workspace }}
+      # - name: Debug - List Workspace Contents
+      #   run: ls -R ${{ github.workspace }}
 
-
-      - name: Debug - List Artifact Directory Contents
-        run: ls -R ${{ github.workspace }}/comp_actions_env_vars
+      # - name: Debug - List Artifact Directory Contents
+      #   run: ls -R ${{ github.workspace }}/comp_actions_env_vars
         
 
       # - name: Set Environment Variables from Artifact
