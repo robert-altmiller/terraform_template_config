@@ -1,15 +1,10 @@
 {
   "environment": "unity_catalog",
   "create_or_delete": "create",
-  "resource_name": "dbx-schema-jake",
-  "el_resource_name": "s3://my-bucket",
-  "catalog_name": "dbx-catalog",
-  "catalog_principal_name": "dev-contributors",
-  "catalog_principal_privileges": [
-    "ALL_PRIVILEGES"
-  ],
-  "schema_principal_name": "dev-contributors",
-  "schema_principal_privileges": [
-    "WRITE_VOLUME"
+  "resource_name": "dbx-sc-1",
+  "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-role-external-assume",
+  "sc_principal_name": "dev-contributors",
+  "sc_principal_privileges": [
+    "WRITE_FILES"
   ]
 }
