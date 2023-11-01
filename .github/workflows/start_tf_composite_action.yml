@@ -35,8 +35,8 @@ jobs:
       - name: Set Environment Variables from Artifact
         run: |
           source ./composite_action_env_vars.sh
-          echo "ISSUE_BRANCH_NAME_MAIN=$ISSUE_BRANCH_NAME_MAIN" >> $GITHUB_ENV
           echo "ISSUE_BRANCH_NAME_MAIN: $ISSUE_BRANCH_NAME_MAIN"
+          echo "ISSUE_BRANCH_NAME_MAIN=$ISSUE_BRANCH_NAME_MAIN" >> $GITHUB_ENV
 
 
       - uses: robert-altmiller/terraform_template@main
