@@ -17,7 +17,7 @@ jobs:
       uses: dawidd6/action-download-artifact@v2
       with:  
         github_token: ${{secrets.GH_TOKEN}}
-        name: my-artifact
+        name: sample.txt
         check_artifacts: true
         search_artifacts: true
 
