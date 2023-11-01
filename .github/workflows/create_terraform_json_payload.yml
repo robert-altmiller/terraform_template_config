@@ -208,11 +208,6 @@ jobs:
       - name: Upload environment variables as an artifact for composite actions workflow
         uses: actions/upload-artifact@v3
         with:
-          name: env-vars
+          name: comp_actions_env_vars
           path: composite_actions_env_vars/environment_vars.sh
           if-no-files-found: warn
-
-
-      - name: Debug - List Environment Variables Directory
-        run: |
-          ls -R /home/runner/work/_temp/env-vars

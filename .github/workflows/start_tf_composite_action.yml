@@ -15,12 +15,12 @@ jobs:
       - name: Download Environment Variables Artifact
         uses: actions/download-artifact@v3
         with:
-          path: composite_actions_env_vars
+          name: comp_actions_env_vars
 
 
       - name: Set Environment Variables from Artifact
         run: |
-          source ./composite_actions_env_vars/environment_vars.sh
+          source ./environment_vars.sh
           echo "ISSUE_BRANCH_NAME_MAIN=$ISSUE_BRANCH_NAME_MAIN" >> $GITHUB_ENV
           echo "ISSUE_BRANCH_NAME_MAIN: $ISSUE_BRANCH_NAME_MAIN"
 
