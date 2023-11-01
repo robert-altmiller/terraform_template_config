@@ -19,12 +19,22 @@ jobs:
       #     workflow: "6724959757"
       #     workflow_conclusion: success
 
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
-        
+
+      - name: Download File from S3
+        run: |
+          aws s3 cp s3://dbx-artifacts-bucket/composite_actions_env_vars/composite_action_env_vars.sh composite_action_env_vars.sh
+
 
       - name: Set Environment Variables from Artifact
         run: |
-          source ./environment_vars.sh
+          source ./composite_action_env_vars.sh
           echo "ISSUE_BRANCH_NAME_MAIN=$ISSUE_BRANCH_NAME_MAIN" >> $GITHUB_ENV
           echo "ISSUE_BRANCH_NAME_MAIN: $ISSUE_BRANCH_NAME_MAIN"
 
