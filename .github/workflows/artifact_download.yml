@@ -9,14 +9,11 @@ jobs:
 
     steps:
     
-    - name: Checkout 
-      uses: actions/checkout@v3
-    
     - name: Download artifact
       id: download-artifact
       uses: dawidd6/action-download-artifact@v2
       with:  
-        github_token: ${{secrets.GH_TOKEN}}
+        github_token: ${{secrets.GITHUB_TOKEN}}
         name: sample.txt
         check_artifacts: true
         search_artifacts: true
