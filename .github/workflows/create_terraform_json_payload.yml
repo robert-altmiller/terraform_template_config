@@ -206,7 +206,7 @@ jobs:
 
 
       - name: Upload environment variables as an artifact for composite actions workflow
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: env-vars
           path: ${{ runner.temp }}/env-vars/environment-vars

@@ -13,15 +13,14 @@ jobs:
     steps:
 
       - name: Download Environment Variables Artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
-          name: env-vars
-          path: ${{ runner.temp }}/env-vars/environment-vars
+          path: ${{ runner.temp }}/env-vars
 
 
       - name: Set Environment Variables from Artifact
         run: |
-          source ${{ runner.temp }}/env-vars/environment-vars
+          ./environment-vars
           echo "ISSUE_BRANCH_NAME_MAIN=$ISSUE_BRANCH_NAME_MAIN" >> $GITHUB_ENV
 
 
