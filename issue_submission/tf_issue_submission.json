@@ -1,68 +1,9 @@
 {
-  "catalogs": {
-    "dbx-catalog": {
-      "environment": "unity_catalog",
-      "create_or_delete": "create",
-      "catalog_metastore_id": "0d26daa6-5e44-4c97-a497-ef015f91254a",
-      "resource_name": "dbx-catalog",
-      "el_resource_name": "",
-      "catalog_principal_name": "dev-contributors",
-      "catalog_principal_privileges": [
-        "USE_CATALOG",
-        "USE_SCHEMA",
-        "APPLY_TAG"
-      ]
-    }
-  },
+  "catalogs": {},
   "cluster_policies": {},
   "clusters": {},
-  "external_locations": {
-    "dbx-el": {
-      "environment": "unity_catalog",
-      "create_or_delete": "create",
-      "resource_name": "dbx-el",
-      "el_s3_url": "s3://dbx-unitycatalog-bucket",
-      "el_sc_name": "dbx-sc",
-      "el_principal_name": "dev-contributors",
-      "el_principal_privileges": [
-        "ALL_PRIVILEGES"
-      ]
-    }
-  },
-  "schemas": {
-    "dbx-schema": {
-      "environment": "unity_catalog",
-      "create_or_delete": "create",
-      "resource_name": "dbx-schema",
-      "el_resource_name": "s3://dbx-unitycatalog-bucket",
-      "catalog_name": "dbx-catalog",
-      "catalog_principal_name": "dev-contributors",
-      "catalog_principal_privileges": [
-        "ALL_PRIVILEGES"
-      ],
-      "schema_principal_name": "dev-contributors",
-      "schema_principal_privileges": [
-        "USE_SCHEMA",
-        "APPLY_TAG",
-        "EXECUTE"
-      ]
-    },
-    "dbx-schema-jake": {
-      "environment": "unity_catalog",
-      "create_or_delete": "create",
-      "resource_name": "dbx-schema-jake",
-      "el_resource_name": "s3://my-bucket",
-      "catalog_name": "dbx-catalog",
-      "catalog_principal_name": "dev-contributors",
-      "catalog_principal_privileges": [
-        "ALL_PRIVILEGES"
-      ],
-      "schema_principal_name": "dev-contributors",
-      "schema_principal_privileges": [
-        "WRITE_VOLUME"
-      ]
-    }
-  },
+  "external_locations": {},
+  "schemas": {},
   "storage_credentials": {
     "dbx-sc": {
       "environment": "unity_catalog",
