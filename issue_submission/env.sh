@@ -1,10 +1,10 @@
 export ENVIRONMENT=unity_catalog
-export ISSUE_BRANCH_NAME=issue-539-branch
-export ISSUE_BRANCH_NAME_MAIN=issue-539-main-branch
+export ISSUE_BRANCH_NAME=issue-542-branch
+export ISSUE_BRANCH_NAME_MAIN=issue-542-main-branch
 export ISSUE_RESOURCE_NAME=dbx-el-1
 export ISSUE_CREATE_DESTROY=create
 export MASTER_CONFIG_JSON_FNAME=external_locations.json
-export GITHUB_ISSUE_NUMBER=539
+export GITHUB_ISSUE_NUMBER=542
 export GITHUB_REPO_OWNER=robert-altmiller
 export GITHUB_REPO_NAME=terraform_template_config
 export GITHUB_REPO_URL=https://github.com/robert-altmiller/terraform_template_config.git
