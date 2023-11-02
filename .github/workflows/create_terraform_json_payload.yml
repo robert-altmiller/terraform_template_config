@@ -214,12 +214,12 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
 
-      - name: Upload Composite Actions Workflow Env Vars to S3, and Create Terraform State File Backups
+      - name: Upload Composite Actions Workflow Env Vars to S3, and Create Terraform State File Backups in S3
         run: |
           aws s3 cp composite_actions_env_vars/composite_action_env_vars.sh s3://dbx-artifacts-bucket/composite_actions_env_vars/composite_action_env_vars.sh
-          if [ "${{ env.init_backend_environment }}" == "unity_catalog" ]; then
+          if [ "${{ env.ISSUE_ENVIRONMENT }}" == "unity_catalog" ]; then
             aws s3 cp s3://dbx-unitycatalog-bucket/terraform/terraform.tfstate s3://dbx-artifacts-bucket/terraform/${{ github.event.issue.number }}-backup-terraform.tfstate
-          elif [ "${{ env.init_backend_environment }}" == "dev" ]; then
+          elif [ "${{ env.ISSUE_ENVIRONMENT }}" == "dev" ]; then
             aws s3 cp s3://dbx-dev-bucket/terraform/terraform.tfstate s3://dbx-artifacts-bucket/terraform/${{ github.event.issue.number }}-backup-terraform.tfstate
           else
             aws s3 cp s3://dbx-prod-bucket/terraform/terraform.tfstate s3://dbx-artifacts-bucket/terraform/${{ github.event.issue.number }}-backup-terraform.tfstate
