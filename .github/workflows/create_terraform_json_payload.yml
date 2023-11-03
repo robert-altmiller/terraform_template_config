@@ -214,35 +214,24 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
 
-      # - name: Upload Composite Actions Workflow Env Vars to S3, and Create Terraform State File Backups in S3
-      #   run: |
-      #     aws s3 cp composite_actions_env_vars/composite_action_env_vars.sh s3://dbx-artifacts-bucket/composite_actions_env_vars/composite_action_env_vars.sh
-      #     if [ "${{ env.ISSUE_ENVIRONMENT }}" == "unity_catalog" and s3://dbx-artifacts-bucket/terraform/${{ github.event.issue.number }}-backup-terraform.tfstate != none]; then
-      #       aws s3 cp s3://dbx-unitycatalog-bucket/terraform/terraform.tfstate s3://dbx-artifacts-bucket/terraform/${{ github.event.issue.number }}-backup-terraform.tfstate
-      #     elif [ "${{ env.ISSUE_ENVIRONMENT }}" == "dev" ]; then
-      #       aws s3 cp s3://dbx-dev-bucket/terraform/terraform.tfstate s3://dbx-artifacts-bucket/terraform/${{ github.event.issue.number }}-backup-terraform.tfstate
-      #     else
-      #       aws s3 cp s3://dbx-prod-bucket/terraform/terraform.tfstate s3://dbx-artifacts-bucket/terraform/${{ github.event.issue.number }}-backup-terraform.tfstate
-      #     fi
-
-
       - name: Upload Composite Actions Workflow Env Vars to S3, and Create Terraform State File Backups in S3
         run: |
-          aws s3 cp composite_actions_env_vars/composite_action_env_vars.sh s3://dbx-artifacts-bucket/composite_actions_env_vars/composite_action_env_vars.sh
-          if [ "${{ env.ISSUE_ENVIRONMENT }}" == "unity_catalog" ]; then
-            SOURCE_BUCKET="dbx-unitycatalog-bucket"
-          elif [ "${{ env.ISSUE_ENVIRONMENT }}" == "dev" ]; then
-            SOURCE_BUCKET="dbx-dev-bucket"
-          else
-            SOURCE_BUCKET="dbx-prod-bucket"
-          fi
-          SOURCE_KEY="terraform/terraform.tfstate"
-          if aws s3 ls "s3://${SOURCE_BUCKET}/${SOURCE_KEY}" ; then
-            echo "Source tfstate file ${SOURCE_BUCKET}/${SOURCE_KEY} exists, and a backup is being created."
-            aws s3 cp "s3://${SOURCE_BUCKET}/${SOURCE_KEY}" "s3://dbx-artifacts-bucket/terraform/${{ github.event.issue.number }}-backup-terraform.tfstate"
-          else
-            echo "Source tfstate file ${SOURCE_BUCKET}/${SOURCE_KEY} does not exist exists, and a backup will not be created."
-          fi
+          aws s3 cp composite_actions_env_vars/composite_action_env_vars.sh s3://dbx-artifacts-bucket/composite_actions_env_vars/${{ github.event.issue.number }}-composite_action_env_vars.sh
+          aws s3 cp issue_submission/tf_issue_submission.json s3://dbx-artifacts-bucket/issue_submission/${{ github.event.issue.number }}-tf_issue_submission.json
+          # if [ "${{ env.ISSUE_ENVIRONMENT }}" == "unity_catalog" ]; then
+          #   SOURCE_BUCKET="dbx-unitycatalog-bucket"
+          # elif [ "${{ env.ISSUE_ENVIRONMENT }}" == "dev" ]; then
+          #   SOURCE_BUCKET="dbx-dev-bucket"
+          # else
+          #   SOURCE_BUCKET="dbx-prod-bucket"
+          # fi
+          # SOURCE_KEY="terraform/terraform.tfstate"
+          # if aws s3 ls "s3://${SOURCE_BUCKET}/${SOURCE_KEY}" ; then
+          #   echo "Source tfstate file ${SOURCE_BUCKET}/${SOURCE_KEY} exists, and a backup is being created."
+          #   aws s3 cp "s3://${SOURCE_BUCKET}/${SOURCE_KEY}" "s3://dbx-artifacts-bucket/terraform/${{ github.event.issue.number }}-backup-terraform.tfstate"
+          # else
+          #   echo "Source tfstate file ${SOURCE_BUCKET}/${SOURCE_KEY} does not exist exists, and a backup will not be created."
+          # fi
         
 
       # - name: Upload environment variables as an artifact for composite actions workflow
