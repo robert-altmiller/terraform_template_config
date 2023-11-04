@@ -1,11 +1,10 @@
 {
   "environment": "unity_catalog",
-  "create_or_delete": "destroy",
-  "resource_name": "my-sc",
+  "create_or_delete": "create",
+  "resource_name": "dbx-sc",
   "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-role-external-assume",
   "sc_principal_name": "dev-contributors",
   "sc_principal_privileges": [
-    "CREATE_EXTERNAL_LOCATION",
-    "CREATE_EXTERNAL_TABLE"
+    "WRITE_FILES"
   ]
 }
