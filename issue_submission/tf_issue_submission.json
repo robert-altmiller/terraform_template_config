@@ -4,17 +4,5 @@
   "clusters": {},
   "external_locations": {},
   "schemas": {},
-  "storage_credentials": {
-    "my-sc": {
-      "environment": "unity_catalog",
-      "create_or_delete": "create",
-      "resource_name": "my-sc",
-      "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-role-external-assume",
-      "sc_principal_name": "dev-contributors",
-      "sc_principal_privileges": [
-        "CREATE_EXTERNAL_TABLE",
-        "READ_FILES"
-      ]
-    }
-  }
+  "storage_credentials": {}
 }
