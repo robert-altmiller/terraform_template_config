@@ -12,12 +12,14 @@ jobs:
 
     steps:
 
-      # - name: Download Environment Variables Artifact
-      #   id: download-artifact
-      #   uses: dawidd6/action-download-artifact@v2
-      #   with:  
-      #     workflow: "6724959757"
-      #     workflow_conclusion: success
+      - name: Check PR and Issue Association
+        run: |
+          PR_NUMBER=${{ github.event.pull_request.number }}
+          ISSUE_NUMBER=${{ github.event.pull_request.issue.number }}
+          
+          echo "PR Number: $PR_NUMBER"
+          echo "Associated Issue Number: $ISSUE_NUMBER"
+
 
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v1
