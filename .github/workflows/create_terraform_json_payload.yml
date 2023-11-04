@@ -230,11 +230,3 @@ jobs:
           # else
           #   echo "Source tfstate file ${SOURCE_BUCKET}/${SOURCE_KEY} does not exist exists, and a backup will not be created."
           # fi
-        
-
-      # - name: Upload environment variables as an artifact for composite actions workflow
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: comp_actions_env_vars
-      #     path: composite_actions_env_vars/environment_vars.sh
-      #     if-no-files-found: warn

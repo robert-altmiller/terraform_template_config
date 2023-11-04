@@ -15,7 +15,13 @@ jobs:
       - name: Check PR and Issue Association
         run: |
           PR_NUMBER=${{ github.event.pull_request.number }}
-          ISSUE_NUMBER=${{ github.event.pull_request.issue.number }}
+          
+          # Fetch additional PR details using GitHub API
+          API_URL="https://api.github.com/repos/${{ github.repository }}/pulls/${PR_NUMBER}"
+          PR_DETAILS=$(curl -sSL -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "$API_URL")
+          
+          # Extract the associated issue number from PR details
+          ISSUE_NUMBER=$(echo "$PR_DETAILS" | jq -r '.issue_url' | awk -F'/' '{print $NF}')
           
           echo "PR Number: $PR_NUMBER"
           echo "Associated Issue Number: $ISSUE_NUMBER"
