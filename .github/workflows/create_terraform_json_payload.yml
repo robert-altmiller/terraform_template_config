@@ -60,19 +60,6 @@ jobs:
           ref: ${{ env.ISSUE_BRANCH_NAME }}
 
 
-      - name: Set up AWS CLI
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-
-
-      - name: Upload previous tf_issue_submission.json to s3 from previous successful Terraform deployment for rollback (if needed)
-        run: |
-            aws s3 cp issue_submission/tf_issue_submission.json s3://dbx-artifacts-bucket/issue_submission/${{ github.event.issue.number }}-tf_issue_submission.json
-
-
       - name: Convert Github issues title to lowercase with underscore and put in env vars
         run: |    
           FORMATTED_TITLE=$(echo "$ISSUE_TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/ /_/g')
@@ -218,8 +205,13 @@ jobs:
           echo workflow_id: $GITHUB_RUN_ID
         shell: bash
 
-
-
+        
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
 
       - name: Upload Composite Actions Workflow Env Vars to S3
