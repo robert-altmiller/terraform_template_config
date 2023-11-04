@@ -1,10 +1,10 @@
 export ENVIRONMENT=unity_catalog
-export ISSUE_BRANCH_NAME=issue-577-branch
-export ISSUE_BRANCH_NAME_MAIN=issue-577-main-branch
-export ISSUE_RESOURCE_NAME=my-sc
+export ISSUE_BRANCH_NAME=issue-582-branch
+export ISSUE_BRANCH_NAME_MAIN=issue-582-main-branch
+export ISSUE_RESOURCE_NAME=dbx-sc
 export ISSUE_CREATE_DESTROY=create
 export MASTER_CONFIG_JSON_FNAME=storage_credentials.json
-export GITHUB_ISSUE_NUMBER=577
+export GITHUB_ISSUE_NUMBER=582
 export GITHUB_REPO_OWNER=robert-altmiller
 export GITHUB_REPO_NAME=terraform_template_config
 export GITHUB_REPO_URL=https://github.com/robert-altmiller/terraform_template_config.git
