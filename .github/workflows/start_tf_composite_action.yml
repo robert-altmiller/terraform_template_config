@@ -15,24 +15,8 @@ jobs:
       - name: Check for Specific Comments
         id: check_comments
         run: |
-          PR_NUMBER=${{ github.event.pull_request.number }}
+          pull_request_number=${{ github.event.pull_request.number }}
           echo BODY: ${{ github.event.pull_request.body }}
-          # ISSUE_NUMBER=$(echo "${{ github.event.pull_request.body }}" | grep -oP 'Issue Number: #\K[0-9]+')
-          # echo ISSUE_NUMBER: $ISSUE_NUMBER
-
-          # # Fetch the comments on the PR using the GitHub API
-          # COMMENTS=$(curl -sSL -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/issues/${ISSUE_NUMBER}/comments")
-
-          # # Check for comments containing 'PR Request Feature Main Branch'
-          # MAIN_BRANCH=""
-          # while read -r comment; do
-          #   if echo "$comment" | grep -q 'PR Request Feature Main Branch'; then
-          #     MAIN_BRANCH=$(echo "$comment" | grep -oP 'PR Request Feature Main Branch: \K.+')
-          #     break
-          #   fi
-          # done <<< "$COMMENTS"
-
-          # echo "PR Request Feature Main Branch: $MAIN_BRANCH"
 
 
       - name: Set up AWS CLI
