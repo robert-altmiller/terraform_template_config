@@ -15,7 +15,7 @@ jobs:
       - name: Check for Specific Comments
         id: check_comments
         run: |
-          echo BODY: ${{ github.event.pull_request.body }}
+          echo "BODY: ${{ github.event.pull_request.body }}"
           echo "Issue Number: ${{ github.event.pull_request.issue.number }}"
 
       - name: Set up AWS CLI
