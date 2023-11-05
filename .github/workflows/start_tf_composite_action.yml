@@ -16,7 +16,7 @@ jobs:
         id: check_comments
         run: |
           echo BODY: ${{ github.event.pull_request.body }}
-
+          echo "Issue Number: ${{ github.event.pull_request.issue.number }}"
 
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v1

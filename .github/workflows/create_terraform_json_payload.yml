@@ -183,17 +183,17 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           pr_title: "databricks - ${{ env.ISSUE_TITLE }} - request (${{ env.ISSUE_ENVIRONMENT }})"
           pr_body: |
-            PR Request Time: ${{ env.date }}
-            PR Request Person: ${{ github.actor }}
-            PR Request Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
-            PR Request Feature Main Branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
+            Pull Request Time: ${{ env.date }}
+            Pull Request Person: ${{ github.actor }}
+            Pull Request Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
+            Pull Request Feature Main Branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
             Databricks Resource Environment: ${{ env.ISSUE_ENVIRONMENT }}
             Databricks Resource Type: ${{ env.ISSUE_TITLE }}
             Databricks Resource Action: ${{ env.ISSUE_CREATE_DESTROY }}
             Databricks Resource Name: ${{ env.ISSUE_RESOURCE_NAME  }}
 
-            If you have merge conflict add a comment 'fix pr' in the issue below:
-            Issue Number: [#${{ github.event.issue.number }}](https://github.com/${{ github.repository }}/issues/${{ github.event.issue.number }})
+            # If you have merge conflict add a comment 'fix pr' in the issue below:
+            # Issue Number: [#${{ github.event.issue.number }}](https://github.com/${{ github.repository }}/issues/${{ github.event.issue.number }})
 
 
       - name: Write environment variables to file for composite action.yml
