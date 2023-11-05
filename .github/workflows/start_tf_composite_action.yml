@@ -15,8 +15,9 @@ jobs:
       - name: Check for Specific Comments
         id: check_comments
         run: |
-          echo "BODY: ${{ github.event.pull_request.body }}"
-          echo "Issue Number: ${{ github.event.pull_request.issue.number }}"
+          PR_BODY="${{ github.event.pull_request.body }}"
+          ISSUE_BRANCH_NAME_MAIN=$(echo "$PR_BODY" | grep -oP 'Pull Request Feature Main Branch: \K[^ ]+')
+          echo "ISSUE_BRANCH_NAME_MAIN: $ISSUE_BRANCH_NAME_MAIN"
 
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v1
