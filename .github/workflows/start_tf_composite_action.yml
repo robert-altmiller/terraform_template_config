@@ -15,7 +15,6 @@ jobs:
       - name: Check for Specific Comments
         id: check_comments
         run: |
-          pull_request_number=${{ github.event.pull_request.number }}
           echo BODY: ${{ github.event.pull_request.body }}
 
 
