@@ -12,29 +12,11 @@ jobs:
 
     steps:
 
-      - name: Check for Specific Comments
-        id: check_comments
+      - name: Get Pull Request Body Comments and Strip Out Pull Request Feature Main Branch Name
+        id: get_pull_request_comments
         run: |
           PR_BODY="${{ github.event.pull_request.body }}"
           ISSUE_BRANCH_NAME_MAIN=$(echo "$PR_BODY" | grep -oP 'Pull Request Feature Main Branch: \K[^ ]+')
-          echo "ISSUE_BRANCH_NAME_MAIN: $ISSUE_BRANCH_NAME_MAIN"
-
-      - name: Set up AWS CLI
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-
-
-      - name: Download File from S3
-        run: |
-          aws s3 cp s3://dbx-artifacts-bucket/composite_actions_env_vars/composite_action_env_vars.sh composite_action_env_vars.sh
-
-
-      - name: Set Environment Variables from Artifact
-        run: |
-          source ./composite_action_env_vars.sh
           echo "ISSUE_BRANCH_NAME_MAIN: $ISSUE_BRANCH_NAME_MAIN"
           echo "ISSUE_BRANCH_NAME_MAIN=$ISSUE_BRANCH_NAME_MAIN" >> $GITHUB_ENV
 
