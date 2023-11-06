@@ -22,6 +22,9 @@ jobs:
           ISSUE_REQUESTOR_EMAIL=$(echo "$PR_BODY" | grep -oP 'Issue Requestor: \K[^ ]+')
           echo "ISSUE_REQUESTOR_EMAIL: $ISSUE_REQUESTOR_EMAIL"
           echo "ISSUE_REQUESTOR_EMAIL=$ISSUE_REQUESTOR_EMAIL" >> $GITHUB_ENV
+          ISSUE_RESOURCE_TYPE=$(echo "$PR_BODY" | grep -oP 'Databricks Resource Type: \K[^ ]+')
+          echo "ISSUE_RESOURCE_TYPE: $ISSUE_RESOURCE_TYPE"
+          echo "ISSUE_RESOURCE_TYPE=$ISSUE_RESOURCE_TYPE" >> $GITHUB_ENV
 
 
       - uses: robert-altmiller/terraform_template@main
