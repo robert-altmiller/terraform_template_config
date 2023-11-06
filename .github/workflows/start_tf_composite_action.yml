@@ -19,12 +19,6 @@ jobs:
           ISSUE_BRANCH_NAME_MAIN=$(echo "$PR_BODY" | grep -oP 'PR Feature Main Branch: \K[^ ]+')
           echo "ISSUE_BRANCH_NAME_MAIN: $ISSUE_BRANCH_NAME_MAIN"
           echo "ISSUE_BRANCH_NAME_MAIN=$ISSUE_BRANCH_NAME_MAIN" >> $GITHUB_ENV
-          ISSUE_REQUESTOR_EMAIL=$(echo "$PR_BODY" | grep -oP 'Issue Requestor: \K[^ ]+')
-          echo "ISSUE_REQUESTOR_EMAIL: $ISSUE_REQUESTOR_EMAIL"
-          echo "ISSUE_REQUESTOR_EMAIL=$ISSUE_REQUESTOR_EMAIL" >> $GITHUB_ENV
-          ISSUE_RESOURCE_TYPE=$(echo "$PR_BODY" | grep -oP 'Databricks Resource Type: \K[^ ]+')
-          echo "ISSUE_RESOURCE_TYPE: $ISSUE_RESOURCE_TYPE"
-          echo "ISSUE_RESOURCE_TYPE=$ISSUE_RESOURCE_TYPE" >> $GITHUB_ENV
 
 
       - uses: robert-altmiller/terraform_template@main
@@ -43,4 +37,3 @@ jobs:
           DATABRICKS_INSTANCE_PROD: ${{ secrets.DATABRICKS_INSTANCE_PROD }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           ISSUE_BRANCH_NAME_MAIN: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
-          ISSUE_REQUESTOR_EMAIL: ${{ env.ISSUE_REQUESTOR_EMAIL }} 

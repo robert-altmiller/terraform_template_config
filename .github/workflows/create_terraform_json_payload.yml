@@ -150,7 +150,9 @@ jobs:
           echo export ISSUE_BRANCH_NAME=${{ env.ISSUE_BRANCH_NAME }} >> issue_submission/env.sh
           echo export ISSUE_BRANCH_NAME_MAIN=${{ env.ISSUE_BRANCH_NAME_MAIN }} >> issue_submission/env.sh
           echo export ISSUE_RESOURCE_NAME=${{ env.ISSUE_RESOURCE_NAME }} >> issue_submission/env.sh
+          echo export ISSUE_RESOURCE_TYPE=${{ env.ISSUE_TITLE }} >> issue_submission/env.sh
           echo export ISSUE_CREATE_DESTROY=${{ env.ISSUE_CREATE_DESTROY }} >> issue_submission/env.sh
+          echo export ISSUE_REQUESTOR_EMAIL=${{ env.ISSUE_USER_LOGIN }}${{ env.EMAIL_COMPANY_NAME }}  >> issue_submission/env.sh
           echo export MASTER_CONFIG_JSON_FNAME=${{ env.ISSUE_TITLE }}.json >> issue_submission/env.sh
           echo export GITHUB_ISSUE_NUMBER=${{ github.event.issue.number }} >> issue_submission/env.sh
           echo export GITHUB_REPO_OWNER=${{ github.repository_owner }} >> issue_submission/env.sh
@@ -185,7 +187,7 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           pr_title: "databricks - ${{ env.ISSUE_TITLE }} - request (${{ env.ISSUE_ENVIRONMENT }})"
           pr_body: |
-            Issue Requestor: ${{ env.ISSUE_USER_LOGIN }}${{ env.EMAIL_COMPANY_NAME }} 
+            Issue Requestor: 
             PR Time: ${{ env.date }}
             PR Person: ${{ github.actor }}
             PR Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
