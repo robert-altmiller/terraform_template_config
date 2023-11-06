@@ -13,6 +13,9 @@ jobs:
 
     env:
       ISSUE_TITLE: "${{ github.event.issue.labels[0].name }}"
+      ISSUE_USER_ID: "${{ github.event.issue.user.id }}"
+      ISSUE_USER_LOGIN: "${{ github.event.issue.user.login }}"
+      EMAIL_COMPANY_NAME: "@databricks.com"
     
     steps:
 
@@ -21,7 +24,7 @@ jobs:
           echo "Issue Body: ${{ github.event.issue.body }}"
 
           
-      - name: Get the Github issue and issue main feature branch names
+      - name: Get the Github issue, issue main feature branch names
         run: |
           ISSUE_BRANCH_NAME=issue-${{github.event.issue.number}}-branch
           echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
@@ -183,10 +186,11 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           pr_title: "databricks - ${{ env.ISSUE_TITLE }} - request (${{ env.ISSUE_ENVIRONMENT }})"
           pr_body: |
-            Pull Request Time: ${{ env.date }}
-            Pull Request Person: ${{ github.actor }}
-            Pull Request Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
-            Pull Request Feature Main Branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
+            Issue Requestor: ${{ env.ISSUE_USER_ID }}${{ env.EMAIL_COMPANY_NAME }} 
+            PR Time: ${{ env.date }}
+            PR Person: ${{ github.actor }}
+            PR Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
+            PR Feature Main Branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
             Databricks Resource Environment: ${{ env.ISSUE_ENVIRONMENT }}
             Databricks Resource Type: ${{ env.ISSUE_TITLE }}
             Databricks Resource Action: ${{ env.ISSUE_CREATE_DESTROY }}
@@ -203,30 +207,3 @@ jobs:
           echo export ISSUE_BRANCH_NAME_MAIN=${{ env.ISSUE_BRANCH_NAME_MAIN }} > composite_actions_env_vars/composite_action_env_vars.sh
           echo workflow_id: $GITHUB_RUN_ID
         shell: bash
-
-
-      # - name: Set up AWS CLI
-      #   uses: aws-actions/configure-aws-credentials@v1
-      #   with:
-      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     aws-region: ${{ secrets.AWS_REGION }}
-
-
-      # - name: Upload Composite Actions Workflow Env Vars to S3
-      #   run: |
-      #     aws s3 cp composite_actions_env_vars/composite_action_env_vars.sh s3://dbx-artifacts-bucket/composite_actions_env_vars/composite_action_env_vars.sh
-          # if [ "${{ env.ISSUE_ENVIRONMENT }}" == "unity_catalog" ]; then
-          #   SOURCE_BUCKET="dbx-unitycatalog-bucket"
-          # elif [ "${{ env.ISSUE_ENVIRONMENT }}" == "dev" ]; then
-          #   SOURCE_BUCKET="dbx-dev-bucket"
-          # else
-          #   SOURCE_BUCKET="dbx-prod-bucket"
-          # fi
-          # SOURCE_KEY="terraform/terraform.tfstate"
-          # if aws s3 ls "s3://${SOURCE_BUCKET}/${SOURCE_KEY}" ; then
-          #   echo "Source tfstate file ${SOURCE_BUCKET}/${SOURCE_KEY} exists, and a backup is being created."
-          #   aws s3 cp "s3://${SOURCE_BUCKET}/${SOURCE_KEY}" "s3://dbx-artifacts-bucket/terraform/${{ github.event.issue.number }}-backup-terraform.tfstate"
-          # else
-          #   echo "Source tfstate file ${SOURCE_BUCKET}/${SOURCE_KEY} does not exist exists, and a backup will not be created."
-          # fi

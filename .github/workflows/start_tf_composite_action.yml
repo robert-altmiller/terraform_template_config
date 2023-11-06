@@ -16,9 +16,12 @@ jobs:
         id: get_pull_request_comments
         run: |
           PR_BODY="${{ github.event.pull_request.body }}"
-          ISSUE_BRANCH_NAME_MAIN=$(echo "$PR_BODY" | grep -oP 'Pull Request Feature Main Branch: \K[^ ]+')
+          ISSUE_BRANCH_NAME_MAIN=$(echo "$PR_BODY" | grep -oP 'PR Feature Main Branch: \K[^ ]+')
           echo "ISSUE_BRANCH_NAME_MAIN: $ISSUE_BRANCH_NAME_MAIN"
           echo "ISSUE_BRANCH_NAME_MAIN=$ISSUE_BRANCH_NAME_MAIN" >> $GITHUB_ENV
+          ISSUE_REQUESTOR_EMAIL=$(echo "$PR_BODY" | grep -oP 'Issue Requestor: \K[^ ]+')
+          echo "ISSUE_REQUESTOR_EMAIL: $ISSUE_REQUESTOR_EMAIL"
+          echo "ISSUE_REQUESTOR_EMAIL=$ISSUE_REQUESTOR_EMAIL" >> $GITHUB_ENV
 
 
       - uses: robert-altmiller/terraform_template@main
@@ -37,3 +40,4 @@ jobs:
           DATABRICKS_INSTANCE_PROD: ${{ secrets.DATABRICKS_INSTANCE_PROD }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           ISSUE_BRANCH_NAME_MAIN: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
+          ISSUE_REQUESTOR_EMAIL: ${{ env.ISSUE_REQUESTOR_EMAIL }} 
