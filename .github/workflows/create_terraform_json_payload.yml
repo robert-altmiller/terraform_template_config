@@ -13,7 +13,6 @@ jobs:
 
     env:
       ISSUE_TITLE: "${{ github.event.issue.labels[0].name }}"
-      ISSUE_USER_ID: "${{ github.event.issue.user.id }}"
       ISSUE_USER_LOGIN: "${{ github.event.issue.user.login }}"
       EMAIL_COMPANY_NAME: "@databricks.com"
     
@@ -186,7 +185,7 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           pr_title: "databricks - ${{ env.ISSUE_TITLE }} - request (${{ env.ISSUE_ENVIRONMENT }})"
           pr_body: |
-            Issue Requestor: ${{ env.ISSUE_USER_ID }}${{ env.EMAIL_COMPANY_NAME }} 
+            Issue Requestor: ${{ env.ISSUE_USER_LOGIN }}${{ env.EMAIL_COMPANY_NAME }} 
             PR Time: ${{ env.date }}
             PR Person: ${{ github.actor }}
             PR Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
