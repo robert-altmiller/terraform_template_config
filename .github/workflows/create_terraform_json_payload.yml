@@ -187,7 +187,7 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           pr_title: "databricks - ${{ env.ISSUE_TITLE }} - request (${{ env.ISSUE_ENVIRONMENT }})"
           pr_body: |
-            Issue Requestor: 
+            Issue Requestor: ${{ env.ISSUE_USER_LOGIN }}${{ env.EMAIL_COMPANY_NAME }}
             PR Time: ${{ env.date }}
             PR Person: ${{ github.actor }}
             PR Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
@@ -199,12 +199,3 @@ jobs:
 
             If you have merge conflict add a comment 'fix pr' in the issue below:
             Issue Number: [#${{ github.event.issue.number }}](https://github.com/${{ github.repository }}/issues/${{ github.event.issue.number }})
-
-
-      - name: Write environment variables to file for composite action.yml
-        run: |
-          mkdir -p composite_actions_env_vars
-          echo ISSUE_BRANCH_NAME_MAIN: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
-          echo export ISSUE_BRANCH_NAME_MAIN=${{ env.ISSUE_BRANCH_NAME_MAIN }} > composite_actions_env_vars/composite_action_env_vars.sh
-          echo workflow_id: $GITHUB_RUN_ID
-        shell: bash
