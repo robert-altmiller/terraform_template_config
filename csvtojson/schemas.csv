@@ -1,2 +1,0 @@
-header,resource_name,environment,create_or_delete,resource_name,catalog_name,catalog_principal_name,catalog_principal_privileges,schema_principal_name,schema_principal_privileges
-schemas,brianschema2,unity_catalog,Create,brianschema2,brian_test,Databricks-EDO-Dev-Virginia-Admin,ALL_PRIVILEGES|USE_SCHEMA,Databricks-EDO-Dev-Virginia-Admin,ALL_PRIVILEGES|CREATE_VOLUME
