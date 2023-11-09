@@ -28,7 +28,6 @@ def read_excel_data(input_filepath = None, worksheet_name = None, header_row = 1
  
    # apply the safe_eval function to the entire column (convert to python list)
    principal_privilege_cols = [col for col in df.columns if "principal_privileges" in col]
-   print(principal_privilege_cols)
    for pp_col in principal_privilege_cols:
       df[pp_col] = df[pp_col].apply(convert_col_to_python_list)
    
