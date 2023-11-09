@@ -102,13 +102,21 @@ jobs:
           echo XLSX_JSON: $XLSX_JSON
           echo "XLSX_JSON=$XLSX_JSON" >> $GITHUB_ENV
 
-          # Parse the XLSX_JSON using jq
-          blocks=$(echo "${{ env.XLSX_JSON }}" | jq -c 'to_entries[]')
+          # Use jq to extract the top-level keys (block names) from the JSON
+          json_keys_root_level=$(echo "$XLSX_JSON" | jq -r 'keys[]')
 
-          # Iterate over each block
-          for block in $blocks; do
-            echo Block: $block
+          # Iterate over each top-level block
+          for json_key_root_level in $json_keys_root_level; do
+            echo "json_key_root_level: $json_key_root_level"
           done
+
+          # # Parse the XLSX_JSON using jq
+          # blocks=$(echo "${{ env.XLSX_JSON }}" | jq -c 'to_entries[]')
+
+          # # Iterate over each block
+          # for block in $blocks; do
+          #   echo Block: $block
+          # done
 
 
       # - name: Append / Remove issue submission to / from master config JSON file
