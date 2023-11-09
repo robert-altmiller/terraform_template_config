@@ -27,7 +27,10 @@ def read_excel_data(input_filepath = None, worksheet_name = None, header_row = 1
    df = pd.read_excel(input_filepath, sheet_name = worksheet_name, header= header_row)
  
    # apply the safe_eval function to the entire column (convert to python list)
-   df['sc_principal_privileges'] = df['sc_principal_privileges'].apply(convert_col_to_python_list)
+   principal_privilege_cols = [col for col in df.columns if "principal_privileges" in col]
+   print(principal_privilege_cols)
+   for pp_col in principal_privilege_cols:
+      df[pp_col] = df[pp_col].apply(convert_col_to_python_list)
    
    # convert dataframe to json
    df_json = json.loads(dataframe_to_json(df))
@@ -37,16 +40,26 @@ def read_excel_data(input_filepath = None, worksheet_name = None, header_row = 1
    for json_obj in df_json:
       tf_json_payload[json_obj["resource_name"]] = json_obj
 
-   return json.dumps(tf_json_payload)
+   return tf_json_payload
 
 
 if __name__ == "__main__":
     
-    # Specify the input file path, worksheet name, and header row as needed
-    input_filepath = 'input.xlsx'
-    worksheet_name = 'storage_credentials'
-    header_row = 1
+   # Specify the input file path, worksheet name, and header row as needed
+   input_filepath = 'input.xlsx'
+   worksheet_names = [
+      "storage_credentials",
+      "external_locations",
+      "catalogs",
+      "schemas"
+   ]
+   header_row = 1
+   tf_payload_consolidated = {}
 
-    # Call the read_excel_data function to process the Excel data
-    jsondata = read_excel_data(input_filepath, worksheet_name, header_row)
-    print(jsondata)
+   # Call the read_excel_data function to process the Excel data
+   for worksheet in worksheet_names:
+      jsondata = read_excel_data(input_filepath, worksheet, header_row)
+      tf_payload_consolidated[worksheet] = jsondata
+   
+   tf_payload_consolidated = json.dumps(tf_payload_consolidated)
+   print(tf_payload_consolidated)
