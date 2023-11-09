@@ -1,4 +1,4 @@
-name: Create Terraform Json Payload
+name: Create Mult Resources Terraform Json Payload
 
 on:
   workflow_dispatch:
