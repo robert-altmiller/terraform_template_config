@@ -20,10 +20,10 @@ jobs:
           
       - name: Get the Github issue, issue main feature branch names
         run: |
-          ISSUE_BRANCH_NAME=issue-${{ github.run_id }}-branch
+          ISSUE_BRANCH_NAME=runid-${{ github.run_id }}-branch
           echo "ISSUE_BRANCH_NAME=$ISSUE_BRANCH_NAME" >> $GITHUB_ENV
           echo ISSUE_BRANCH_NAME: $ISSUE_BRANCH_NAME
-          ISSUE_BRANCH_NAME_MAIN=issue-${{ github.run_id }}-main-branch
+          ISSUE_BRANCH_NAME_MAIN=runid-${{ github.run_id }}-main-branch
           echo "ISSUE_BRANCH_NAME_MAIN=$ISSUE_BRANCH_NAME_MAIN" >> $GITHUB_ENV
           echo ISSUE_BRANCH_NAME_MAIN: $ISSUE_BRANCH_NAME_MAIN
       
@@ -33,7 +33,7 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
 
           
-      - name: Create new feature branch from main branch (e.g. issue-[issuenumber]-branch)
+      - name: Create new feature branch from main branch (e.g. runid-[github_runid]-branch)
         run: |
           git checkout main
           git pull
@@ -42,7 +42,7 @@ jobs:
           git push -f origin ${{ env.ISSUE_BRANCH_NAME }}
 
 
-      - name: Create new feature branch from main branch (e.g. issue-[issuenumber]-main-branch)
+      - name: Create new feature branch from main branch (e.g. runid-[github_runid]-main-branch)
         run: |
           git checkout main
           git pull
@@ -101,6 +101,14 @@ jobs:
           XLSX_JSON=$(python ./xlsxtojson/process_xlsx_input.py)
           echo XLSX_JSON: $XLSX_JSON
           echo "XLSX_JSON=$XLSX_JSON" >> $GITHUB_ENV
+
+          # Parse the XLSX_JSON using jq
+          blocks=$(echo "${{ inputs.xlsx_json }}" | jq -c 'to_entries[]')
+
+          # Iterate over each block
+          for block in $blocks; do
+            echo "Block: $block"
+          done
 
 
       # - name: Append / Remove issue submission to / from master config JSON file
