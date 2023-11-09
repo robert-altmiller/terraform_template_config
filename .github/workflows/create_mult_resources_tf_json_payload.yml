@@ -103,11 +103,11 @@ jobs:
           echo "XLSX_JSON=$XLSX_JSON" >> $GITHUB_ENV
 
           # Parse the XLSX_JSON using jq
-          blocks=$(echo "${{ inputs.xlsx_json }}" | jq -c 'to_entries[]')
+          blocks=$(echo "${{ env.XLSX_JSON }}" | jq -c 'to_entries[]')
 
           # Iterate over each block
           for block in $blocks; do
-            echo "Block: $block"
+            echo Block: $block
           done
 
 
