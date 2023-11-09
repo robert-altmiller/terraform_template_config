@@ -100,18 +100,12 @@ jobs:
           echo "ISSUE_RESOURCE_NAME=$ISSUE_RESOURCE_NAME" >> $GITHUB_ENV
 
 
-
       - name: Extract JSON Data From xlstojson Input for Multiple Databricks Resources
         run: |
           pip install pandas openpyxl
           XLSX_JSON=$(python ./xlsxtojson/process_xlsx_input.py)
           echo XLSX_JSON: $XLSX_JSON
-          # # Read the contents of the new JSON file
-          # _JSON=$(cat path/to/new_json.json)
-  
-          # # Extract the list of types
-          # TYPES=$(echo "$NEW_JSON" | jq 'keys[]' | tr -d '"')
-          # echo "Types to iterate over: $TYPES"
+          echo "XLSX_JSON=$XLSX_JSON" >> $GITHUB_ENV
 
 
       - name: Append / Remove issue submission to / from master config JSON file
