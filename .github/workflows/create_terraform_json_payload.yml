@@ -103,7 +103,7 @@ jobs:
 
       - name: Extract JSON Data From xlstojson Input for Multiple Databricks Resources
         run: |
-          pip install pandas
+          pip install pandas openpyxl
           XLSX_JSON=$(python ./xlsxtojson/process_xlsx_input.py)
           echo XLSX_JSON: $XLSX_JSON
           # # Read the contents of the new JSON file
