@@ -87,6 +87,7 @@ jobs:
       - name: Output issue parser JSON results 
         run: cat ${HOME}/issue-parser-result.json
 
+
       - name: Write issue submission JSON file to local Terraform Template Config repo and create environment vars
         run: |
           echo '${{ steps.issue-parser.outputs.jsonString }}' > issue_submission/github_issue_submission.json
@@ -97,6 +98,19 @@ jobs:
           echo "ISSUE_CREATE_DESTROY=$ISSUE_CREATE_DESTROY" >> $GITHUB_ENV
           ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
           echo "ISSUE_RESOURCE_NAME=$ISSUE_RESOURCE_NAME" >> $GITHUB_ENV
+
+
+
+      - name: Extract JSON Data From xlstojson Input for Multiple Databricks Resources
+        run: |
+          XLSX_JSON=$(python ./xlsxtojson/process_xlsx_input.py)
+          echo XLSX_JSON: $XLSX_JSON
+          # # Read the contents of the new JSON file
+          # _JSON=$(cat path/to/new_json.json)
+  
+          # # Extract the list of types
+          # TYPES=$(echo "$NEW_JSON" | jq 'keys[]' | tr -d '"')
+          # echo "Types to iterate over: $TYPES"
 
 
       - name: Append / Remove issue submission to / from master config JSON file
