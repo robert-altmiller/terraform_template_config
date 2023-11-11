@@ -55,13 +55,6 @@ jobs:
           ref: ${{ env.ISSUE_BRANCH_NAME }}
 
 
-      # - name: Convert Github issues title to lowercase with underscore and put in env vars
-      #   run: |    
-      #     FORMATTED_TITLE=$(echo "$ISSUE_TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/ /_/g')
-      #     echo "ISSUE_TITLE=$FORMATTED_TITLE" >> $GITHUB_ENV
-      #     echo ISSUE_TITLE: $FORMATTED_TITLE
-
-
       - name: Install jq
         run: sudo apt-get install jq
 
@@ -69,28 +62,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-
-
-      # - uses: stefanbuck/github-issue-parser@v3
-      #   id: issue-parser
-      #   with:
-      #     template-path: .github/ISSUE_TEMPLATE/${{ env.ISSUE_TITLE }}_request.yml
-
-
-      # - name: Output issue parser JSON results 
-      #   run: cat ${HOME}/issue-parser-result.json
-
-
-      # - name: Write issue submission JSON file to local Terraform Template Config repo and create environment vars
-      #   run: |
-      #     echo '${{ steps.issue-parser.outputs.jsonString }}' > issue_submission/github_issue_submission.json
-      #     ISSUE_JSON=$(cat issue_submission/github_issue_submission.json)
-      #     ISSUE_ENVIRONMENT=$(echo $ISSUE_JSON | jq -r .environment)
-      #     echo "ISSUE_ENVIRONMENT=$ISSUE_ENVIRONMENT" >> $GITHUB_ENV
-      #     ISSUE_CREATE_DESTROY=$(echo $ISSUE_JSON | jq -r .create_or_delete)
-      #     echo "ISSUE_CREATE_DESTROY=$ISSUE_CREATE_DESTROY" >> $GITHUB_ENV
-      #     ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
-      #     echo "ISSUE_RESOURCE_NAME=$ISSUE_RESOURCE_NAME" >> $GITHUB_ENV
 
 
       - name: Extract JSON Data From xlstojson Input for Multiple Databricks Resources
@@ -119,10 +90,30 @@ jobs:
 
             # Use jq to extract the blocks within the current JSON key and iterate over them
             echo "$XLSX_JSON" | jq -c ".$json_key[]" | while read -r block; do
-              echo "block: $block"
+                
+                ENVIRONMENT=$(echo "$block" | jq -r '.environment')
+
+                ISSUE_JSON=$block
+                echo ISSUE_JSON: $ISSUE_JSON
+                MASTER_CONFIG_JSON=$(cat master_config/$ENVIRONMENT/$json_key.json)
+                echo MASTER_CONFIG_JSON: $MASTER_CONFIG_JSON
+                ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
+                ISSUE_ACTION=$(echo $ISSUE_JSON | jq -r .create_or_delete)
+
+                if [[ "$ISSUE_ACTION" == "create" ]]; then
+                  UPDATED_MASTER_CONFIG=$(echo $MASTER_CONFIG_JSON | jq ".$json_key.\"$ISSUE_RESOURCE_NAME\" = $ISSUE_JSON")
+                elif [[ "$ISSUE_ACTION" == "destroy" ]]; then
+                  UPDATED_MASTER_CONFIG=$(echo $MASTER_CONFIG_JSON | jq "del(.$json_key.\"$ISSUE_RESOURCE_NAME\")")
+                else
+                  echo "Unknown ISSUE_ACTION: $ISSUE_ACTION"
+                  exit 1
+                fi
+
+                echo UPDATED_MASTER_CONFIG: $UPDATED_MASTER_CONFIG
+                echo "$UPDATED_MASTER_CONFIG" > master_config/$ENVIRONMENT/$json_key.json
+              #echo "block: $block"
             done
           done
-
 
       # - name: Append / Remove issue submission to / from master config JSON file
       #   run: |
