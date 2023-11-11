@@ -106,14 +106,6 @@ jobs:
           # Iterate over each top-level block
           for json_key in $json_keys; do
             echo "json_key: $json_key"
-            
-            # Use jq to extract the items within the current key
-            items_in_key=$(echo "$XLSX_JSON" | jq -r ".$json_key[]")
-            
-            # Iterate over each item within the current key
-            for item in $items_in_key; do
-              echo "item: $item"
-            done
           done
 
 
