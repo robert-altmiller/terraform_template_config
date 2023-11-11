@@ -110,10 +110,7 @@ jobs:
             # Use jq to extract the blocks within the current JSON key
             blocks_in_key=$(echo "$XLSX_JSON" | jq -r ".$json_key[]")
 
-            # Iterate over each block within the current JSON key
-            for block in $blocks_in_key; do
-              echo "block: $block"
-            done
+            echo "blocks_in_key: $blocks_in_key"
           done
 
 
