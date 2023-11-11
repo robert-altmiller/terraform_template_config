@@ -115,49 +115,17 @@ jobs:
             done
           done
 
-      # - name: Append / Remove issue submission to / from master config JSON file
-      #   run: |
-      #     # Here is the fix for no master config json file present
-      #     DIRECTORY="master_config/${{ env.ISSUE_ENVIRONMENT }}"
-      #     # Create the directory if it doesn't exist
-      #     mkdir -p "$DIRECTORY"
-      #     FILE="${DIRECTORY}/${{ env.ISSUE_TITLE }}.json"
-      #     if [[ ! -f "$FILE" ]]; then
-      #         echo '{"${{ env.ISSUE_TITLE }}": {}}' > "$FILE"
-      #         echo "$FILE created."
-      #     else
-      #         echo "$FILE already exists."
-      #     fi
-
-      #     ISSUE_JSON=$(cat issue_submission/github_issue_submission.json)
-      #     echo ISSUE_JSON: $ISSUE_JSON
-      #     MASTER_CONFIG_JSON=$(cat master_config/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json)
-      #     echo MASTER_CONFIG_JSON: $MASTER_CONFIG_JSON
-      #     ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
-      #     ISSUE_ACTION=$(echo $ISSUE_JSON | jq -r .create_or_delete)
-      #     if [[ "$ISSUE_ACTION" == "create" ]]; then
-      #       UPDATED_MASTER_CONFIG=$(echo $MASTER_CONFIG_JSON | jq ".${{ env.ISSUE_TITLE }}.\"$ISSUE_RESOURCE_NAME\" = $ISSUE_JSON")
-      #     elif [[ "$ISSUE_ACTION" == "destroy" ]]; then
-      #       UPDATED_MASTER_CONFIG=$(echo $MASTER_CONFIG_JSON | jq "del(.${{ env.ISSUE_TITLE }}.\"$ISSUE_RESOURCE_NAME\")")
-      #     else
-      #       echo "Unknown ISSUE_ACTION: $ISSUE_ACTION"
-      #       exit 1
-      #     fi
-      #     echo UPDATED_MASTER_CONFIG: $UPDATED_MASTER_CONFIG
-      #     echo "$UPDATED_MASTER_CONFIG" > master_config/${{ env.ISSUE_ENVIRONMENT }}/${{ env.ISSUE_TITLE }}.json
-
-
-      # - name: Combine all the Master Config json files together into a single dictionary (e.g. tf_issue_submission.json)
-      #   run: |
-      #     OUTPUT_JSON="{}" # initialize an empty JSON object
-      #     # Iterate over each JSON file in the directory
-      #     for filepath in master_config/${{ env.ISSUE_ENVIRONMENT }}/*.json; do
-      #       FILE_CONTENTS=$(cat "$filepath")
-      #       # Directly merge this file into our main JSON object
-      #       OUTPUT_JSON=$(jq -s '.[0] * .[1]' <<< "$OUTPUT_JSON $FILE_CONTENTS")
-      #     done
-      #     # Save the merged JSON
-      #     echo "$OUTPUT_JSON" > issue_submission/tf_issue_submission.json
+      - name: Combine all the Master Config json files together into a single dictionary (e.g. tf_issue_submission.json)
+        run: |
+          OUTPUT_JSON="{}" # initialize an empty JSON object
+          # Iterate over each JSON file in the directory
+          for filepath in master_config/${{ env.ISSUE_ENVIRONMENT }}/*.json; do
+            FILE_CONTENTS=$(cat "$filepath")
+            # Directly merge this file into our main JSON object
+            OUTPUT_JSON=$(jq -s '.[0] * .[1]' <<< "$OUTPUT_JSON $FILE_CONTENTS")
+          done
+          # Save the merged JSON
+          echo "$OUTPUT_JSON" > issue_submission/tf_issue_submission.json
 
 
       # - name: Get Github env, repo url and master config config fname, and write to issue_submission --> env.sh
