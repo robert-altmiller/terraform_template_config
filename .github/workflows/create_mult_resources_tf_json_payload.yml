@@ -16,8 +16,6 @@ jobs:
     
     steps:
 
-
-          
       - name: Get the Github issue, issue main feature branch names
         run: |
           ISSUE_BRANCH_NAME=runid-${{ github.run_id }}-branch
