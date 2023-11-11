@@ -102,10 +102,18 @@ jobs:
 
           # Use jq to extract the top-level keys (block names) from the JSON
           json_keys=$(echo "$XLSX_JSON" | jq -r 'keys[]')
-
-          # Iterate over each top-level block
+          
+          # Iterate over each top-level JSON key
           for json_key in $json_keys; do
             echo "json_key: $json_key"
+            
+            # Use jq to extract the blocks within the current JSON key
+            blocks_in_key=$(echo "$XLSX_JSON" | jq -r ".$json_key[]")
+
+            # Iterate over each block within the current JSON key
+            for block in $blocks_in_key; do
+              echo "block: $block"
+            done
           done
 
 
