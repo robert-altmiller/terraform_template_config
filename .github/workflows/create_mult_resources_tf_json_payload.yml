@@ -107,6 +107,16 @@ jobs:
           for json_key in $json_keys; do
             echo "json_key: $json_key"
 
+            DIRECTORY="master_config/$json_key"
+            mkdir -p "$DIRECTORY"
+            FILE="${DIRECTORY}/$json_key.json"
+            if [[ ! -f "$FILE" ]]; then
+                echo '{"$json_key": {}}' > "$FILE"
+                echo "$FILE created."
+            else
+                echo "$FILE already exists."
+            fi
+
             # Use jq to extract the blocks within the current JSON key and iterate over them
             echo "$XLSX_JSON" | jq -c ".$json_key[]" | while read -r block; do
               echo "block: $block"
