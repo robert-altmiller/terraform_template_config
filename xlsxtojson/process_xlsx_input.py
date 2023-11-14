@@ -24,7 +24,7 @@ def read_excel_data(input_filepath = None, worksheet_name = None, header_row = 1
    """read excel data for creating Databricks Terraform resources"""
 
    # read the Excel file into a DataFrame, using row 2 as the header
-   df = pd.read_excel(input_filepath, sheet_name = worksheet_name, header= header_row)
+   df = pd.read_excel(input_filepath, sheet_name = worksheet_name, header = header_row)
  
    # apply the safe_eval function to the entire column (convert to python list)
    principal_privilege_cols = [col for col in df.columns if "principal_privileges" in col]
