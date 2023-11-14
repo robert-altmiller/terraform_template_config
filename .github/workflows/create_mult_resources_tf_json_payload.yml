@@ -78,7 +78,7 @@ jobs:
           for json_key in $json_keys; do
             echo "json_key: $json_key"
 
-            DIRECTORY="master_config/$json_key"
+            DIRECTORY="master_config/unity_catalog"
             mkdir -p "$DIRECTORY"
             FILE="${DIRECTORY}/$json_key.json"
             if [[ ! -f "$FILE" ]]; then
@@ -115,17 +115,17 @@ jobs:
             done
           done
 
-      - name: Combine all the Master Config json files together into a single dictionary (e.g. tf_issue_submission.json)
-        run: |
-          OUTPUT_JSON="{}" # initialize an empty JSON object
-          # Iterate over each JSON file in the directory
-          for filepath in master_config/${{ env.ISSUE_ENVIRONMENT }}/*.json; do
-            FILE_CONTENTS=$(cat "$filepath")
-            # Directly merge this file into our main JSON object
-            OUTPUT_JSON=$(jq -s '.[0] * .[1]' <<< "$OUTPUT_JSON $FILE_CONTENTS")
-          done
-          # Save the merged JSON
-          echo "$OUTPUT_JSON" > issue_submission/tf_issue_submission.json
+      # - name: Combine all the Master Config json files together into a single dictionary (e.g. tf_issue_submission.json)
+      #   run: |
+      #     OUTPUT_JSON="{}" # initialize an empty JSON object
+      #     # Iterate over each JSON file in the directory
+      #     for filepath in master_config/${{ env.ISSUE_ENVIRONMENT }}/*.json; do
+      #       FILE_CONTENTS=$(cat "$filepath")
+      #       # Directly merge this file into our main JSON object
+      #       OUTPUT_JSON=$(jq -s '.[0] * .[1]' <<< "$OUTPUT_JSON $FILE_CONTENTS")
+      #     done
+      #     # Save the merged JSON
+      #     echo "$OUTPUT_JSON" > issue_submission/tf_issue_submission.json
 
 
       # - name: Get Github env, repo url and master config config fname, and write to issue_submission --> env.sh
