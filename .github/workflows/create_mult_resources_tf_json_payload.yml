@@ -148,31 +148,6 @@ jobs:
         run: echo "date=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
 
 
-      - name: Format XLS_JSON for Github pull request
-        id: forma_xlsx_json
-        run: |
-          XLSX_JSON=${{ toJson(env.XLSX_JSON) }}
-          echo "XLSX_JSON=$XLSX_JSON" >> $GITHUB_ENV
-      
-      - name: Prepare pretty printed json for Github pull request
-        run: |
-          FORMATTED_XLSX_JSON=$(echo "${XLSX_JSON}" | jq '.')
-          echo FORMATTED_XLSX_JSON: $FORMATTED_XLSX_JSON
-          echo "FORMATTED_XLSX_JSON=${FORMATTED_XLSX_JSON}" >> $GITHUB_ENV
-          
-
-      # - name: Format XLS_JSON for Github pull request
-      #   id: forma_xlsx_json
-      #   run: |
-      #     XLSX_JSON_SINGLE_TICKS='${{ env.XLSX_JSON }}'
-      #     echo "XLSX_JSON_SINGLE_TICKS=$XLSX_JSON_SINGLE_TICKS" >> $GITHUB_ENV
-
-
-      # - name: Prepare pretty printed json for Github pull request
-      #   run: |
-      #       echo "FORMATTED_XLSX_JSON=$(echo '${{ env.XLSX_JSON_SINGLE_TICKS }}' | jq '.')" >> $GITHUB_ENV
-
-
       - name: Create Github issue pull request to main branch + approval
         uses: repo-sync/pull-request@v2
         with:
@@ -187,7 +162,4 @@ jobs:
             PR Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
             PR Feature Main Branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
             Databricks Multiple Resources Environment: ${{ env.ISSUE_ENVIRONMENT }}
-            Databricks Multiple Resources Payload:
-              ```json
-              ${{ env.FORMATTED_XLSX_JSON }}
-              ```
+            Databricks Multiple Resources Payload: ${{ env.XLSX_JSON }}
