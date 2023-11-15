@@ -116,51 +116,51 @@ jobs:
           echo "ISSUE_ENVIRONMENT=$ENVIRONMENT" >> $GITHUB_ENV
 
 
-      # - name: Combine all the Master Config json files together into a single dictionary (e.g. tf_issue_submission.json)
-      #   run: |
-      #     OUTPUT_JSON="{}" # initialize an empty JSON object
-      #     # Iterate over each JSON file in the directory
-      #     for filepath in master_config/${{ env.ISSUE_ENVIRONMENT }}/*.json; do
-      #       FILE_CONTENTS=$(cat "$filepath")
-      #       # Directly merge this file into our main JSON object
-      #       OUTPUT_JSON=$(jq -s '.[0] * .[1]' <<< "$OUTPUT_JSON $FILE_CONTENTS")
-      #     done
-      #     # Save the merged JSON
-      #     echo "$OUTPUT_JSON" > issue_submission/tf_issue_submission.json
+      - name: Combine all the Master Config json files together into a single dictionary (e.g. tf_issue_submission.json)
+        run: |
+          OUTPUT_JSON="{}" # initialize an empty JSON object
+          # Iterate over each JSON file in the directory
+          for filepath in master_config/${{ env.ISSUE_ENVIRONMENT }}/*.json; do
+            FILE_CONTENTS=$(cat "$filepath")
+            # Directly merge this file into our main JSON object
+            OUTPUT_JSON=$(jq -s '.[0] * .[1]' <<< "$OUTPUT_JSON $FILE_CONTENTS")
+          done
+          # Save the merged JSON
+          echo "$OUTPUT_JSON" > issue_submission/tf_issue_submission.json
 
 
 
-      # - name: Commit updated issue submission JSON file to Terraform Config repo
-      #   run: |
-      #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
-      #     git config --global user.name "github-actions[bot]"
-      #     git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}.git
-      #     git fetch
-      #     git checkout ${{ env.ISSUE_BRANCH_NAME }} || git checkout -b ${{ env.ISSUE_BRANCH_NAME }} # Check out the branch if it exists, otherwise create it
-      #     git pull origin ${{ env.ISSUE_BRANCH_NAME }} || true # If the branch is new, this pull will fail, hence we use `|| true` to prevent the workflow from stopping
-      #     # Adding all folders and changes
-      #     git add --all
-      #     git commit -m 'new infrastructure submission' || echo "No changes to commit"
-      #     git push origin ${{ env.ISSUE_BRANCH_NAME }}
+      - name: Commit updated issue submission JSON file to Terraform Config repo
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}.git
+          git fetch
+          git checkout ${{ env.ISSUE_BRANCH_NAME }} || git checkout -b ${{ env.ISSUE_BRANCH_NAME }} # Check out the branch if it exists, otherwise create it
+          git pull origin ${{ env.ISSUE_BRANCH_NAME }} || true # If the branch is new, this pull will fail, hence we use `|| true` to prevent the workflow from stopping
+          # Adding all folders and changes
+          git add --all
+          git commit -m 'new infrastructure submission' || echo "No changes to commit"
+          git push origin ${{ env.ISSUE_BRANCH_NAME }}
 
 
-      # - name: Get the current date for Github issue pull request
-      #   id: date
-      #   run: echo "date=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+      - name: Get the current date for Github issue pull request
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
 
 
-      # - name: Create Github issue pull request to main branch + approval
-      #   uses: repo-sync/pull-request@v2
-      #   with:
-      #     source_branch: ${{ env.ISSUE_BRANCH_NAME }}
-      #     destination_branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
-      #     github_token: ${{ secrets.GH_TOKEN }}
-      #     pr_title: "databricks - multiple resources - request (${{ env.ISSUE_ENVIRONMENT }})"
-      #     pr_body: |
-      #       Issue Requestor: ${{ env.ISSUE_USER_LOGIN }}${{ env.EMAIL_COMPANY_NAME }}
-      #       PR Time: ${{ env.date }}
-      #       PR Person: ${{ github.actor }}
-      #       PR Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
-      #       PR Feature Main Branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
-      #       Databricks Multiple Resources Environment: ${{ env.ISSUE_ENVIRONMENT }}
-      #       Databricks Multiple Resources Payload: ${{ env.XLSX_JSON }}
+      - name: Create Github issue pull request to main branch + approval
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: ${{ env.ISSUE_BRANCH_NAME }}
+          destination_branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
+          github_token: ${{ secrets.GH_TOKEN }}
+          pr_title: "databricks - multiple resources - request (${{ env.ISSUE_ENVIRONMENT }})"
+          pr_body: |
+            Issue Requestor: ${{ env.ISSUE_USER_LOGIN }}${{ env.EMAIL_COMPANY_NAME }}
+            PR Time: ${{ env.date }}
+            PR Person: ${{ github.actor }}
+            PR Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
+            PR Feature Main Branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
+            Databricks Multiple Resources Environment: ${{ env.ISSUE_ENVIRONMENT }}
+            Databricks Multiple Resources Payload: ${{ env.XLSX_JSON }}
