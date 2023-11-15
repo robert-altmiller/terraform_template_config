@@ -155,6 +155,11 @@ jobs:
           echo "XLSX_JSON_SINGLE_TICKS=$XLSX_JSON_SINGLE_TICKS" >> $GITHUB_ENV
 
 
+      - name: Prepare pretty printed json for Github pull request
+        run: |
+            echo "FORMATTED_XLSX_JSON=$(echo '${{ env.XLSX_JSON_SINGLE_TICKS }}' | jq '.')" >> $GITHUB_ENV
+
+
       - name: Create Github issue pull request to main branch + approval
         uses: repo-sync/pull-request@v2
         with:
@@ -171,5 +176,5 @@ jobs:
             Databricks Multiple Resources Environment: ${{ env.ISSUE_ENVIRONMENT }}
             Databricks Multiple Resources Payload:
               ```json
-              $(echo "$XLSX_JSON_SINGLE_TICKS" | jq '.')
+              ${{ env.FORMATTED_XLSX_JSON }}
               ```
