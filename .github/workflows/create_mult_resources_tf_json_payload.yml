@@ -152,26 +152,24 @@ jobs:
         id: forma_xlsx_json
         run: |
           XLSX_JSON_SINGLE_TICKS='${{ env.XLSX_JSON }}'
-          FORMATTED_XLSX_JSON=$(echo "$XLSX_JSON_SINGLE_TICKS" | jq '.')
-          echo "FORMATTED_XLSX_JSON=$FORMATTED_XLSX_JSON" >> $GITHUB_ENV
-          echo "FORMATTED_XLSX_JSON: $FORMATTED_XLSX_JSON"
+          echo "XLSX_JSON_SINGLE_TICKS=$XLSX_JSON_SINGLE_TICKS" >> $GITHUB_ENV
 
 
-      # - name: Create Github issue pull request to main branch + approval
-      #   uses: repo-sync/pull-request@v2
-      #   with:
-      #     source_branch: ${{ env.ISSUE_BRANCH_NAME }}
-      #     destination_branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
-      #     github_token: ${{ secrets.GH_TOKEN }}
-      #     pr_title: "databricks - multiple resources - request (${{ env.ISSUE_ENVIRONMENT }})"
-      #     pr_body: |
-      #       Issue Requestor: ${{ env.ISSUE_USER_LOGIN }}${{ env.EMAIL_COMPANY_NAME }}
-      #       PR Time: ${{ env.date }}
-      #       PR Person: ${{ github.actor }}
-      #       PR Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
-      #       PR Feature Main Branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
-      #       Databricks Multiple Resources Environment: ${{ env.ISSUE_ENVIRONMENT }}
-      #       Databricks Multiple Resources Payload:
-      #         ```json
-      #         ${{ env.FORMATTED_XLSX_JSON }}
-      #         ```
+      - name: Create Github issue pull request to main branch + approval
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: ${{ env.ISSUE_BRANCH_NAME }}
+          destination_branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
+          github_token: ${{ secrets.GH_TOKEN }}
+          pr_title: "databricks - multiple resources - request (${{ env.ISSUE_ENVIRONMENT }})"
+          pr_body: |
+            Issue Requestor: ${{ env.ISSUE_USER_LOGIN }}${{ env.EMAIL_COMPANY_NAME }}
+            PR Time: ${{ env.date }}
+            PR Person: ${{ github.actor }}
+            PR Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
+            PR Feature Main Branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
+            Databricks Multiple Resources Environment: ${{ env.ISSUE_ENVIRONMENT }}
+            Databricks Multiple Resources Payload:
+              ```json
+              $(echo "$XLSX_JSON_SINGLE_TICKS" | jq '.')
+              ```
