@@ -93,12 +93,12 @@ jobs:
                     echo "$FILE already exists."
                 fi
 
-                # ISSUE_JSON=$block
-                # echo ISSUE_JSON: $ISSUE_JSON
-                # MASTER_CONFIG_JSON=$(cat master_config/$ENVIRONMENT/$json_key.json)
-                # echo MASTER_CONFIG_JSON (BEFORE APPEND): $MASTER_CONFIG_JSON
-                # ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
-                # ISSUE_ACTION=$(echo $ISSUE_JSON | jq -r .create_or_delete)
+                ISSUE_JSON=$block
+                echo ISSUE_JSON: $ISSUE_JSON
+                MASTER_CONFIG_JSON=$(cat master_config/$ENVIRONMENT/$json_key.json)
+                echo MASTER_CONFIG_JSON (BEFORE APPEND): $MASTER_CONFIG_JSON
+                ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
+                ISSUE_ACTION=$(echo $ISSUE_JSON | jq -r .create_or_delete)
 
                 # if [[ "$ISSUE_ACTION" == "create" ]]; then
                 #   UPDATED_MASTER_CONFIG=$(echo $MASTER_CONFIG_JSON | jq ".$json_key.\"$ISSUE_RESOURCE_NAME\" = $ISSUE_JSON")
