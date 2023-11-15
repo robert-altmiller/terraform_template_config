@@ -69,7 +69,8 @@ jobs:
           pip install pandas openpyxl
           XLSX_JSON=$(python ./xlsxtojson/process_xlsx_input.py)
           echo XLSX_JSON: $XLSX_JSON
-          XLSX_JSON_FORMATTED=$(echo "$XLSX_JSON" | jq -r . | jq -S .)
+          XLSX_JSON_FORMATTED=$(echo "$XLSX_JSON" | jq -c '. | . as $json | keys[] | {(.): $json[.]}')
+          echo XLSX_JSON_FORMATTED: $XLSX_JSON_FORMATTED
           echo "XLSX_JSON_FORMATTED=$XLSX_JSON_FORMATTED" >> $GITHUB_ENV
 
           # Use jq to extract the top-level keys (block names) from the JSON
@@ -103,22 +104,13 @@ jobs:
                 ISSUE_ACTION=$(echo $ISSUE_JSON | jq -r .create_or_delete)
 
                 if [[ "$ISSUE_ACTION" == "create" ]]; then
-                  UPDATED_MASTER_CONFIG=$(echo "$MASTER_CONFIG_JSON" | jq ".$json_key.\"$ISSUE_RESOURCE_NAME\" = $ISSUE_JSON")
+                  UPDATED_MASTER_CONFIG=$(echo $MASTER_CONFIG_JSON | jq ".$json_key.\"$ISSUE_RESOURCE_NAME\" = $ISSUE_JSON")
                 elif [[ "$ISSUE_ACTION" == "destroy" ]]; then
-                  UPDATED_MASTER_CONFIG=$(echo "$MASTER_CONFIG_JSON" | jq "del(.$json_key.\"$ISSUE_RESOURCE_NAME\")")
+                  UPDATED_MASTER_CONFIG=$(echo $MASTER_CONFIG_JSON | jq "del(.$json_key.\"$ISSUE_RESOURCE_NAME\")")
                 else
                   echo "Unknown ISSUE_ACTION: $ISSUE_ACTION"
                   exit 1
                 fi
-
-                # if [[ "$ISSUE_ACTION" == "create" ]]; then
-                #   UPDATED_MASTER_CONFIG=$(echo $MASTER_CONFIG_JSON | jq ".$json_key.\"$ISSUE_RESOURCE_NAME\" = $ISSUE_JSON")
-                # elif [[ "$ISSUE_ACTION" == "destroy" ]]; then
-                #   UPDATED_MASTER_CONFIG=$(echo $MASTER_CONFIG_JSON | jq "del(.$json_key.\"$ISSUE_RESOURCE_NAME\")")
-                # else
-                #   echo "Unknown ISSUE_ACTION: $ISSUE_ACTION"
-                #   exit 1
-                # fi
 
                 echo UPDATED_MASTER_CONFIG (AFTER APPEND): $UPDATED_MASTER_CONFIG
                 echo "$UPDATED_MASTER_CONFIG" > master_config/$ENVIRONMENT/$json_key.json
