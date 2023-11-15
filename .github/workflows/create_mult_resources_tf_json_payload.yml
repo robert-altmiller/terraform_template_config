@@ -96,7 +96,7 @@ jobs:
                 ISSUE_JSON=$block
                 echo ISSUE_JSON: $ISSUE_JSON
                 MASTER_CONFIG_JSON=$(cat master_config/$ENVIRONMENT/$json_key.json)
-                echo MASTER_CONFIG_JSON (BEFORE APPEND): $MASTER_CONFIG_JSON
+                echo MASTER_CONFIG_JSON: $MASTER_CONFIG_JSON
                 ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
                 ISSUE_ACTION=$(echo $ISSUE_JSON | jq -r .create_or_delete)
 
@@ -109,7 +109,7 @@ jobs:
                 #   exit 1
                 # fi
 
-                # echo UPDATED_MASTER_CONFIG (AFTER APPEND): $UPDATED_MASTER_CONFIG
+                # echo UPDATED_MASTER_CONFIG: $UPDATED_MASTER_CONFIG
                 # echo "$UPDATED_MASTER_CONFIG" > master_config/$ENVIRONMENT/$json_key.json
             done
           done
