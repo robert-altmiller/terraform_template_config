@@ -114,6 +114,7 @@ jobs:
                 echo "$UPDATED_MASTER_CONFIG" > master_config/$ENVIRONMENT/$json_key.json
             done
           done
+          echo "FORMATTED_XLSX_JSON=$(echo '${{ env.XLSX_JSON }}' | jq '.')" >> $GITHUB_ENV
 
 
       - name: Combine all the Master Config json files together into a single dictionary (e.g. tf_issue_submission.json)
@@ -149,6 +150,11 @@ jobs:
         run: echo "date=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
 
 
+      - name: Format JSON
+        id: format_json
+        run: |
+          
+
       - name: Create Github issue pull request to main branch + approval
         uses: repo-sync/pull-request@v2
         with:
@@ -165,5 +171,5 @@ jobs:
             Databricks Multiple Resources Environment: ${{ env.ISSUE_ENVIRONMENT }}
             Databricks Multiple Resources Payload:
               ```json
-              ${{ env.XLSX_JSON }}
+              ${{ env.FORMATTED_XLSX_JSON }}
               ```
