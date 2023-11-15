@@ -60,7 +60,7 @@
       "create_or_delete": "create",
       "resource_name": "dbx-el2",
       "el_s3_url": "s3://dbx-unitycatalog-bucket",
-      "el_sc_name": "dbx-sc1",
+      "el_sc_name": "dbx-sc2",
       "el_principal_name": "dev-contributors",
       "el_principal_privileges": [
         "ALL_PRIVILEGES"
@@ -126,6 +126,19 @@
       "environment": "unity_catalog",
       "create_or_delete": "create",
       "resource_name": "dbx-sc1",
+      "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-role-external-assume",
+      "sc_principal_name": "dev-contributors",
+      "sc_principal_privileges": [
+        "CREATE_EXTERNAL_LOCATION",
+        "CREATE_EXTERNAL_TABLE",
+        "READ_FILES",
+        "WRITE_FILES"
+      ]
+    },
+    "dbx-sc2": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-sc2",
       "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-role-external-assume",
       "sc_principal_name": "dev-contributors",
       "sc_principal_privileges": [
