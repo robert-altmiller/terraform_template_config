@@ -163,4 +163,7 @@ jobs:
             PR Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
             PR Feature Main Branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
             Databricks Multiple Resources Environment: ${{ env.ISSUE_ENVIRONMENT }}
-            Databricks Multiple Resources Payload: ${{ env.XLSX_JSON }}
+            Databricks Multiple Resources Payload:
+              \``json
+              ${{ env.XLSX_JSON }}
+              \``
