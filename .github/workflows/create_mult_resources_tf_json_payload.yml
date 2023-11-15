@@ -151,13 +151,24 @@ jobs:
       - name: Format XLS_JSON for Github pull request
         id: forma_xlsx_json
         run: |
-          XLSX_JSON_SINGLE_TICKS='${{ env.XLSX_JSON }}'
-          echo "XLSX_JSON_SINGLE_TICKS=$XLSX_JSON_SINGLE_TICKS" >> $GITHUB_ENV
+          echo "XLSX_JSON_SINGLE_TICKS=${{ env.XLSX_JSON }}" >> $GITHUB_ENV
 
-
+          
       - name: Prepare pretty printed json for Github pull request
         run: |
-            echo "FORMATTED_XLSX_JSON=$(echo '${{ env.XLSX_JSON_SINGLE_TICKS }}' | jq '.')" >> $GITHUB_ENV
+          echo "FORMATTED_XLSX_JSON=$(echo \"$XLSX_JSON_SINGLE_TICKS\" | jq '.')" >> $GITHUB_ENV
+      
+
+      # - name: Format XLS_JSON for Github pull request
+      #   id: forma_xlsx_json
+      #   run: |
+      #     XLSX_JSON_SINGLE_TICKS='${{ env.XLSX_JSON }}'
+      #     echo "XLSX_JSON_SINGLE_TICKS=$XLSX_JSON_SINGLE_TICKS" >> $GITHUB_ENV
+
+
+      # - name: Prepare pretty printed json for Github pull request
+      #   run: |
+      #       echo "FORMATTED_XLSX_JSON=$(echo '${{ env.XLSX_JSON_SINGLE_TICKS }}' | jq '.')" >> $GITHUB_ENV
 
 
       - name: Create Github issue pull request to main branch + approval
