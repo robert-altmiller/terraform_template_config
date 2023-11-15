@@ -1,11 +1,10 @@
 {
   "environment": "unity_catalog",
   "create_or_delete": "destroy",
-  "resource_name": "my-el",
-  "el_s3_url": "fgf",
-  "el_sc_name": "fdgd",
-  "el_principal_name": "fdgd",
-  "el_principal_privileges": [
-    "CREATE_EXTERNAL_VOLUME"
+  "resource_name": "my-sc-2",
+  "sc_role_arn": "my-sc-2",
+  "sc_principal_name": "my-sc-2",
+  "sc_principal_privileges": [
+    "CREATE_EXTERNAL_TABLE"
   ]
 }
