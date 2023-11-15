@@ -1,15 +1,11 @@
 {
   "environment": "unity_catalog",
-  "create_or_delete": "create",
+  "create_or_delete": "destroy",
   "resource_name": "my-el",
-  "el_s3_url": "s3://dbx-unitycatalog-bucket",
-  "el_sc_name": "my-sc-2",
-  "el_principal_name": "dev-contributors",
+  "el_s3_url": "fgf",
+  "el_sc_name": "fdgd",
+  "el_principal_name": "fdgd",
   "el_principal_privileges": [
-    "CREATE_EXTERNAL_TABLE",
-    "CREATE_EXTERNAL_VOLUME",
-    "CREATE_MANAGED_STORAGE",
-    "READ_FILES",
-    "WRITE_FILES"
+    "CREATE_EXTERNAL_VOLUME"
   ]
 }
