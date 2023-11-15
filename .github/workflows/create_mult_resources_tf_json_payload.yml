@@ -114,7 +114,6 @@ jobs:
                 echo "$UPDATED_MASTER_CONFIG" > master_config/$ENVIRONMENT/$json_key.json
             done
           done
-          echo "FORMATTED_XLSX_JSON=$(echo '${{ env.XLSX_JSON }}' | jq '.')" >> $GITHUB_ENV
 
 
       - name: Combine all the Master Config json files together into a single dictionary (e.g. tf_issue_submission.json)
@@ -128,7 +127,6 @@ jobs:
           done
           # Save the merged JSON
           echo "$OUTPUT_JSON" > issue_submission/tf_issue_submission.json
-
 
 
       - name: Commit updated issue submission JSON file to Terraform Config repo
@@ -149,11 +147,11 @@ jobs:
         id: date
         run: echo "date=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
 
-
-      - name: Format JSON
+      - name: Format XLS_JSON for Github pull request
         id: format_json
         run: |
-          
+          echo "FORMATTED_XLSX_JSON=$(echo '${{ env.XLSX_JSON }}' | jq '.')" >> $GITHUB_ENV
+
 
       - name: Create Github issue pull request to main branch + approval
         uses: repo-sync/pull-request@v2
