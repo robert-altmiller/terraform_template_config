@@ -11,17 +11,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
+      
       - name: Get Pull Request Body Comments and Strip Out Pull Request Feature Main Branch Name
+        if: ${{ github.event.pull_request.merged }} == true
         id: get_pull_request_comments
         run: |
           PR_BODY="${{ github.event.pull_request.body }}"
           ISSUE_BRANCH_NAME_MAIN=$(echo "$PR_BODY" | grep -oP 'PR Feature Main Branch: \K[^ ]+')
           echo "ISSUE_BRANCH_NAME_MAIN: $ISSUE_BRANCH_NAME_MAIN"
           echo "ISSUE_BRANCH_NAME_MAIN=$ISSUE_BRANCH_NAME_MAIN" >> $GITHUB_ENV
+    
 
 
       - uses: robert-altmiller/terraform_template@main
+        if: ${{ github.event.pull_request.merged }} == true
         with:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} 
           AWS_REGION:  ${{ secrets.AWS_REGION }}
