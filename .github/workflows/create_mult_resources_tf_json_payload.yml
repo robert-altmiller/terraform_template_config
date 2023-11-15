@@ -150,7 +150,7 @@ jobs:
       - name: Format XLS_JSON for Github pull request
         id: format_json
         run: |
-          echo "FORMATTED_XLSX_JSON=$(echo ${{ env.XLSX_JSON }} | jq '.')" >> $GITHUB_ENV
+          echo "FORMATTED_XLSX_JSON=$(echo '${{ env.XLSX_JSON }}' | jq '.')" >> $GITHUB_ENV
           echo FORMATTED_XLSX_JSON: $FORMATTED_XLSX_JSON
 
 
