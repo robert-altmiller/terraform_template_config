@@ -82,6 +82,7 @@ jobs:
             echo "$XLSX_JSON" | jq -c ".$json_key[]" | while read -r block; do
                 
                 ENVIRONMENT=$(echo "$block" | jq -r '.environment')
+                echo "ISSUE_ENVIRONMENT=$ENVIRONMENT" >> $GITHUB_ENV
 
                 DIRECTORY="master_config/$ENVIRONMENT"
                 mkdir -p "$DIRECTORY"
@@ -113,7 +114,6 @@ jobs:
                 echo "$UPDATED_MASTER_CONFIG" > master_config/$ENVIRONMENT/$json_key.json
             done
           done
-          echo "ISSUE_ENVIRONMENT=$ENVIRONMENT" >> $GITHUB_ENV
 
 
       - name: Combine all the Master Config json files together into a single dictionary (e.g. tf_issue_submission.json)
