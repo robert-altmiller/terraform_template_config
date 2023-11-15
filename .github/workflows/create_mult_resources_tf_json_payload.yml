@@ -78,7 +78,6 @@ jobs:
           for json_key in $json_keys; do
             echo "json_key: $json_key"
 
-
           #   # Use jq to extract the blocks within the current JSON key and iterate over them
           #   echo "$XLSX_JSON" | jq -c ".$json_key[]" | while read -r block; do
                 
@@ -113,7 +112,7 @@ jobs:
           #       echo UPDATED_MASTER_CONFIG (AFTER APPEND): $UPDATED_MASTER_CONFIG
           #       echo "$UPDATED_MASTER_CONFIG" > master_config/$ENVIRONMENT/$json_key.json
           #   done
-          # done
+          done
           # echo "ISSUE_ENVIRONMENT=$ENVIRONMENT" >> $GITHUB_ENV
 
 
