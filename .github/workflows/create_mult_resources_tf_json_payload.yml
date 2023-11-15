@@ -151,8 +151,8 @@ jobs:
       - name: Format XLS_JSON for Github pull request
         id: forma_xlsx_json
         run: |
-          XLSX_JSON='${{ env.XLSX_JSON }}'
-          FORMATTED_XLSX_JSON=$(echo "$XLSX_JSON" | jq '.')
+          XLSX_JSON_SINGLE_TICKS='${{ env.XLSX_JSON }}'
+          FORMATTED_XLSX_JSON=$(echo "$XLSX_JSON_SINGLE_TICKS" | jq '.')
           echo "FORMATTED_XLSX_JSON=$FORMATTED_XLSX_JSON" >> $GITHUB_ENV
           echo "FORMATTED_XLSX_JSON: $FORMATTED_XLSX_JSON"
 
