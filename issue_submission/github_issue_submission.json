@@ -1,10 +1,11 @@
 {
   "environment": "unity_catalog",
   "create_or_delete": "destroy",
-  "resource_name": "dbx-sc2",
-  "sc_role_arn": "dbx-sc2",
-  "sc_principal_name": "dbx-sc2",
+  "resource_name": "dbx-sc3",
+  "sc_role_arn": "dbx-sc3",
+  "sc_principal_name": "dbx-sc3",
   "sc_principal_privileges": [
-    "CREATE_EXTERNAL_LOCATION"
+    "CREATE_EXTERNAL_LOCATION",
+    "CREATE_EXTERNAL_TABLE"
   ]
 }
