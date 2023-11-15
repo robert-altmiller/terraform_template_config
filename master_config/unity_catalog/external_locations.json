@@ -1,3 +1,15 @@
 {
-  "external_locations": {}
+  "external_locations": {
+    "my-el": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "my-el",
+      "el_s3_url": "s3://dbx-unitycatalog-bucket",
+      "el_sc_name": "my-sc",
+      "el_principal_name": "dev-contributors",
+      "el_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ]
+    }
+  }
 }
