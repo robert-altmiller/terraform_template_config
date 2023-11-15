@@ -68,8 +68,9 @@ jobs:
         run: |
           pip install pandas openpyxl
           XLSX_JSON=$(python ./xlsxtojson/process_xlsx_input.py)
+          XLSX_JSON_FORMATTED=$(echo "$XLSX_JSON" | jq -r . | jq -S .)
           echo XLSX_JSON: $XLSX_JSON
-          echo "XLSX_JSON=$XLSX_JSON" >> $GITHUB_ENV
+          echo "XLSX_JSON=$XLSX_JSON_FORMATTED" >> $GITHUB_ENV
 
           # Use jq to extract the top-level keys (block names) from the JSON
           json_keys=$(echo "$XLSX_JSON" | jq -r 'keys[]')
@@ -78,25 +79,26 @@ jobs:
           for json_key in $json_keys; do
             echo "json_key: $json_key"
 
-            DIRECTORY="master_config/unity_catalog"
-            mkdir -p "$DIRECTORY"
-            FILE="${DIRECTORY}/$json_key.json"
-            if [[ ! -f "$FILE" ]]; then
-                echo '{"$json_key": {}}' > "$FILE"
-                echo "$FILE created."
-            else
-                echo "$FILE already exists."
-            fi
 
             # Use jq to extract the blocks within the current JSON key and iterate over them
             echo "$XLSX_JSON" | jq -c ".$json_key[]" | while read -r block; do
                 
                 ENVIRONMENT=$(echo "$block" | jq -r '.environment')
 
+                DIRECTORY="master_config/$ENVIRONMENT"
+                mkdir -p "$DIRECTORY"
+                FILE="${DIRECTORY}/$json_key.json"
+                if [[ ! -f "$FILE" ]]; then
+                    echo '{"$json_key": {}}' > "$FILE"
+                    echo "$FILE created."
+                else
+                    echo "$FILE already exists."
+                fi
+
                 ISSUE_JSON=$block
                 echo ISSUE_JSON: $ISSUE_JSON
                 MASTER_CONFIG_JSON=$(cat master_config/$ENVIRONMENT/$json_key.json)
-                echo MASTER_CONFIG_JSON: $MASTER_CONFIG_JSON
+                echo MASTER_CONFIG_JSON (BEFORE APPEND): $MASTER_CONFIG_JSON
                 ISSUE_RESOURCE_NAME=$(echo $ISSUE_JSON | jq -r .resource_name)
                 ISSUE_ACTION=$(echo $ISSUE_JSON | jq -r .create_or_delete)
 
@@ -109,77 +111,58 @@ jobs:
                   exit 1
                 fi
 
-                echo UPDATED_MASTER_CONFIG: $UPDATED_MASTER_CONFIG
+                echo UPDATED_MASTER_CONFIG (AFTER APPEND): $UPDATED_MASTER_CONFIG
                 echo "$UPDATED_MASTER_CONFIG" > master_config/$ENVIRONMENT/$json_key.json
-              #echo "block: $block"
             done
           done
-
-      # - name: Combine all the Master Config json files together into a single dictionary (e.g. tf_issue_submission.json)
-      #   run: |
-      #     OUTPUT_JSON="{}" # initialize an empty JSON object
-      #     # Iterate over each JSON file in the directory
-      #     for filepath in master_config/${{ env.ISSUE_ENVIRONMENT }}/*.json; do
-      #       FILE_CONTENTS=$(cat "$filepath")
-      #       # Directly merge this file into our main JSON object
-      #       OUTPUT_JSON=$(jq -s '.[0] * .[1]' <<< "$OUTPUT_JSON $FILE_CONTENTS")
-      #     done
-      #     # Save the merged JSON
-      #     echo "$OUTPUT_JSON" > issue_submission/tf_issue_submission.json
+          echo "ISSUE_ENVIRONMENT=$ENVIRONMENT" >> $GITHUB_ENV
 
 
-      # - name: Get Github env, repo url and master config config fname, and write to issue_submission --> env.sh
-      #   run: |
-      #     echo export ENVIRONMENT=${{ env.ISSUE_ENVIRONMENT }} > issue_submission/env.sh
-      #     echo export ISSUE_BRANCH_NAME=${{ env.ISSUE_BRANCH_NAME }} >> issue_submission/env.sh
-      #     echo export ISSUE_BRANCH_NAME_MAIN=${{ env.ISSUE_BRANCH_NAME_MAIN }} >> issue_submission/env.sh
-      #     echo export ISSUE_RESOURCE_NAME=${{ env.ISSUE_RESOURCE_NAME }} >> issue_submission/env.sh
-      #     echo export ISSUE_RESOURCE_TYPE=${{ env.ISSUE_TITLE }} >> issue_submission/env.sh
-      #     echo export ISSUE_CREATE_DESTROY=${{ env.ISSUE_CREATE_DESTROY }} >> issue_submission/env.sh
-      #     echo export ISSUE_REQUESTOR_EMAIL=${{ env.ISSUE_USER_LOGIN }}${{ env.EMAIL_COMPANY_NAME }}  >> issue_submission/env.sh
-      #     echo export MASTER_CONFIG_JSON_FNAME=${{ env.ISSUE_TITLE }}.json >> issue_submission/env.sh
-      #     echo export GITHUB_ISSUE_NUMBER=${{ github.event.issue.number }} >> issue_submission/env.sh
-      #     echo export GITHUB_REPO_OWNER=${{ github.repository_owner }} >> issue_submission/env.sh
-      #     echo export GITHUB_REPO_NAME=${{ github.event.repository.name }} >> issue_submission/env.sh
-      #     echo export GITHUB_REPO_URL=${{ github.server_url }}/${{ github.repository_owner }}/${{ github.event.repository.name }}.git >> issue_submission/env.sh
+      - name: Combine all the Master Config json files together into a single dictionary (e.g. tf_issue_submission.json)
+        run: |
+          OUTPUT_JSON="{}" # initialize an empty JSON object
+          # Iterate over each JSON file in the directory
+          for filepath in master_config/${{ env.ISSUE_ENVIRONMENT }}/*.json; do
+            FILE_CONTENTS=$(cat "$filepath")
+            # Directly merge this file into our main JSON object
+            OUTPUT_JSON=$(jq -s '.[0] * .[1]' <<< "$OUTPUT_JSON $FILE_CONTENTS")
+          done
+          # Save the merged JSON
+          echo "$OUTPUT_JSON" > issue_submission/tf_issue_submission.json
 
 
-      # - name: Commit updated issue submission JSON file to Terraform Config repo
-      #   run: |
-      #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
-      #     git config --global user.name "github-actions[bot]"
-      #     git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}.git
-      #     git fetch
-      #     git checkout ${{ env.ISSUE_BRANCH_NAME }} || git checkout -b ${{ env.ISSUE_BRANCH_NAME }} # Check out the branch if it exists, otherwise create it
-      #     git pull origin ${{ env.ISSUE_BRANCH_NAME }} || true # If the branch is new, this pull will fail, hence we use `|| true` to prevent the workflow from stopping
-      #     # Adding all folders and changes
-      #     git add --all
-      #     git commit -m 'new infrastructure submission' || echo "No changes to commit"
-      #     git push origin ${{ env.ISSUE_BRANCH_NAME }}
+
+      - name: Commit updated issue submission JSON file to Terraform Config repo
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}.git
+          git fetch
+          git checkout ${{ env.ISSUE_BRANCH_NAME }} || git checkout -b ${{ env.ISSUE_BRANCH_NAME }} # Check out the branch if it exists, otherwise create it
+          git pull origin ${{ env.ISSUE_BRANCH_NAME }} || true # If the branch is new, this pull will fail, hence we use `|| true` to prevent the workflow from stopping
+          # Adding all folders and changes
+          git add --all
+          git commit -m 'new infrastructure submission' || echo "No changes to commit"
+          git push origin ${{ env.ISSUE_BRANCH_NAME }}
 
 
-      # - name: Get the current date for Github issue pull request
-      #   id: date
-      #   run: echo "date=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+      - name: Get the current date for Github issue pull request
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
 
 
-      # - name: Create Github issue pull request to main branch + approval
-      #   uses: repo-sync/pull-request@v2
-      #   with:
-      #     source_branch: ${{ env.ISSUE_BRANCH_NAME }}
-      #     destination_branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
-      #     github_token: ${{ secrets.GH_TOKEN }}
-      #     pr_title: "databricks - ${{ env.ISSUE_TITLE }} - request (${{ env.ISSUE_ENVIRONMENT }})"
-      #     pr_body: |
-      #       Issue Requestor: ${{ env.ISSUE_USER_LOGIN }}${{ env.EMAIL_COMPANY_NAME }}
-      #       PR Time: ${{ env.date }}
-      #       PR Person: ${{ github.actor }}
-      #       PR Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
-      #       PR Feature Main Branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
-      #       Databricks Resource Environment: ${{ env.ISSUE_ENVIRONMENT }}
-      #       Databricks Resource Type: ${{ env.ISSUE_TITLE }}
-      #       Databricks Resource Action: ${{ env.ISSUE_CREATE_DESTROY }}
-      #       Databricks Resource Name: ${{ env.ISSUE_RESOURCE_NAME  }}
-
-      #       If you have merge conflict add a comment 'fix pr' in the issue below:
-      #       Issue Number: [#${{ github.event.issue.number }}](https://github.com/${{ github.repository }}/issues/${{ github.event.issue.number }})
+      - name: Create Github issue pull request to main branch + approval
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: ${{ env.ISSUE_BRANCH_NAME }}
+          destination_branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
+          github_token: ${{ secrets.GH_TOKEN }}
+          pr_title: "databricks - multiple resources - request (${{ env.ISSUE_ENVIRONMENT }})"
+          pr_body: |
+            Issue Requestor: ${{ env.ISSUE_USER_LOGIN }}${{ env.EMAIL_COMPANY_NAME }}
+            PR Time: ${{ env.date }}
+            PR Person: ${{ github.actor }}
+            PR Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
+            PR Feature Main Branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
+            Databricks Multiple Resources Environment: ${{ env.ISSUE_ENVIRONMENT }}
+            Databricks Multiple Resources Payload: ${{ env.XLSX_JSON }}
