@@ -133,7 +133,7 @@ jobs:
           echo export ENVIRONMENT=${{ env.ISSUE_ENVIRONMENT }} > issue_submission/env.sh
           echo export ISSUE_BRANCH_NAME=${{ env.ISSUE_BRANCH_NAME }} >> issue_submission/env.sh
           echo export ISSUE_BRANCH_NAME_MAIN=${{ env.ISSUE_BRANCH_NAME_MAIN }} >> issue_submission/env.sh
-          echo export ISSUE_RESOURCE_NAME=${{ env.XLSX_JSON }} >> issue_submission/env.sh
+          echo export ISSUE_RESOURCE_NAME="${{ env.XLSX_JSON }}" >> issue_submission/env.sh
           echo export ISSUE_RESOURCE_TYPE="multiple" >> issue_submission/env.sh
           echo export ISSUE_REQUESTOR_EMAIL=${{ env.ISSUE_USER_LOGIN }}${{ env.EMAIL_COMPANY_NAME }}  >> issue_submission/env.sh
           echo export GITHUB_ISSUE_NUMBER=${{ github.run_id }} >> issue_submission/env.sh
