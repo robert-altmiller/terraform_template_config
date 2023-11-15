@@ -69,9 +69,7 @@ jobs:
           pip install pandas openpyxl
           XLSX_JSON=$(python ./xlsxtojson/process_xlsx_input.py)
           echo XLSX_JSON: $XLSX_JSON
-          XLSX_JSON_FORMATTED=$(echo "$XLSX_JSON" | jq -c '. | . as $json | keys[] | {(.): $json[.]}')
-          echo XLSX_JSON_FORMATTED: $XLSX_JSON_FORMATTED
-          echo "XLSX_JSON_FORMATTED=$XLSX_JSON_FORMATTED" >> $GITHUB_ENV
+          echo "XLSX_JSON=$XLSX_JSON" >> $GITHUB_ENV
 
           # Use jq to extract the top-level keys (block names) from the JSON
           json_keys=$(echo "$XLSX_JSON" | jq -r 'keys[]')
@@ -166,4 +164,4 @@ jobs:
             PR Feature Branch: ${{ env.ISSUE_BRANCH_NAME }}
             PR Feature Main Branch: ${{ env.ISSUE_BRANCH_NAME_MAIN }}
             Databricks Multiple Resources Environment: ${{ env.ISSUE_ENVIRONMENT }}
-            Databricks Multiple Resources Payload: ${{ env.XLSX_JSON_FORMATTED }}
+            Databricks Multiple Resources Payload: ${{ env.XLSX_JSON }}
