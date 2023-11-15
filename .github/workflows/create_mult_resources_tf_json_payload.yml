@@ -10,8 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ISSUE_TITLE: "${{ github.event.issue.labels[0].name }}"
-      ISSUE_USER_LOGIN: "${{ github.event.issue.user.login }}"
+      ISSUE_USER_LOGIN: "${{ github.repository_owner }}"
       EMAIL_COMPANY_NAME: "@databricks.com"
     
     steps:
