@@ -130,7 +130,7 @@ jobs:
 
       - name: Get Github env, repo url and master config config fname, and write to issue_submission --> env.sh
         run: |
-          echo export XLSX_JSON='${{ env.XLSX_JSON }}' > issue_submission/env.sh
+          # echo export XLSX_JSON='${{ env.XLSX_JSON }}' > issue_submission/env.sh
           echo export ENVIRONMENT=${{ env.ISSUE_ENVIRONMENT }} >> issue_submission/env.sh
           echo export ISSUE_BRANCH_NAME=${{ env.ISSUE_BRANCH_NAME }} >> issue_submission/env.sh
           echo export ISSUE_BRANCH_NAME_MAIN=${{ env.ISSUE_BRANCH_NAME_MAIN }} >> issue_submission/env.sh
