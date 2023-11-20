@@ -1,11 +1,11 @@
 {
   "environment": "unity_catalog",
-  "create_or_delete": "create",
+  "create_or_delete": "destroy",
   "resource_name": "dbx-el3",
-  "el_s3_url": "s3://dbx-artifacts-bucket",
+  "el_s3_url": "sdfdfs",
   "el_sc_name": "dbx-sc1",
-  "el_principal_name": "dev-contributors",
+  "el_principal_name": "contributors",
   "el_principal_privileges": [
-    "ALL_PRIVILEGES"
+    "CREATE_MANAGED_STORAGE"
   ]
 }
