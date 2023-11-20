@@ -39,6 +39,14 @@
   },
   "cluster_policies": {},
   "clusters": {},
+  "delta_shares": {
+    "dbx-share": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-share",
+      "ds_recipient_name": "robert-altmiller"
+    }
+  },
   "external_locations": {
     "dbx-el-1": {
       "environment": "unity_catalog",
