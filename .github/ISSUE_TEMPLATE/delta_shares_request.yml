@@ -1,0 +1,105 @@
+name: Delta Shares Request
+description: Create Delta Shares Request Form
+labels: [Delta Shares]
+
+title: "Delta Shares"
+
+body:
+
+- type: dropdown
+  id: environment
+  attributes:
+    label: Select Environment
+    options:
+      - unity_catalog
+  validations:
+    required: True
+
+- type: dropdown
+  id: create_or_delete
+  attributes:
+    label: Select to 'create' or 'destroy' Resource
+    options:
+      - create
+      - destroy
+  validations:
+    required: True
+
+- type: input
+  id: catalog_metastore_id
+  attributes:
+    description: "The metastore id can be found in the Databricks admin account console."
+    label: Please Enter the Metastore ID for the UC Catalog
+  validations:
+    required: True
+
+- type: input
+  id: resource_name
+  attributes:
+    description: "Please note: 'underscores' or 'dashes' can be used in the name."
+    label: Please Enter the Delta Shares Name
+  validations:
+    required: True
+
+- type: input
+  id: ds_recipient_name
+  attributes:
+    label: Please Enter the Delta Share Recipient Name
+    description: "Please note: only 'dashes' are allowed in the recipient name."
+  validations:
+    required: False
+
+# - type: input
+#   id: ds_schema_name
+#   attributes:
+#     label: Please Enter the Schema Name
+#   validations:
+#     required: False
+
+# - type: input
+#   id: ds_catalog_principal_name
+#   attributes:
+#     label: Please Enter the Group Name for Catalog Access
+#   validations:
+#     required: True
+
+# - type: checkboxes
+#   id: catalog_principal_privileges
+#   attributes:
+#     label: Please Select the Grants for the Group Name
+#     description: "Please note: If selecting 'ALL_PRIVILEGES', ensure no other boxes are checked."
+#     options:
+#       - label: USE_CATALOG
+#         required: False
+#       - label: USE_SCHEMA
+#         required: False
+#       - label: APPLY_TAG
+#         required: False
+#       - label: EXECUTE
+#         required: False
+#       - label: MODIFY
+#         required: False
+#       - label: READ_VOLUME
+#         required: False
+#       - label: REFRESH
+#         required: False
+#       - label: SELECT
+#         required: False
+#       - label: WRITE_VOLUME
+#         required: False
+#       - label: CREATE_FUNCTION
+#         required: False
+#       - label: CREATE_MATERIALIZED_VIEW
+#         required: False
+#       - label: CREATE_MODEL
+#         required: False
+#       - label: CREATE_SCHEMA
+#         required: False
+#       - label: CREATE_TABLE
+#         required: False
+#       - label: CREATE_VOLUME
+#         required: False
+#       - label: ALL_PRIVILEGES
+#         required: False
+#   validations:
+#     required: True
