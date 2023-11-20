@@ -1,3 +1,46 @@
 {
-  "schemas": {}
+  "schemas": {
+    "dbx-schema-1": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-schema-1",
+      "el_resource_name": "s3://dbx-dev-bucket",
+      "catalog_name": "dbx-catalog-1",
+      "catalog_principal_name": "dev-contributors",
+      "catalog_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ],
+      "schema_principal_name": "dev-contributors",
+      "schema_principal_privileges": [
+        "USE_SCHEMA",
+        "APPLY_TAG",
+        "EXECUTE",
+        "MODIFY",
+        "READ_VOLUME",
+        "REFRESH",
+        "SELECT",
+        "WRITE_VOLUME",
+        "CREATE_FUNCTION",
+        "CREATE_MATERIALIZED_VIEW",
+        "CREATE_MODEL",
+        "CREATE_TABLE",
+        "CREATE_VOLUME"
+      ]
+    },
+    "dbx-schema-2": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-schema-2",
+      "el_resource_name": "s3://dbx-unitycatalog-bucket",
+      "catalog_name": "dbx-catalog-2",
+      "catalog_principal_name": "dev-contributors",
+      "catalog_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ],
+      "schema_principal_name": "dev-contributors",
+      "schema_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ]
+    }
+  }
 }
