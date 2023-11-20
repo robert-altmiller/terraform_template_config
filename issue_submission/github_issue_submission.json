@@ -1,11 +1,11 @@
 {
   "environment": "unity_catalog",
   "create_or_delete": "create",
-  "resource_name": "dbx-el3",
+  "resource_name": "dbx-sc3",
   "el_s3_url": "s3://dbx-prod-bucket",
   "el_sc_name": "dbx-sc1",
   "el_principal_name": "dev-contributors",
   "el_principal_privileges": [
-    "WRITE_FILES"
+    "ALL_PRIVILEGES"
   ]
 }
