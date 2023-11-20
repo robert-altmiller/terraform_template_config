@@ -1,11 +1,6 @@
 {
   "environment": "unity_catalog",
-  "create_or_delete": "destroy",
-  "resource_name": "dbx-el3",
-  "el_s3_url": "sdfdfs",
-  "el_sc_name": "dbx-sc1",
-  "el_principal_name": "contributors",
-  "el_principal_privileges": [
-    "CREATE_MANAGED_STORAGE"
-  ]
+  "create_or_delete": "create",
+  "resource_name": "dbx-share",
+  "ds_recipient_name": "robert-altmiller"
 }
