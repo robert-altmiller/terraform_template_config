@@ -36,8 +36,8 @@ body:
 - type: input
   id: resource_name
   attributes:
-    description: "Please note: 'underscores' or 'dashes' can be used in the name."
-    label: Please Enter the Delta Shares Name
+    description: "Please note: only 'dashes' are allowed in the delta share name."
+    label: Please Enter the Delta Share Name
   validations:
     required: True
 
