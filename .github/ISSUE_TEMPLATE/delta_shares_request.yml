@@ -11,7 +11,8 @@ body:
   attributes:
     label: Select Environment
     options:
-      - unity_catalog
+      - dev
+      - prod
   validations:
     required: True
 
