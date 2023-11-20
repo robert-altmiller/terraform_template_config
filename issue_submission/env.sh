@@ -1,12 +1,12 @@
 export ENVIRONMENT=unity_catalog
-export ISSUE_BRANCH_NAME=issue-722-branch
-export ISSUE_BRANCH_NAME_MAIN=issue-722-main-branch
+export ISSUE_BRANCH_NAME=issue-727-branch
+export ISSUE_BRANCH_NAME_MAIN=issue-727-main-branch
 export ISSUE_RESOURCE_NAME=dbx-el3
 export ISSUE_RESOURCE_TYPE=external_locations
 export ISSUE_CREATE_DESTROY=create
 export ISSUE_REQUESTOR_EMAIL=robert-altmiller@databricks.com
 export MASTER_CONFIG_JSON_FNAME=external_locations.json
-export GITHUB_ISSUE_NUMBER=722
+export GITHUB_ISSUE_NUMBER=727
 export GITHUB_REPO_OWNER=robert-altmiller
 export GITHUB_REPO_NAME=terraform_template_config
 export GITHUB_REPO_URL=https://github.com/robert-altmiller/terraform_template_config.git
