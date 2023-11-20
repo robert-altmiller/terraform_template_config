@@ -2,9 +2,9 @@
   "environment": "unity_catalog",
   "create_or_delete": "destroy",
   "resource_name": "dbx-el1",
-  "el_s3_url": "sdf",
-  "el_sc_name": "sdfsd",
-  "el_principal_name": "sdfsd",
+  "el_s3_url": "sd",
+  "el_sc_name": "sd",
+  "el_principal_name": "ds",
   "el_principal_privileges": [
     "CREATE_EXTERNAL_TABLE"
   ]
