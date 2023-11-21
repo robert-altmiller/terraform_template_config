@@ -1,3 +1,10 @@
 {
-    "delta_shares": {}
+  "delta_shares": {
+    "dbx-share": {
+      "environment": "dev",
+      "create_or_delete": "create",
+      "resource_name": "dbx-share",
+      "ds_recipient_name": "robert-altmiller"
+    }
+  }
 }
