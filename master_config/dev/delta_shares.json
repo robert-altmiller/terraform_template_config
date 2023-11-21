@@ -6,6 +6,13 @@
       "ds_metastore_id": "dedc0345-c2c5-475c-8cf3-262335cbcbcd",
       "resource_name": "dbx-share",
       "ds_recipient_name": "robert-altmiller"
+    },
+    "dbx-share1": {
+      "environment": "dev",
+      "create_or_delete": "create",
+      "ds_metastore_id": "dedc0345-c2c5-475c-8cf3-262335cbcbcd",
+      "resource_name": "dbx-share1",
+      "ds_recipient_name": "robert-altmiller2"
     }
   }
 }
