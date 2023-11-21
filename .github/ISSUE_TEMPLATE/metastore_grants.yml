@@ -27,6 +27,15 @@ body:
     required: True
 
 - type: input
+  id: resource_name
+  attributes:
+    label: Default Metastore Resource Name (Don't Change)
+    options:
+      - metastore
+  validations:
+    required: True
+
+- type: input
   id: metastore_id
   attributes:
     description: "The metastore id can be found in the Databricks admin account console."
