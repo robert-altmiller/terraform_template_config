@@ -1,0 +1,79 @@
+name: Delta Shares Request
+description: Create Delta Shares Request Form
+labels: [Metastore Grants]
+
+title: "Metastore Grants"
+
+body:
+
+- type: dropdown
+  id: environment
+  attributes:
+    label: Select Environment
+    options:
+      - dev
+      - prod
+  validations:
+    required: True
+
+- type: dropdown
+  id: create_or_delete
+  attributes:
+    label: Select to 'create' or 'destroy' Resource
+    options:
+      - create
+      - destroy
+  validations:
+    required: True
+
+- type: input
+  id: metastore_id
+  attributes:
+    description: "The metastore id can be found in the Databricks admin account console."
+    label: Please Enter the Databricks Workspace Metastore ID
+  validations:
+    required: True
+
+- type: input
+  id: metastore_principal_name
+  attributes:
+    label: Please Enter the Principal or Group Name for Metastore Grants
+  validations:
+    required: False
+
+- type: checkboxes
+  id: metastore_principal_privileges
+  attributes:
+    label: Please Select the Grants for the Principal or Group Name
+    description: "Please note: If selecting 'ALL_PRIVILEGES', ensure no other boxes are checked."
+    options:
+      - label: CREATE_CATALOG
+        required: False
+      - label: CREATE_CONNECTION
+        required: False
+      - label: CREATE_EXTERNAL_LOCATION
+        required: False
+      - label: CREATE_PROVIDER
+        required: False
+      - label: CREATE_RECIPIENT
+        required: False
+      - label: CREATE_SHARE
+        required: False
+      - label: CREATE_STORAGE_CREDENTIAL
+        required: False
+      - label: MANAGE_ALLOWLIST
+        required: False
+      - label: SET_SHARE_PERMISSION
+        required: False
+      - label: USE_CONNECTION
+        required: False
+      - label: USE_MARKETPLACE_ASSETS
+        required: False
+      - label: USE_PROVIDER
+        required: False
+      - label: USE_RECIPIENT
+        required: False
+      - label: USE_SHARE
+        required: False
+  validations:
+    required: True
