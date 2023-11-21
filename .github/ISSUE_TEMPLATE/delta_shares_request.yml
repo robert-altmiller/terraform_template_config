@@ -27,7 +27,7 @@ body:
     required: True
 
 - type: input
-  id: catalog_metastore_id
+  id: ds_metastore_id
   attributes:
     description: "The metastore id can be found in the Databricks admin account console."
     label: Please Enter the Databricks Workspace Metastore ID
