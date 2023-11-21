@@ -1,25 +1,152 @@
 {
-  "catalogs": {},
-  "cluster_policies": {},
-  "clusters": {},
-  "delta_shares": {
-    "dbx-share": {
-      "environment": "dev",
+  "catalogs": {
+    "dbx-catalog-1": {
+      "environment": "unity_catalog",
       "create_or_delete": "create",
-      "ds_metastore_id": "dedc0345-c2c5-475c-8cf3-262335cbcbcd",
-      "resource_name": "dbx-share",
-      "ds_recipient_name": "robert-altmiller"
+      "catalog_metastore_id": "dedc0345-c2c5-475c-8cf3-262335cbcbcd",
+      "resource_name": "dbx-catalog-1",
+      "el_resource_name": null,
+      "catalog_principal_name": "dev-contributors",
+      "catalog_principal_privileges": [
+        "USE_CATALOG",
+        "USE_SCHEMA",
+        "APPLY_TAG",
+        "EXECUTE",
+        "MODIFY",
+        "READ_VOLUME",
+        "REFRESH",
+        "SELECT",
+        "WRITE_VOLUME",
+        "CREATE_FUNCTION",
+        "CREATE_MATERIALIZED_VIEW",
+        "CREATE_MODEL",
+        "CREATE_SCHEMA",
+        "CREATE_TABLE",
+        "CREATE_VOLUME"
+      ]
     },
-    "dbx-share1": {
-      "environment": "dev",
+    "dbx-catalog-2": {
+      "environment": "unity_catalog",
       "create_or_delete": "create",
-      "ds_metastore_id": "dedc0345-c2c5-475c-8cf3-262335cbcbcd",
-      "resource_name": "dbx-share1",
-      "ds_recipient_name": "robert-altmiller2"
+      "catalog_metastore_id": "dedc0345-c2c5-475c-8cf3-262335cbcbcd",
+      "resource_name": "dbx-catalog-2",
+      "el_resource_name": null,
+      "catalog_principal_name": "dev-contributors",
+      "catalog_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ]
     }
   },
-  "external_locations": {},
+  "cluster_policies": {},
+  "clusters": {},
+  "delta_shares": {},
+  "external_locations": {
+    "dbx-el-1": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-el-1",
+      "el_s3_url": "s3://dbx-dev-bucket",
+      "el_sc_name": "dbx-sc-1",
+      "el_principal_name": "dev-contributors",
+      "el_principal_privileges": [
+        "CREATE_EXTERNAL_TABLE",
+        "CREATE_EXTERNAL_VOLUME",
+        "CREATE_MANAGED_STORAGE",
+        "READ_FILES",
+        "WRITE_FILES"
+      ]
+    },
+    "dbx-el-2": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-el-2",
+      "el_s3_url": "s3://dbx-unitycatalog-bucket",
+      "el_sc_name": "dbx-sc-1",
+      "el_principal_name": "dev-contributors",
+      "el_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ]
+    },
+    "dbx-el-3": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-el-3",
+      "el_s3_url": "s3://dbx-prod-bucket",
+      "el_sc_name": "dbx-sc-2",
+      "el_principal_name": "dev-contributors",
+      "el_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ]
+    }
+  },
   "metastore_grants": {},
-  "schemas": {},
-  "storage_credentials": {}
+  "schemas": {
+    "dbx-schema-1": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-schema-1",
+      "el_resource_name": "s3://dbx-dev-bucket",
+      "catalog_name": "dbx-catalog-1",
+      "catalog_principal_name": "dev-contributors",
+      "catalog_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ],
+      "schema_principal_name": "dev-contributors",
+      "schema_principal_privileges": [
+        "USE_SCHEMA",
+        "APPLY_TAG",
+        "EXECUTE",
+        "MODIFY",
+        "READ_VOLUME",
+        "REFRESH",
+        "SELECT",
+        "WRITE_VOLUME",
+        "CREATE_FUNCTION",
+        "CREATE_MATERIALIZED_VIEW",
+        "CREATE_MODEL",
+        "CREATE_TABLE",
+        "CREATE_VOLUME"
+      ]
+    },
+    "dbx-schema-2": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-schema-2",
+      "el_resource_name": "s3://dbx-unitycatalog-bucket",
+      "catalog_name": "dbx-catalog-2",
+      "catalog_principal_name": "dev-contributors",
+      "catalog_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ],
+      "schema_principal_name": "dev-contributors",
+      "schema_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ]
+    }
+  },
+  "storage_credentials": {
+    "dbx-sc-1": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-sc-1",
+      "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-role-external-assume",
+      "sc_principal_name": "dev-contributors",
+      "sc_principal_privileges": [
+        "CREATE_EXTERNAL_LOCATION",
+        "CREATE_EXTERNAL_TABLE",
+        "READ_FILES",
+        "WRITE_FILES"
+      ]
+    },
+    "dbx-sc-2": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-sc-2",
+      "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-role-external-assume",
+      "sc_principal_name": "dev-contributors",
+      "sc_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ]
+    }
+  }
 }
