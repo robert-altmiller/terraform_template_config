@@ -29,7 +29,7 @@ body:
   id: catalog_metastore_id
   attributes:
     description: "The metastore id can be found in the Databricks admin account console."
-    label: Please Enter the Metastore ID for the UC Catalog
+    label: Please Enter the Databricks Workspace Metastore ID
   validations:
     required: True
 
