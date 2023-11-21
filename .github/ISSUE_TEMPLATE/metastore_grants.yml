@@ -26,7 +26,7 @@ body:
   validations:
     required: True
 
-- type: input
+- type: dropdown
   id: resource_name
   attributes:
     label: Default Metastore Resource Name (Don't Change)
