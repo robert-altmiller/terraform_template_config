@@ -33,7 +33,7 @@ body:
     options:
       - metastore
   validations:
-    required: True
+    required: False
 
 - type: input
   id: metastore_id
