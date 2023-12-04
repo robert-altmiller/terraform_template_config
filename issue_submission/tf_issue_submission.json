@@ -2,7 +2,16 @@
   "catalogs": {},
   "cluster_policies": {},
   "clusters": {},
-  "delta_shares": {},
+  "delta_shares": {
+    "dbx-share": {
+      "environment": "dev",
+      "create_or_delete": "create",
+      "resource_name": "dbx-share",
+      "ds_recipient_name_external": "robert-altmiller",
+      "ds_recipient_name_databricks": "",
+      "ds_sharing_identifier": ""
+    }
+  },
   "external_locations": {},
   "metastore_grants": {},
   "schemas": {},
