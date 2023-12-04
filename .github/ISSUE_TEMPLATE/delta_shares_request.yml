@@ -43,9 +43,17 @@ body:
     required: True
 
 - type: input
-  id: ds_recipient_name
+  id: ds_recipient_name_external
   attributes:
-    label: Please Enter the Delta Share Recipient Name
+    label: Please Enter the Delta Share EXTERNAL Recipient Name (optional)
+    description: "Please note: only 'dashes' are allowed in the recipient name."
+  validations:
+    required: False
+
+- type: input
+  id: ds_recipient_name_databricks
+  attributes:
+    label: Please Enter the Delta Share DATABRICKS Recipient Name (optional)
     description: "Please note: only 'dashes' are allowed in the recipient name."
   validations:
     required: False
@@ -53,7 +61,7 @@ body:
 - type: input
   id: ds_sharing_identifier
   attributes:
-    label: Please Enter the Recipient Sharing Identifier For Databricks to Databricks Sharing (optional)
+    label: Please Enter the Delta Share Recipient Sharing Identifier For the DATABRICKS Recipient Name (optional)
     description: "Please note: this is only for Databricks to Databricks sharing."
   validations:
     required: False
