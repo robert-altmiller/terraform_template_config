@@ -7,6 +7,14 @@
       "ds_recipient_name_external": "",
       "ds_recipient_name_databricks": "robert-altmiller",
       "ds_sharing_identifier": "aws:ap-northeast-1:baf6ea40-9d56-49f1-92dd-a990a5878a44"
+    },
+    "dbx-share2": {
+      "environment": "dev",
+      "create_or_delete": "create",
+      "resource_name": "dbx-share2",
+      "ds_recipient_name_external": "",
+      "ds_recipient_name_databricks": "robert-altmiller2",
+      "ds_sharing_identifier": "aws:ap-northeast-1:baf6ea40-9d56-49f1-92dd-a990a5878a44"
     }
   }
 }
