@@ -1,8 +1,8 @@
 {
   "environment": "dev",
   "create_or_delete": "create",
-  "resource_name": "dbx-share",
-  "ds_recipient_name_external": "robert-altmiller",
+  "resource_name": "dbx-share3",
+  "ds_recipient_name_external": "robert-altmiller3",
   "ds_recipient_name_databricks": "",
   "ds_recipient_sharing_identifier": ""
 }
