@@ -1,7 +1,10 @@
 {
-  "environment": "dev",
+  "environment": "unity_catalog",
   "create_or_delete": "create",
-  "ds_metastore_id": "dedc0345-c2c5-475c-8cf3-262335cbcbcd",
-  "resource_name": "dbx-share1",
-  "ds_recipient_name": "robert-altmiller2"
+  "resource_name": "dbx-sc",
+  "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-role-external-assume",
+  "sc_principal_name": "dev-contributors",
+  "sc_principal_privileges": [
+    "ALL_PRIVILEGES"
+  ]
 }
