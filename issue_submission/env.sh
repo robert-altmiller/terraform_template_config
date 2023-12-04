@@ -1,12 +1,12 @@
 export ENVIRONMENT=dev
-export ISSUE_BRANCH_NAME=issue-782-branch
-export ISSUE_BRANCH_NAME_MAIN=issue-782-main-branch
-export ISSUE_RESOURCE_NAME=dbx-share3
+export ISSUE_BRANCH_NAME=issue-788-branch
+export ISSUE_BRANCH_NAME_MAIN=issue-788-main-branch
+export ISSUE_RESOURCE_NAME=dbx-share
 export ISSUE_RESOURCE_TYPE=delta_shares
 export ISSUE_CREATE_DESTROY=create
 export ISSUE_REQUESTOR_EMAIL=robert-altmiller@databricks.com
 export MASTER_CONFIG_JSON_FNAME=delta_shares.json
-export GITHUB_ISSUE_NUMBER=782
+export GITHUB_ISSUE_NUMBER=788
 export GITHUB_REPO_OWNER=robert-altmiller
 export GITHUB_REPO_NAME=terraform_template_config
 export GITHUB_REPO_URL=https://github.com/robert-altmiller/terraform_template_config.git
