@@ -9,7 +9,7 @@
       "resource_name": "dbx-share",
       "ds_recipient_name_external": "robert-altmiller",
       "ds_recipient_name_databricks": "",
-      "ds_recipient_sharing_identifier": ""
+      "ds_sharing_identifier": ""
     },
     "dbx-share3": {
       "environment": "dev",
