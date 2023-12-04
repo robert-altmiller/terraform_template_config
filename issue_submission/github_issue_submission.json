@@ -1,11 +1,7 @@
 {
-  "environment": "unity_catalog",
+  "environment": "dev",
   "create_or_delete": "create",
-  "resource_name": "dbx-el",
-  "el_s3_url": "s3://dbx-artifacts-bucket",
-  "el_sc_name": "dbx-sc",
-  "el_principal_name": "dev-contributors",
-  "el_principal_privileges": [
-    "ALL_PRIVILEGES"
-  ]
+  "ds_metastore_id": "0d26daa6-5e44-4c97-a497-ef015f91254a",
+  "resource_name": "dbx-share",
+  "ds_recipient_name": "robert-altmiller"
 }
