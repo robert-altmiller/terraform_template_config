@@ -62,6 +62,6 @@ body:
   id: ds_sharing_identifier
   attributes:
     label: Please Enter the Delta Share Recipient Sharing Identifier For the DATABRICKS Recipient Name (optional)
-    description: "Please note: this is only for Databricks to Databricks sharing."
+    description: "Please note: this is only for Databricks to Databricks sharing (e.g. <cloud>:<region>:<guid>)
   validations:
     required: False
