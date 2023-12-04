@@ -53,7 +53,7 @@ body:
 - type: input
   id: ds_sharing_identifier
   attributes:
-    label: Please Enter the Delta Share Recipient Sharing Identifier
+    label: Please Enter the Recipient Sharing Identifier For Databricks to Databricks Sharing (optional)
     description: "Please note: this is only for Databricks to Databricks sharing."
   validations:
     required: False
