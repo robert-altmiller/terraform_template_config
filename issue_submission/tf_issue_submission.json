@@ -2,18 +2,42 @@
   "catalogs": {},
   "cluster_policies": {},
   "clusters": {},
-  "delta_shares": {
-    "dbx-share": {
-      "environment": "dev",
+  "delta_shares": {},
+  "external_locations": {
+    "dbx-el": {
+      "environment": "unity_catalog",
       "create_or_delete": "create",
-      "resource_name": "dbx-share",
-      "ds_recipient_name_external": "",
-      "ds_recipient_name_databricks": "robert-altmiller",
-      "ds_sharing_identifier": "aws:ap-northeast-1:baf6ea40-9d56-49f1-92dd-a990a5878a44"
+      "resource_name": "dbx-el",
+      "el_s3_url": "s3://dbx-artifacts-bucket",
+      "el_sc_name": "dbx-sc",
+      "el_principal_name": "dev-contributors",
+      "el_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ]
     }
   },
-  "external_locations": {},
   "metastore_grants": {},
   "schemas": {},
-  "storage_credentials": {}
+  "storage_credentials": {
+    "dbx-sc": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-sc",
+      "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-role-external-assume",
+      "sc_principal_name": "dev-contributors",
+      "sc_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ]
+    },
+    "dbx-sc-2": {
+      "environment": "unity_catalog",
+      "create_or_delete": "create",
+      "resource_name": "dbx-sc-2",
+      "sc_role_arn": "arn:aws:iam::332745928618:role/dbx-role-external-assume",
+      "sc_principal_name": "dev-contributors",
+      "sc_principal_privileges": [
+        "ALL_PRIVILEGES"
+      ]
+    }
+  }
 }
