@@ -45,7 +45,7 @@ def read_excel_data(input_filepath = None, worksheet_name = None, header_row = 1
 if __name__ == "__main__":
     
    # Specify the input file path, worksheet name, and header row as needed
-   input_filepath = '../xlsxtojson/input.xlsx'
+   input_filepath = './xlsxtojson/input.xlsx'
    worksheet_names = [
       "storage_credentials",
       "external_locations",
